@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="lox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Pane layoutX="-42.0" prefHeight="58.0" prefWidth="1360.0" styleClass="drops" AnchorPane.leftAnchor="-40.0" AnchorPane.rightAnchor="-40.0" AnchorPane.topAnchor="-17.0" />
+      <HBox alignment="CENTER" prefHeight="38.0" prefWidth="370.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label styleClass="text" text="Welcome customer!">
+               <padding>
+                  <Insets right="30.0" />
+               </padding>
+            </Label>
+            <Button fx:id="logout" alignment="CENTER" mnemonicParsing="false" styleClass="button1" text="Log out">
+               <graphic>
+                  <ImageView fitHeight="19.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Global_Resources/logout_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
+      <ImageView fitHeight="73.0" fitWidth="215.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="2.0">
+         <image>
+            <Image url="@../Global_Resources/Main_Logo.png" />
+         </image>
+      </ImageView>
+      <GridPane hgap="10.0" prefHeight="680.0" prefWidth="1280.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="138.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="658.0" minWidth="10.0" prefWidth="641.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.0" minWidth="10.0" prefWidth="322.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="254.0" minWidth="10.0" prefWidth="141.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="222.0" minHeight="0.0" prefHeight="44.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="543.0" minHeight="10.0" prefHeight="539.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="74.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="95.0" prefWidth="643.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="65.0" prefWidth="207.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="74.0" text="25 zlt" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="74.0" text="25 cm" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="&lt;" />
+                              <Label alignment="CENTER" prefHeight="37.0" prefWidth="39.0" text="9" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="&gt;" />
+                           </children>
+                        </HBox>
+                        <Separator orientation="VERTICAL" prefHeight="200.0">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin>
+                        </Separator>
+                        <HBox alignment="CENTER" prefHeight="65.0" prefWidth="196.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="74.0" text="25 zlt" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="74.0" text="25 cm" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="&lt;" />
+                              <Label alignment="CENTER" prefHeight="37.0" prefWidth="39.0" text="9" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="&gt;" />
+                           </children>
+                        </HBox>
+                        <Separator orientation="VERTICAL" prefHeight="200.0">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin>
+                        </Separator>
+                        <HBox alignment="CENTER" prefHeight="65.0" prefWidth="171.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="74.0" text="25 zlt" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="74.0" text="25 cm" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="&lt;" />
+                              <Label alignment="CENTER" prefHeight="37.0" prefWidth="39.0" text="9" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="&gt;" />
+                           </children>
+                        </HBox>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="28.0" prefWidth="31.0" text="+">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Separator prefWidth="200.0">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </Separator>
+                  <ScrollPane prefHeight="482.0" prefWidth="643.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="223.0" prefWidth="317.0" />
+                    </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="45.0" prefWidth="324.0">
+                     <children>
+                        <StackPane prefHeight="80.0" prefWidth="99.0">
+                           <children>
+                              <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@shopping_cart_icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="count" alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="21.0" text="8">
+                                 <StackPane.margin>
+                                    <Insets bottom="40.0" left="60.0" />
+                                 </StackPane.margin>
+                                 <font>
+                                    <Font size="27.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <Label alignment="CENTER" prefHeight="65.0" prefWidth="116.0" text="32 zlt" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="47.0" prefWidth="79.0" text="PAY">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Separator prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Separator>
+                  <ScrollPane prefHeight="453.0" prefWidth="324.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="456.0" prefWidth="311.0" />
+                    </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

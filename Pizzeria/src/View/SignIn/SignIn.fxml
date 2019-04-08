@@ -18,13 +18,18 @@
       <Pane layoutX="-61.0" layoutY="-70.0" prefHeight="100.0" prefWidth="612.0" styleClass="drops" AnchorPane.leftAnchor="-61.0" AnchorPane.rightAnchor="-79.0" AnchorPane.topAnchor="-70.0" />
       <Pane layoutX="380.0" layoutY="-2.0" prefHeight="56.0" prefWidth="30.0" styleClass="drops" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="0.0" />
       <Pane layoutX="421.0" layoutY="-7.0" prefHeight="88.0" prefWidth="30.0" styleClass="drops" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="0.0" />
+      <ImageView fitHeight="56.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+         <image>
+            <Image url="@../Global_Resources/Logo.png" />
+         </image>
+      </ImageView>
       <BorderPane prefHeight="608.0" prefWidth="463.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" BorderPane.alignment="CENTER">
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="84.0" text="SIgn In" textAlignment="CENTER" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="84.0" text="Sign In" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0">
