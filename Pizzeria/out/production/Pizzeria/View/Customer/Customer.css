@@ -77,3 +77,11 @@
     -fx-background-color: #474747;
     -fx-text-fill: white;
 }
+
+#count
+{
+    -fx-background-color: #db3b2f;
+    -fx-background-radius: 30;
+    -fx-text-fill: white;
+    -fx-padding: 2;
+}
