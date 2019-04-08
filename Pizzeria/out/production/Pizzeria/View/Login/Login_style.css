@@ -53,15 +53,8 @@
 
 }
 
-/*
-.TextFiel:hover
-{
-    -fx-background-color: transparent, #909090, transparent, white;
-    -fx-background-radius: 0, 0, 0, 0;
-    -fx-padding: 0.166667em;
-}
-*/
 .TextFiel:focused
 {
-    -fx-effect: dropshadow(three-pass-box, #474747, 2, 0, 0, 0);
+    -fx-background-color: #474747;
+    -fx-text-fill: white;
 }

@@ -11,16 +11,18 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/View/Login/Login.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("/View/Login/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/SignIn/SignIn.fxml"));
         primaryStage.setTitle("Pizzeria - oh Cheese!");
         Image logo_icon = new Image("/View/Global_Resources/Logo.png");
         primaryStage.getIcons().add(logo_icon);
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().addAll("/View/Login/Login_style.css");
+//        scene.getStylesheets().addAll("/View/Login/Login_style.css");
+        scene.getStylesheets().addAll("/View/SignIn/SignsInStyle.css");
 
-        primaryStage.setMinWidth(720);
-        primaryStage.setMinHeight(720);
+//        primaryStage.setMinWidth(720);
+//        primaryStage.setMinHeight(720);
 
         primaryStage.setScene(scene);
         primaryStage.show();
