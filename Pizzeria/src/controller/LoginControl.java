@@ -19,6 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+
 public class LoginControl implements Initializable{
 
     @FXML private ChoiceBox<String> Mode_choice = new ChoiceBox<>();
@@ -38,7 +40,7 @@ public class LoginControl implements Initializable{
 	
     public void ChangeScene(ActionEvent event) throws IOException {
     	
-    	if(checkIfEmpty()) {
+
             Parent extended_calculator = FXMLLoader.load(getClass().getResource("/View/Customer/Customer.fxml"));
             Scene scene = new Scene(extended_calculator);
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -46,12 +48,6 @@ public class LoginControl implements Initializable{
             window.show();
             scene.getStylesheets().clear();
             scene.getStylesheets().add("/View/Customer/Customer.css");
-    	}
-    	else
-    	{
-//    		System.out.println("too bad");
-    	}
-
     }
     
     public boolean checkIfEmpty() {
@@ -88,6 +84,29 @@ public class LoginControl implements Initializable{
         window.getIcons().add(logo_icon);
         window.setTitle("Pizzeria - oh Cheese!");
 
+    }
+
+    public void open_window(ActionEvent event) throws IOException {
+        String value = Mode_choice.getValue();
+        if(checkIfEmpty()) {
+            try {
+                switch (value) {
+                    case "ADMIN":
+                        System.out.println("Opened Admin Window");
+                        break;
+                    case "CUSTOMER":
+                        ChangeScene(event);
+                        break;
+                    case "EMPLOYEE":
+                        System.out.println("Opened employee Window");
+                        break;
+                    default:
+                        System.out.println("default");
+                }
+            } catch (NullPointerException e) {
+                System.out.println("fak");
+            }
+        }
     }
     
     

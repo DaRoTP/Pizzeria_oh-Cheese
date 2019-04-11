@@ -112,7 +112,7 @@
                               <Insets left="128.0" />
                            </VBox.margin>
                         </HBox>
-                        <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ChangeScene" prefHeight="35.0" prefWidth="90.0" text="Login">
+                        <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_window" prefHeight="35.0" prefWidth="90.0" text="Login">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
