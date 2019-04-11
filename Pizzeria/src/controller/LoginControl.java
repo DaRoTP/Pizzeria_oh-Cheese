@@ -87,6 +87,7 @@ public class LoginControl implements Initializable{
         Image logo_icon = new Image("/View/Global_Resources/Logo.png");
         window.getIcons().add(logo_icon);
         window.setTitle("Pizzeria - oh Cheese!");
+
     }
     
     
