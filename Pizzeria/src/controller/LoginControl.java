@@ -31,23 +31,20 @@ public class LoginControl implements Initializable{
 	
 
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1)
-    {
+    public void initialize(URL arg0, ResourceBundle arg1) {
     	Mode_choice.getItems().add("CUSTOMER");
         Mode_choice.getItems().add("ADMIN");
         Mode_choice.getItems().add("EMPLOYEE");
     }
 	
-    public void ChangeScene(ActionEvent event) throws IOException {
-    	
-
-            Parent extended_calculator = FXMLLoader.load(getClass().getResource("/View/Customer/Customer.fxml"));
+    public void ChangeScene(ActionEvent event, String StageName) throws IOException {
+            Parent extended_calculator = FXMLLoader.load(getClass().getResource("/View/"+StageName+"/"+StageName+".fxml"));
             Scene scene = new Scene(extended_calculator);
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setScene(scene);
             window.show();
             scene.getStylesheets().clear();
-            scene.getStylesheets().add("/View/Customer/Customer.css");
+            scene.getStylesheets().add("/View/"+StageName+"/"+StageName+".css");
     }
     
     public boolean checkIfEmpty() {
@@ -92,19 +89,20 @@ public class LoginControl implements Initializable{
             try {
                 switch (value) {
                     case "ADMIN":
-                        System.out.println("Opened Admin Window");
+                        ChangeScene(event,"Admin");
                         break;
                     case "CUSTOMER":
-                        ChangeScene(event);
+                        ChangeScene(event,"Customer");
                         break;
                     case "EMPLOYEE":
-                        System.out.println("Opened employee Window");
+                        ChangeScene(event,"Employee");
                         break;
                     default:
                         System.out.println("default");
                 }
             } catch (NullPointerException e) {
-                System.out.println("fak");
+                Mode_choice.getStyleClass().add("warning_choice");
+                Warning_label.setText("User type not chosen");
             }
         }
     }
