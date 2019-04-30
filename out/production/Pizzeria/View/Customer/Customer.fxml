@@ -24,11 +24,22 @@
       <Pane layoutX="-42.0" prefHeight="58.0" prefWidth="1360.0" styleClass="drops" AnchorPane.leftAnchor="-40.0" AnchorPane.rightAnchor="-40.0" AnchorPane.topAnchor="-17.0" />
       <HBox alignment="CENTER" prefHeight="38.0" prefWidth="370.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label styleClass="blacktext" text="Welcome customer!">
-               <padding>
-                  <Insets right="30.0" />
-               </padding>
-            </Label>
+            <Label styleClass="blacktext" text="Welcome customer!" />
+            <Button fx:id="settings" alignment="CENTER" mnemonicParsing="false" onAction="#settings">
+               <graphic>
+                  <ImageView fitHeight="19.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Global_Resources/settings_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
             <Button fx:id="logout" alignment="CENTER" mnemonicParsing="false" onAction="#LogOut" styleClass="button1" text="Log out">
                <graphic>
                   <ImageView fitHeight="19.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">

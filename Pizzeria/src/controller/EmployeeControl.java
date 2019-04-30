@@ -1,24 +1,18 @@
 package controller;
 
-import java.io.IOException;
-
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class CustomerControl {
+import java.io.IOException;
 
-    @FXML CheckBox newadress = new CheckBox();
+public class EmployeeControl {
 
-
-    public void changescene(ActionEvent event, String scenename)throws IOException{
+    public void changescene(ActionEvent event, String scenename)throws IOException {
         Parent extended_calculator = FXMLLoader.load(getClass().getResource("/View/"+scenename+"/"+scenename+".fxml"));
         Scene scene = new Scene(extended_calculator);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -29,34 +23,40 @@ public class CustomerControl {
 
     }
 
-    public void openscene(ActionEvent event, String scenename) throws IOException {
-        Parent nn = FXMLLoader.load(getClass().getResource("/View/"+scenename+"/"+scenename+".fxml"));
+    public void openscene(ActionEvent event, String scenename, String stylesheetname, String packagename) throws IOException {
+        Parent nn = FXMLLoader.load(getClass().getResource("/View/"+packagename+"/"+scenename+".fxml"));
         Scene scene = new Scene(nn);
         Stage window = new Stage();
         window.setScene(scene);
         window.show();
         scene.getStylesheets().clear();
-        scene.getStylesheets().add("/View/"+scenename+"/"+scenename+".css");
+        scene.getStylesheets().add("/View/"+packagename+"/"+stylesheetname+".css");
         Image logo_icon = new Image("/View/Global_Resources/Logo.png");
         window.getIcons().add(logo_icon);
         window.setTitle("Pizzeria - oh Cheese!");
     }
-	
+
     public void LogOut(ActionEvent event) throws IOException {
         changescene(event, "Login");
     }
 
-    public void Checkout(ActionEvent event) throws IOException {
-        openscene(event,"checkout");
-        if(newadress.isSelected()){
-            openscene(event, "Adress");
-        }
+
+    public void settings(ActionEvent event)throws IOException {
+        openscene(event,"settings","settings","settings");
+
 
     }
 
-    public void settings(ActionEvent event)throws IOException {
-        openscene(event,"settings");
-
-
+    public void add_pizza(ActionEvent event) throws IOException {
+        openscene(event, "addpizza","pizzainfo", "pizzainfo");
+    }
+    public void remove_pizza(ActionEvent event) throws IOException {
+        openscene(event, "removepizza","pizzainfo", "pizzainfo");
+    }
+    public void edit_pizza(ActionEvent event) throws IOException {
+        openscene(event, "editpizza","pizzainfo", "pizzainfo");
+    }
+    public void accept_order(ActionEvent event) throws IOException {
+        openscene(event, "Order","order", "Order");
     }
 }

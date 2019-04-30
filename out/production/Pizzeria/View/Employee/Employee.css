@@ -36,6 +36,12 @@
     -fx-padding: 0;
     -fx-border-width: 0;
 }
+#settings
+{
+    -fx-background-color: #db3b2f;
+    -fx-padding: 0;
+    -fx-border-width: 0;
+}
 
 .button
 {

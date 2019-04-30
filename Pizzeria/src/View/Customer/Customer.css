@@ -114,3 +114,10 @@
     -fx-font-weight: bold;
     -fx-font-size: 10;
 }
+
+#settings
+{
+    -fx-background-color: #db3b2f;
+    -fx-padding: 0;
+    -fx-border-width: 0;
+}
