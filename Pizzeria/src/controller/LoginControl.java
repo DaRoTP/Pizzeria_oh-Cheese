@@ -19,8 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-
 public class LoginControl implements Initializable{
 
     @FXML private ChoiceBox<String> Mode_choice = new ChoiceBox<>();
@@ -70,13 +68,13 @@ public class LoginControl implements Initializable{
 	}	
     
     public void SignInOpen(ActionEvent event) throws IOException {
-        Parent nn = FXMLLoader.load(getClass().getResource("/View/SignIn/SignIn.fxml"));
+        Parent nn = FXMLLoader.load(getClass().getResource("/View/SignUp/SignUp.fxml"));
         Scene scene = new Scene(nn);
         Stage window = new Stage();
         window.setScene(scene);
         window.show();
         scene.getStylesheets().clear();
-        scene.getStylesheets().add("/View/SignIn/SignInStyle.css");
+        scene.getStylesheets().add("/View/SignUp/SignUp.css");
         Image logo_icon = new Image("/View/Global_Resources/Logo.png");
         window.getIcons().add(logo_icon);
         window.setTitle("Pizzeria - oh Cheese!");

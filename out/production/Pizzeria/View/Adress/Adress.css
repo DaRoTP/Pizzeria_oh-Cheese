@@ -56,3 +56,16 @@
     -fx-background-color: #474747;
     -fx-text-fill: white;
 }
+#warning
+{
+    -fx-text-fill: #db3b2f;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+.warning
+{
+	-fx-border-radius: 20;
+	-fx-border-width: 2;
+	-fx-border-color: #db3b2f;
+}

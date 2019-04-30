@@ -18,7 +18,7 @@ public class Main extends Application {
         primaryStage.getIcons().add(logo_icon);
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().addAll("/View/Login/Login_style.css");
+        scene.getStylesheets().addAll("/View/Login/Login.css");
 //        scene.getStylesheets().addAll("/View/Customer/Admin.css");
 
 //        primaryStage.setMinWidth(720);

@@ -11,19 +11,19 @@
     -fx-border-color: #1a1214;
 }
 
-.text
+.blacktext
 {
     -fx-text-fill: #1e1414;
     -fx-font-family: Arial;
     -fx-font-weight: bold;
-    -fx-font-size: 17;
+    -fx-font-size: 15;
 }
-.text1
+.text13
 {
     -fx-text-fill: white;
     -fx-font-family: Arial;
     -fx-font-weight: bold;
-    -fx-font-size: 20;
+    -fx-font-size: 56;
 }
 #logout
 {
@@ -44,7 +44,7 @@
     -fx-text-fill: white;
     -fx-font-family: Arial;
     -fx-font-weight: bold;
-    -fx-font-size: 20;
+    -fx-font-size: 15;
     -fx-padding: 0;
     -fx-border-color: #666666;
     -fx-border-width: 4;
@@ -84,4 +84,33 @@
     -fx-background-radius: 30;
     -fx-text-fill: white;
     -fx-padding: 2;
+}
+.arrow
+{
+    -fx-background-color: #dfdfdf;
+    -fx-text-fill: #666666;
+    -fx-border-width: 0;
+    -fx-font-size: 10;
+}
+.arrow:hover
+{
+    -fx-text-fill: #949494;
+    -fx-font-size: 20;
+}
+.arrow:pressed
+{
+    -fx-text-fill: white;
+}
+
+.price
+{
+    -fx-text-fill: #67bc42;
+
+}
+.smalltext
+{
+    -fx-text-fill: #1e1414;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-font-size: 10;
 }

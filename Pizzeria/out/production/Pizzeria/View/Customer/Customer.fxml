@@ -28,7 +28,7 @@
                   <Insets right="30.0" />
                </padding>
             </Label>
-            <Button fx:id="logout" alignment="CENTER" mnemonicParsing="false" onAction="#ChangeScene" styleClass="button1" text="Log out">
+            <Button fx:id="logout" alignment="CENTER" mnemonicParsing="false" onAction="#LogOut" styleClass="button1" text="Log out">
                <graphic>
                   <ImageView fitHeight="19.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>

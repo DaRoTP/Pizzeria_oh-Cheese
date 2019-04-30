@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class SignInControl {
+public class SignUpControl {
 
 
     @FXML public TextField name = new TextField();
