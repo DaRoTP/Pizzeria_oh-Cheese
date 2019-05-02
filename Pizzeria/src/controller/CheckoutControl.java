@@ -26,7 +26,7 @@ public class CheckoutControl {
                 window.setScene(scene);
                 window.show();
                 scene.getStylesheets().clear();
-                scene.getStylesheets().add("/View/checkout/checkout.css");
+                scene.getStylesheets().add("/View/Global_Resources/GeneralWindowStyle.css");
         }
         else
         {

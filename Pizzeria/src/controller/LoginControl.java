@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class LoginControl implements Initializable{
+public class LoginControl extends GeneralWindowControl implements Initializable{
 
     @FXML private ChoiceBox<String> Mode_choice = new ChoiceBox<>();
 	@FXML TextField usernameField = new TextField();
@@ -34,16 +34,7 @@ public class LoginControl implements Initializable{
         Mode_choice.getItems().add("ADMIN");
         Mode_choice.getItems().add("EMPLOYEE");
     }
-	
-    public void ChangeScene(ActionEvent event, String StageName) throws IOException {
-            Parent extended_calculator = FXMLLoader.load(getClass().getResource("/View/"+StageName+"/"+StageName+".fxml"));
-            Scene scene = new Scene(extended_calculator);
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.setScene(scene);
-            window.show();
-            scene.getStylesheets().clear();
-            scene.getStylesheets().add("/View/"+StageName+"/"+StageName+".css");
-    }
+
     
     public boolean checkIfEmpty() {
 		if (usernameField.getText() == null || usernameField.getText().trim().isEmpty()){
@@ -68,16 +59,7 @@ public class LoginControl implements Initializable{
 	}	
     
     public void SignInOpen(ActionEvent event) throws IOException {
-        Parent nn = FXMLLoader.load(getClass().getResource("/View/SignUp/SignUp.fxml"));
-        Scene scene = new Scene(nn);
-        Stage window = new Stage();
-        window.setScene(scene);
-        window.show();
-        scene.getStylesheets().clear();
-        scene.getStylesheets().add("/View/SignUp/SignUp.css");
-        Image logo_icon = new Image("/View/Global_Resources/Logo.png");
-        window.getIcons().add(logo_icon);
-        window.setTitle("Pizzeria - oh Cheese!");
+        openscene(event,"SignUp","GeneralWindowStyle","SignUp","Global_Resources");
 
     }
 
@@ -87,13 +69,13 @@ public class LoginControl implements Initializable{
             try {
                 switch (value) {
                     case "ADMIN":
-                        ChangeScene(event,"Admin");
+                        changescene(event,"Admin","Admin","Admin");
                         break;
                     case "CUSTOMER":
-                        ChangeScene(event,"Customer");
+                        changescene(event,"Customer","Customer","Customer");
                         break;
                     case "EMPLOYEE":
-                        ChangeScene(event,"Employee");
+                        changescene(event,"Employee","Employee","Employee");
                         break;
                     default:
                         System.out.println("default");

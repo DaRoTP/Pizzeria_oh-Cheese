@@ -33,6 +33,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="logout" alignment="CENTER" mnemonicParsing="false" onAction="#LogOut" text="Log out">
                <graphic>

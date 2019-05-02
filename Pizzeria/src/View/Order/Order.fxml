@@ -149,7 +149,7 @@
                                           <Cursor fx:constant="TEXT" />
                                        </cursor>
                                     </TextField>
-                                    <TextField fx:id="surname1" prefHeight="40.0" prefWidth="157.0" promptText="ZIP CODE" styleClass="TextFiel">
+                                    <TextField fx:id="surname1" prefHeight="40.0" prefWidth="152.0" promptText="ZIP CODE" styleClass="TextFiel">
                                        <cursor>
                                           <Cursor fx:constant="TEXT" />
                                        </cursor>
@@ -158,7 +158,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0">
                                  <children>
-                                    <TextField fx:id="phone_number1" prefHeight="40.0" prefWidth="330.0" promptText="House Number" styleClass="TextFiel">
+                                    <TextField fx:id="phone_number1" prefHeight="40.0" prefWidth="152.0" promptText="House Number" styleClass="TextFiel">
                                        <cursor>
                                           <Cursor fx:constant="TEXT" />
                                        </cursor>
@@ -166,7 +166,7 @@
                                           <Insets right="20.0" />
                                        </HBox.margin>
                                     </TextField>
-                                    <TextField fx:id="e_mail1" prefHeight="40.0" prefWidth="339.0" promptText="Flat Number" styleClass="TextFiel">
+                                    <TextField fx:id="e_mail1" prefHeight="40.0" prefWidth="152.0" promptText="Flat Number" styleClass="TextFiel">
                                        <cursor>
                                           <Cursor fx:constant="TEXT" />
                                        </cursor>

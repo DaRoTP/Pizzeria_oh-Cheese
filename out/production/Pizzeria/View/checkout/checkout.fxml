@@ -63,6 +63,9 @@
                            <toggleGroup>
                               <ToggleGroup fx:id="CardORCash" />
                            </toggleGroup>
+                           <cursor>
+                              <Cursor fx:constant="OPEN_HAND" />
+                           </cursor>
                         </RadioButton>
                         <RadioButton fx:id="card" mnemonicParsing="false" text="Card" toggleGroup="$CardORCash">
                            <padding>
@@ -71,6 +74,9 @@
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="OPEN_HAND" />
+                           </cursor>
                         </RadioButton>
                      </children>
                   </HBox>

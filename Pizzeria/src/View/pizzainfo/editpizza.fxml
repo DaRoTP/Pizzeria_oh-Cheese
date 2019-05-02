@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="429.0" prefWidth="500.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignUpControl">
+<AnchorPane prefHeight="490.0" prefWidth="500.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignUpControl">
    <children>
       <Pane layoutX="-61.0" layoutY="-70.0" prefHeight="100.0" prefWidth="612.0" styleClass="drops" AnchorPane.leftAnchor="-61.0" AnchorPane.rightAnchor="-79.0" AnchorPane.topAnchor="-70.0" />
       <Pane layoutX="380.0" layoutY="-2.0" prefHeight="56.0" prefWidth="30.0" styleClass="drops" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="0.0" />
@@ -56,7 +56,10 @@
                               <Cursor fx:constant="TEXT" />
                            </cursor>
                         </TextField>
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Search" />
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Search">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
