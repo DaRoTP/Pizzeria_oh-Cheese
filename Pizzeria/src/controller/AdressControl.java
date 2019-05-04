@@ -12,7 +12,7 @@ public class AdressControl {
     @FXML public TextField city = new TextField();
     @FXML public TextField street = new TextField();
     @FXML public TextField house_number = new TextField();
-    @FXML public TextField flat_number = new TextField();
+    @FXML public TextField apartment_number = new TextField();
     @FXML public TextField zip_code= new TextField();
 
     @FXML public Label warning = new Label();

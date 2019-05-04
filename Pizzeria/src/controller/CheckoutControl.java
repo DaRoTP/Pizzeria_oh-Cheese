@@ -20,13 +20,13 @@ public class CheckoutControl {
 
     public void submit(ActionEvent event) throws IOException {
         if (cash.isSelected() || card.isSelected()) {
-                Parent extended_calculator = FXMLLoader.load(getClass().getResource("/View/checkout/thankyou.fxml"));
+                Parent extended_calculator = FXMLLoader.load(getClass().getResource("/view/checkout/thankyou.fxml"));
                 Scene scene = new Scene(extended_calculator);
                 Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
                 window.setScene(scene);
                 window.show();
                 scene.getStylesheets().clear();
-                scene.getStylesheets().add("/View/Global_Resources/GeneralWindowStyle.css");
+                scene.getStylesheets().add("/view/Global_Resources/GeneralWindowStyle.css");
         }
         else
         {

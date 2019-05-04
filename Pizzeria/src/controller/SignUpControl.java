@@ -21,7 +21,7 @@ public class SignUpControl {
     @FXML public TextField city = new TextField();
     @FXML public TextField street = new TextField();
     @FXML public TextField house_number = new TextField();
-    @FXML public TextField flat_number = new TextField();
+    @FXML public TextField apartment_number = new TextField();
     @FXML public TextField zip_code= new TextField();
 
     @FXML public Label warning = new Label();
@@ -175,7 +175,7 @@ public class SignUpControl {
 
             if (!zip_code.getText().matches("\\d{2}-\\d{3}")){
                 zip_code.getStyleClass().add("warning");
-                warning.setText("ZIP COde must like: 87-345");
+                warning.setText("ZIP CODE must like: 87-345");
                 return false;
             }
             else

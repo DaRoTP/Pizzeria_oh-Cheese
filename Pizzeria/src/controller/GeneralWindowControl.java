@@ -13,25 +13,25 @@ import java.io.IOException;
 public class GeneralWindowControl {
 
     public void changescene(ActionEvent event, String scenename, String stylesheetname, String packagename)throws IOException {
-        Parent extended_calculator = FXMLLoader.load(getClass().getResource("/View/"+packagename+"/"+scenename+".fxml"));
+        Parent extended_calculator = FXMLLoader.load(getClass().getResource("/view/" +packagename+"/"+scenename+".fxml"));
         Scene scene = new Scene(extended_calculator);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
         scene.getStylesheets().clear();
-        scene.getStylesheets().add("/View/"+packagename+"/"+stylesheetname+".css");
+        scene.getStylesheets().add("/view/" +packagename+"/"+stylesheetname+".css");
 
     }
 
     public void openscene(ActionEvent event, String scenename, String stylesheetname, String scene_packagename,String stylesheet_packagename) throws IOException {
-        Parent nn = FXMLLoader.load(getClass().getResource("/View/"+scene_packagename+"/"+scenename+".fxml"));
+        Parent nn = FXMLLoader.load(getClass().getResource("/view/" +scene_packagename+"/"+scenename+".fxml"));
         Scene scene = new Scene(nn);
         Stage window = new Stage();
         window.setScene(scene);
         window.show();
         scene.getStylesheets().clear();
-        scene.getStylesheets().add("/View/"+stylesheet_packagename+"/"+stylesheetname+".css");
-        Image logo_icon = new Image("/View/Global_Resources/Logo.png");
+        scene.getStylesheets().add("/view/" +stylesheet_packagename+"/"+stylesheetname+".css");
+        Image logo_icon = new Image("/view/Global_Resources/Logo.png");
         window.getIcons().add(logo_icon);
         window.setTitle("Pizzeria - oh Cheese!");
     }
