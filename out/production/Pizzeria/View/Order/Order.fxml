@@ -182,6 +182,12 @@
                                     </TextField>
                                  </children>
                               </HBox>
+                              <VBox alignment="TOP_CENTER" prefHeight="41.0" prefWidth="352.0">
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="23.0" prefWidth="244.0" text="chose a delivery person" />
+                                    <ChoiceBox prefHeight="25.0" prefWidth="343.0" />
+                                 </children>
+                              </VBox>
                            </children>
                         </VBox>
                      </children>
@@ -193,16 +199,10 @@
                   </Separator>
                   <HBox alignment="TOP_CENTER" prefHeight="304.0" prefWidth="816.0" spacing="10.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="304.0" prefWidth="365.0">
+                        <VBox alignment="CENTER" prefHeight="304.0" prefWidth="734.0">
                            <children>
                               <Label text="Order Info" />
-                              <TextArea editable="false" prefHeight="304.0" prefWidth="400.0" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="TOP_CENTER" prefHeight="304.0" prefWidth="236.0">
-                           <children>
-                              <Label prefHeight="23.0" prefWidth="244.0" text="chose a delivery person" />
-                              <ChoiceBox prefHeight="31.0" prefWidth="202.0" />
+                              <TextArea editable="false" prefHeight="255.0" prefWidth="734.0" />
                            </children>
                         </VBox>
                      </children>
