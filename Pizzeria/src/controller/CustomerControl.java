@@ -33,6 +33,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     private boolean[] isButtonClicked = new boolean[amountOfPizzas];
 
     private Button[] removePicaBtn = new Button[100];
+    private HBox[] orderTab = new HBox[100];
 
     @FXML CheckBox newadress = new CheckBox();
     @FXML Label largePizzaLabel = new Label();
@@ -68,12 +69,27 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
     }
 
-    public void addPizzaToOrder(PizzaInfo chosenPizza, String pizzaPrice, String pizzaSize, int OrderIndex){
-        orderanchor.setPrefHeight(orderanchor.getPrefHeight() + 100);
-        OrderContent.setPrefHeight(OrderContent.getPrefHeight() + 100);
+    public void removePizzaFromOrder(int OrderIndex){
+        OrderContent.getChildren().remove(orderTab[OrderIndex]);
+        //Shrink anchor pane and Vbox
+        orderanchor.setPrefHeight(orderanchor.getPrefHeight() - 55);
+        OrderContent.setPrefHeight(OrderContent.getPrefHeight() - 55);
+        //change price
+//        finalPrice -= ;
+        //change units bought
+        pizzaUnits -= 1;
+        //Update Labels
+        pizzacounterLabel.setText(String.valueOf(pizzaUnits));
+        finalPriceLabel.setText(finalPrice+" zlt");
 
-        HBox orderTab = new HBox();
-        orderTab.setPrefSize(354, 20);
+    }
+
+    public void addPizzaToOrder(PizzaInfo chosenPizza, String pizzaPrice, String pizzaSize, int OrderIndex){
+        orderanchor.setPrefHeight(orderanchor.getPrefHeight() + 55);
+        OrderContent.setPrefHeight(OrderContent.getPrefHeight() + 55);
+
+        orderTab[OrderIndex] = new HBox();
+        orderTab[OrderIndex].setPrefSize(354, 20);
 
         TextArea information_About_Chosen_Pizza = new TextArea();
         information_About_Chosen_Pizza.setPrefSize(300, 20);
@@ -81,14 +97,18 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
         removePicaBtn[OrderIndex] = new Button("X");
         removePicaBtn[OrderIndex].setPrefSize(40, 20);
-        removePicaBtn[OrderIndex].setPrefSize(40, 20);
         removePicaBtn[OrderIndex].getStyleClass().add("removebtn");
 
-        orderTab.getChildren().addAll(information_About_Chosen_Pizza,removePicaBtn[OrderIndex]);
-        orderTab.setAlignment(Pos.CENTER);
-        orderTab.setSpacing(10);
+        removePicaBtn[OrderIndex].setOnAction(
+                event -> {removePizzaFromOrder(OrderIndex);
+                });
 
-        OrderContent.getChildren().add(orderTab);
+        orderTab[OrderIndex].getChildren().addAll(information_About_Chosen_Pizza,removePicaBtn[OrderIndex]);
+        orderTab[OrderIndex].setAlignment(Pos.CENTER);
+        orderTab[OrderIndex].setSpacing(10);
+
+
+        OrderContent.getChildren().add(orderTab[OrderIndex]);
     }
 
     public void createPizzaTile(PizzaInfo[] pizzas, int amountOfPizzas){
@@ -198,17 +218,23 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         finalPriceLabel.setText(finalPrice+" zlt");
 
         //adds a tile to Order Tab
-        for(int i = 0; i < smallPizzaUnit; i++) {
-            addPizzaToOrder(pizzas[chosenPizzaIndex], "25", "25", pizzaUnits);
-            pizzaUnits++;
+        try {
+            for (int i = 0; i < smallPizzaUnit; i++) {
+                addPizzaToOrder(pizzas[chosenPizzaIndex], "25", "25", pizzaUnits);
+                pizzaUnits++;
+            }
+            for (int i = 0; i < mediumPizzaUnit; i++) {
+                addPizzaToOrder(pizzas[chosenPizzaIndex], "30", "30", pizzaUnits);
+                pizzaUnits++;
+            }
+            for (int i = 0; i < largePizzaUnit; i++) {
+                addPizzaToOrder(pizzas[chosenPizzaIndex], "40", "35", pizzaUnits);
+                pizzaUnits++;
+            }
         }
-        for(int i = 0; i < mediumPizzaUnit; i++) {
-            addPizzaToOrder(pizzas[chosenPizzaIndex], "30", "30", pizzaUnits);
-            pizzaUnits++;
-        }
-        for(int i = 0; i < largePizzaUnit; i++) {
-            addPizzaToOrder(pizzas[chosenPizzaIndex], "40", "35", pizzaUnits);
-            pizzaUnits++;
+        catch (ArrayIndexOutOfBoundsException e)
+        {
+            System.out.println("ERROR: OUT OF BOUNDS");
         }
 
         //add to the counter label

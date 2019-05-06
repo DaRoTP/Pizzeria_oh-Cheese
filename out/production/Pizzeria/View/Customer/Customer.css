@@ -55,6 +55,7 @@
 
     -fx-background-color: #747474;
     -fx-border-color: #616161;
+    -fx-cursor: hand;
 }
 .button:pressed
 {
@@ -134,6 +135,7 @@
     -fx-border-color: #42BD72;
     -fx-border-width: 4;
     -fx-border-radius: 15;
+    -fx-cursor: hand;
 }
 .addbtn:hover
 {
@@ -159,6 +161,7 @@
     -fx-border-color: #C22851;
     -fx-border-width: 4;
     -fx-border-radius: 15;
+    -fx-cursor: hand;
 }
 .removebtn:hover
 {
