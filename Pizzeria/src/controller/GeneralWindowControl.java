@@ -13,8 +13,8 @@ import java.io.IOException;
 public class GeneralWindowControl {
 
     public void changescene(ActionEvent event, String scenename, String stylesheetname, String packagename)throws IOException {
-        Parent extended_calculator = FXMLLoader.load(getClass().getResource("/view/" +packagename+"/"+scenename+".fxml"));
-        Scene scene = new Scene(extended_calculator);
+        Parent newScene = FXMLLoader.load(getClass().getResource("/view/" +packagename+"/"+scenename+".fxml"));
+        Scene scene = new Scene(newScene);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();

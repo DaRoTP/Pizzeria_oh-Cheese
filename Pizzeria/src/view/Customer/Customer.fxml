@@ -195,18 +195,21 @@
                               </Label>
                            </children>
                         </StackPane>
-                        <Label fx:id="finalPriceLabel" alignment="CENTER" prefHeight="65.0" prefWidth="103.0" styleClass="price" text="0 zlt">
+                        <Label fx:id="finalPriceLabel" alignment="CENTER" prefHeight="65.0" prefWidth="92.0" styleClass="price" text="0 zlt">
                            <font>
                               <Font size="24.0" />
-                           </font></Label>
+                           </font>
+                           <HBox.margin>
+                              <Insets left="5.0" right="10.0" />
+                           </HBox.margin></Label>
                         <VBox alignment="CENTER" prefHeight="65.0" prefWidth="44.0">
                            <children>
-                              <Label prefHeight="44.0" prefWidth="52.0" styleClass="smalltext" text="change Adress" textAlignment="CENTER" wrapText="true">
+                              <Label prefHeight="37.0" prefWidth="46.0" styleClass="smalltext" text="Change Adress" wrapText="true">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Label>
-                              <CheckBox fx:id="newadress" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="20.0" prefWidth="13.0" />
+                              <CheckBox fx:id="newadress" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="14.0" />
                            </children>
                            <HBox.margin>
                               <Insets right="10.0" />

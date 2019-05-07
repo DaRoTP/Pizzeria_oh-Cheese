@@ -6,14 +6,19 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import model.Order;
 import model.PizzaInfo;
 
 
@@ -22,9 +27,11 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     private int largePizzaUnit = 0;
     private int mediumPizzaUnit = 0;
     private int smallPizzaUnit = 0;
-    private int pizzaUnits = 0;
+    private int pizzaUnitsOrdered = 0;
     private int finalPrice = 0;
     private int chosenPizzaIndex = 0;
+
+    private Order newOrder;
 
     private int amountOfPizzas = 9;
     private PizzaInfo[] pizzas = new PizzaInfo[amountOfPizzas];
@@ -52,21 +59,24 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
-        pizzas[0] = new PizzaInfo("0","descr");
-        pizzas[1] = new PizzaInfo("1","descr");
-        pizzas[2] = new PizzaInfo("2","descr");
-        pizzas[3] = new PizzaInfo("3","descr");
-        pizzas[4] = new PizzaInfo("4","descr");
-        pizzas[5] = new PizzaInfo("5","descr");
-        pizzas[6] = new PizzaInfo("6","descr");
-        pizzas[7] = new PizzaInfo("7","descr");
-        pizzas[8] = new PizzaInfo("8","descr");
+        pizzas[0] = new PizzaInfo(0,"0","descr");
+        pizzas[1] = new PizzaInfo(1,"1","descr");
+        pizzas[2] = new PizzaInfo(2,"2","descr");
+        pizzas[3] = new PizzaInfo(3,"3","descr");
+        pizzas[4] = new PizzaInfo(4,"4","descr");
+        pizzas[5] = new PizzaInfo(5,"5","descr");
+        pizzas[6] = new PizzaInfo(6,"6","descr");
+        pizzas[7] = new PizzaInfo(7,"7","descr");
+        pizzas[8] = new PizzaInfo(8,"8","descr");
 
         createPizzaTile(pizzas, amountOfPizzas);
+        newOrder = new Order(1);
+    }
 
-//        Description.setText(pizzas[i].getPizzaname()+"\n__________________\n"+pizzas[i].getDescriptioon());
-//        Image pica = new Image("view/pizzainfo/pizzaPhotos/"+pizzas[i].getPizzaname()+".png");
-
+    public void test(){
+        for(int i = 0; i < pizzaUnitsOrdered; i++){
+            System.out.println("- ");
+        }
     }
 
     public void removePizzaFromOrder(int OrderIndex){
@@ -75,11 +85,11 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         orderanchor.setPrefHeight(orderanchor.getPrefHeight() - 55);
         OrderContent.setPrefHeight(OrderContent.getPrefHeight() - 55);
         //change price
-//        finalPrice -= ;
+        finalPrice -= 1;
         //change units bought
-        pizzaUnits -= 1;
+        pizzaUnitsOrdered -= 1;
         //Update Labels
-        pizzacounterLabel.setText(String.valueOf(pizzaUnits));
+        pizzacounterLabel.setText(String.valueOf(pizzaUnitsOrdered));
         finalPriceLabel.setText(finalPrice+" zlt");
 
     }
@@ -107,14 +117,16 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         orderTab[OrderIndex].setAlignment(Pos.CENTER);
         orderTab[OrderIndex].setSpacing(10);
 
-
         OrderContent.getChildren().add(orderTab[OrderIndex]);
+
+        newOrder.setPizzaAndSize(chosenPizza.getPizzaID(),pizzaSize,OrderIndex);
+
     }
 
     public void createPizzaTile(PizzaInfo[] pizzas, int amountOfPizzas){
         for(int i = 0; i < amountOfPizzas; i++) {
-            pizzaanchor.setPrefHeight(pizzaanchor.getPrefHeight() + 100);
-            PizzaContent.setPrefHeight(PizzaContent.getPrefHeight() + 100);
+            pizzaanchor.setPrefHeight(pizzaanchor.getPrefHeight() + 80);
+            PizzaContent.setPrefHeight(PizzaContent.getPrefHeight() + 80);
 
             HBox Pizzatab = new HBox();
             Pizzatab.setPrefSize(589, 70);
@@ -172,10 +184,23 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
 
     public void Checkout(ActionEvent event) throws IOException {
-        openscene(event,"checkout","GeneralWindowStyle","checkout","Global_Resources");
+        //openscene(event,"checkout","GeneralWindowStyle","checkout","Global_Resources");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/checkout/checkout.fxml"));
+        Parent root = loader.load();
+
+        CheckoutControl checkoutc = loader.getController();
+        checkoutc.getPrice(finalPrice);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        root.getStylesheets().add("/view/Global_Resources/GeneralWindowStyle.css");
         if(newadress.isSelected()){
             openscene(event, "Adress","GeneralWindowStyle","Adress","Global_Resources");
         }
+        test();
+
+
     }
     //LARGE PIZZA
     public void addLargePizza(ActionEvent event) throws IOException {
@@ -220,16 +245,16 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         //adds a tile to Order Tab
         try {
             for (int i = 0; i < smallPizzaUnit; i++) {
-                addPizzaToOrder(pizzas[chosenPizzaIndex], "25", "25", pizzaUnits);
-                pizzaUnits++;
+                addPizzaToOrder(pizzas[chosenPizzaIndex], "25", "25", pizzaUnitsOrdered);
+                pizzaUnitsOrdered++;
             }
             for (int i = 0; i < mediumPizzaUnit; i++) {
-                addPizzaToOrder(pizzas[chosenPizzaIndex], "30", "30", pizzaUnits);
-                pizzaUnits++;
+                addPizzaToOrder(pizzas[chosenPizzaIndex], "30", "30", pizzaUnitsOrdered);
+                pizzaUnitsOrdered++;
             }
             for (int i = 0; i < largePizzaUnit; i++) {
-                addPizzaToOrder(pizzas[chosenPizzaIndex], "40", "35", pizzaUnits);
-                pizzaUnits++;
+                addPizzaToOrder(pizzas[chosenPizzaIndex], "40", "35", pizzaUnitsOrdered);
+                pizzaUnitsOrdered++;
             }
         }
         catch (ArrayIndexOutOfBoundsException e)
@@ -238,7 +263,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         }
 
         //add to the counter label
-        pizzacounterLabel.setText(Integer.toString(pizzaUnits));
+        pizzacounterLabel.setText(Integer.toString(pizzaUnitsOrdered));
 
         //null everything
         largePizzaUnit = 0;
