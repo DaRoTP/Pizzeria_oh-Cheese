@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -34,10 +35,13 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     private Order newOrder;
 
     private int amountOfPizzas = 9;
-    private PizzaInfo[] pizzas = new PizzaInfo[amountOfPizzas];
+//    private PizzaInfo[] pizzas = new PizzaInfo[amountOfPizzas];
+    private ArrayList<PizzaInfo> pizzas = new ArrayList<PizzaInfo>();
+//    private Button[] picaBtnList = new Button[amountOfPizzas];
+//    private boolean[] isButtonClicked = new boolean[amountOfPizzas];
+    private ArrayList<Button> picaBtnList = new ArrayList<Button>();
+    private ArrayList<Integer> isButtonClicked = new ArrayList<Integer>();
 
-    private Button[] picaBtnList = new Button[amountOfPizzas];
-    private boolean[] isButtonClicked = new boolean[amountOfPizzas];
 
     private Button[] removePicaBtn = new Button[100];
     private HBox[] orderTab = new HBox[100];
@@ -59,23 +63,37 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
-        pizzas[0] = new PizzaInfo(0,"0","descr");
-        pizzas[1] = new PizzaInfo(1,"1","descr");
-        pizzas[2] = new PizzaInfo(2,"2","descr");
-        pizzas[3] = new PizzaInfo(3,"3","descr");
-        pizzas[4] = new PizzaInfo(4,"4","descr");
-        pizzas[5] = new PizzaInfo(5,"5","descr");
-        pizzas[6] = new PizzaInfo(6,"6","descr");
-        pizzas[7] = new PizzaInfo(7,"7","descr");
-        pizzas[8] = new PizzaInfo(8,"8","descr");
+// //       pizzas[0] = new PizzaInfo(0,"0","descr");
+////        pizzas[1] = new PizzaInfo(1,"1","descr");
+////        pizzas[2] = new PizzaInfo(2,"2","descr");
+////        pizzas[3] = new PizzaInfo(3,"3","descr");
+////        pizzas[4] = new PizzaInfo(4,"4","descr");
+////        pizzas[5] = new PizzaInfo(5,"5","descr");
+////        pizzas[6] = new PizzaInfo(6,"6","descr");
+////        pizzas[7] = new PizzaInfo(7,"7","descr");
+////        pizzas[8] = new PizzaInfo(8,"8","descr");
+        pizzas.add(new PizzaInfo(0,"0","descr"));
+        pizzas.add(new PizzaInfo(1,"1","descr"));
+        pizzas.add(new PizzaInfo(2,"2","descr"));
+        pizzas.add(new PizzaInfo(3,"3","descr"));
+        pizzas.add(new PizzaInfo(4,"4","descr"));
+        pizzas.add(new PizzaInfo(5,"5","descr"));
+        pizzas.add(new PizzaInfo(6,"6","descr"));
+        pizzas.add(new PizzaInfo(7,"7","descr"));
+        pizzas.add(new PizzaInfo(8,"8","descr"));
+
 
         createPizzaTile(pizzas, amountOfPizzas);
         newOrder = new Order(1);
     }
 
-    public void test(){
-        for(int i = 0; i < pizzaUnitsOrdered; i++){
-            System.out.println("- ");
+    public void test(Order some){
+        System.out.println("Customer ID: "+some.getCustumerID());
+        System.out.println("Final Price: "+some.getFinalPrice());
+        System.out.println("Method: "+some.getPaymentMethod());
+        System.out.println("------ Pizzas ----");
+        for(int i = 0; i < some.getPizzasIDs().size(); i++){
+            System.out.println("- ID: "+some.getPizzasIDs().get(i)+" -size: "+some.getSizeIDs().get(i));
         }
     }
 
@@ -85,12 +103,13 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         orderanchor.setPrefHeight(orderanchor.getPrefHeight() - 55);
         OrderContent.setPrefHeight(OrderContent.getPrefHeight() - 55);
         //change price
-        finalPrice -= 1;
+        newOrder.subFrom_FinalPrice(newOrder.getSizeIDs().get(OrderIndex));
+        newOrder.setFinalPrice(newOrder.getFinalPrice() - 1);
         //change units bought
         pizzaUnitsOrdered -= 1;
         //Update Labels
         pizzacounterLabel.setText(String.valueOf(pizzaUnitsOrdered));
-        finalPriceLabel.setText(finalPrice+" zlt");
+        finalPriceLabel.setText(newOrder.getFinalPrice()+" zlt");
 
     }
 
@@ -111,6 +130,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
         removePicaBtn[OrderIndex].setOnAction(
                 event -> {removePizzaFromOrder(OrderIndex);
+                    newOrder.removedFromOrdered(OrderIndex);
                 });
 
         orderTab[OrderIndex].getChildren().addAll(information_About_Chosen_Pizza,removePicaBtn[OrderIndex]);
@@ -119,11 +139,12 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
         OrderContent.getChildren().add(orderTab[OrderIndex]);
 
-        newOrder.setPizzaAndSize(chosenPizza.getPizzaID(),pizzaSize,OrderIndex);
+//        newOrder.setPizzaAndSize(chosenPizza.getPizzaID(),pizzaSize,OrderIndex);
+        newOrder.setPizzaAndSize(chosenPizza.getPizzaID(),pizzaSize);
 
     }
 
-    public void createPizzaTile(PizzaInfo[] pizzas, int amountOfPizzas){
+    public void createPizzaTile(ArrayList pizzas, int amountOfPizzas){
         for(int i = 0; i < amountOfPizzas; i++) {
             pizzaanchor.setPrefHeight(pizzaanchor.getPrefHeight() + 80);
             PizzaContent.setPrefHeight(PizzaContent.getPrefHeight() + 80);
@@ -134,35 +155,35 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
             TextArea Description = new TextArea();
             Description.setPrefSize(500, 70);
-            Description.setText(pizzas[i].getPizzaname()+"\n__________________\n"+pizzas[i].getDescriptioon());
+            Description.setText(((PizzaInfo) pizzas.get(i)).getPizzaname()+"\n__________________\n"+((PizzaInfo) pizzas.get(i)).getDescriptioon());
 
             //            Description.setDisable(true);
             Description.setEditable(false);
 
-            Image pica = new Image("view/pizzainfo/pizzaPhotos/"+pizzas[i].getPizzaname()+".png");
+            Image pica = new Image("view/pizzainfo/pizzaPhotos/"+((PizzaInfo) pizzas.get(i)).getPizzaname()+".png");
             ImageView Picaphoto = new ImageView();
             Picaphoto.setFitHeight(70);
             Picaphoto.setFitWidth(70);
             Picaphoto.setImage(pica);
 
-            picaBtnList[i] = new Button("●");
-            picaBtnList[i].setPrefSize(50, 50);
-            picaBtnList[i].setPrefSize(50, 50);
+            picaBtnList.add(new Button("●"));
+            picaBtnList.get(i).setPrefSize(50, 50);
+            picaBtnList.get(i).setPrefSize(50, 50);
+
+            isButtonClicked.add(1);
 
             int finalI = i;
-            isButtonClicked[i] = true;
-
-            picaBtnList[i].setOnAction(
+            picaBtnList.get(i).setOnAction(
                     event -> {
                         //if button clicked
-                        if (isButtonClicked[finalI]) {
-                            picaBtnList[finalI].getStyleClass().add("addbtn");
-                            isButtonClicked[finalI] = false;
+                        if (isButtonClicked.get(finalI) == 1) {
+                            picaBtnList.get(finalI).getStyleClass().add("addbtn");
+                            isButtonClicked.set(finalI, 0);
 
-                            for (int j = 0; j < amountOfPizzas; j++)
+                            for (int j = 0; j < picaBtnList.size(); j++)
                                 if (j != finalI) {
-                                    picaBtnList[j].getStyleClass().remove("addbtn");
-                                    isButtonClicked[j] = true;
+                                    picaBtnList.get(j).getStyleClass().remove("addbtn");
+                                    isButtonClicked.set(j, 1);
                                 }
 
                             //set chosen pizza index
@@ -170,12 +191,12 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
                         }
                         //if button unclicked
                         else {
-                            picaBtnList[finalI].getStyleClass().remove("addbtn");
-                            isButtonClicked[finalI] = true;
+                            picaBtnList.get(finalI).getStyleClass().remove("addbtn");
+                            isButtonClicked.set(finalI, 1);
                         }
                     });
 
-            Pizzatab.getChildren().addAll(Picaphoto, Description, picaBtnList[i]);
+            Pizzatab.getChildren().addAll(Picaphoto, Description, picaBtnList.get(i));
             Pizzatab.setAlignment(Pos.CENTER);
             Pizzatab.setSpacing(10);
             PizzaContent.getChildren().add(Pizzatab);
@@ -189,7 +210,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         Parent root = loader.load();
 
         CheckoutControl checkoutc = loader.getController();
-        checkoutc.getPrice(finalPrice);
+        checkoutc.getPrice((int) newOrder.getFinalPrice());
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
@@ -198,7 +219,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         if(newadress.isSelected()){
             openscene(event, "Adress","GeneralWindowStyle","Adress","Global_Resources");
         }
-        test();
+        test(newOrder);
 
 
     }
@@ -239,21 +260,21 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
     public void addToOrder(ActionEvent event) throws IOException {
         //Sum everything
-        finalPrice += 40 * largePizzaUnit + 30 * mediumPizzaUnit + 25 * smallPizzaUnit;
-        finalPriceLabel.setText(finalPrice+" zlt");
+        newOrder.setFinalPrice(newOrder.getFinalPrice() + 40 * largePizzaUnit + 30 * mediumPizzaUnit + 25 * smallPizzaUnit);
+        finalPriceLabel.setText(newOrder.getFinalPrice()+" zlt");
 
         //adds a tile to Order Tab
         try {
             for (int i = 0; i < smallPizzaUnit; i++) {
-                addPizzaToOrder(pizzas[chosenPizzaIndex], "25", "25", pizzaUnitsOrdered);
+                addPizzaToOrder(pizzas.get(chosenPizzaIndex), "25", "25", pizzaUnitsOrdered);
                 pizzaUnitsOrdered++;
             }
             for (int i = 0; i < mediumPizzaUnit; i++) {
-                addPizzaToOrder(pizzas[chosenPizzaIndex], "30", "30", pizzaUnitsOrdered);
+                addPizzaToOrder(pizzas.get(chosenPizzaIndex), "30", "30", pizzaUnitsOrdered);
                 pizzaUnitsOrdered++;
             }
             for (int i = 0; i < largePizzaUnit; i++) {
-                addPizzaToOrder(pizzas[chosenPizzaIndex], "40", "35", pizzaUnitsOrdered);
+                addPizzaToOrder(pizzas.get(chosenPizzaIndex), "40", "35", pizzaUnitsOrdered);
                 pizzaUnitsOrdered++;
             }
         }
@@ -272,6 +293,6 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         largePizzaLabel.setText("0");
         mediumPizzaLabel.setText("0");
         smallPizzaLabel.setText("0");
-        picaBtnList[chosenPizzaIndex].fire();
+        picaBtnList.get(chosenPizzaIndex).fire();
     }
 }
