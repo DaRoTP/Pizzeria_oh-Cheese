@@ -25,20 +25,18 @@ import model.PizzaInfo;
 
 public class CustomerControl extends GeneralWindowControl implements Initializable {
 
+    private int CustomerID = 3;
+
     private int largePizzaUnit = 0;
     private int mediumPizzaUnit = 0;
     private int smallPizzaUnit = 0;
     private int pizzaUnitsOrdered = 0;
-    private int finalPrice = 0;
     private int chosenPizzaIndex = 0;
 
     private Order newOrder;
 
     private int amountOfPizzas = 9;
-//    private PizzaInfo[] pizzas = new PizzaInfo[amountOfPizzas];
     private ArrayList<PizzaInfo> pizzas = new ArrayList<PizzaInfo>();
-//    private Button[] picaBtnList = new Button[amountOfPizzas];
-//    private boolean[] isButtonClicked = new boolean[amountOfPizzas];
     private ArrayList<Button> picaBtnList = new ArrayList<Button>();
     private ArrayList<Integer> isButtonClicked = new ArrayList<Integer>();
 
@@ -60,18 +58,10 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     @FXML AnchorPane orderanchor = new AnchorPane();
 
 
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
-// //       pizzas[0] = new PizzaInfo(0,"0","descr");
-////        pizzas[1] = new PizzaInfo(1,"1","descr");
-////        pizzas[2] = new PizzaInfo(2,"2","descr");
-////        pizzas[3] = new PizzaInfo(3,"3","descr");
-////        pizzas[4] = new PizzaInfo(4,"4","descr");
-////        pizzas[5] = new PizzaInfo(5,"5","descr");
-////        pizzas[6] = new PizzaInfo(6,"6","descr");
-////        pizzas[7] = new PizzaInfo(7,"7","descr");
-////        pizzas[8] = new PizzaInfo(8,"8","descr");
         pizzas.add(new PizzaInfo(0,"0","descr"));
         pizzas.add(new PizzaInfo(1,"1","descr"));
         pizzas.add(new PizzaInfo(2,"2","descr"));
@@ -84,7 +74,11 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
 
         createPizzaTile(pizzas, amountOfPizzas);
-        newOrder = new Order(1);
+    }
+
+    public void getIDFirst(int ID){
+        this.CustomerID = ID;
+        newOrder = new Order(CustomerID);
     }
 
     public void test(Order some){
@@ -139,7 +133,6 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
         OrderContent.getChildren().add(orderTab[OrderIndex]);
 
-//        newOrder.setPizzaAndSize(chosenPizza.getPizzaID(),pizzaSize,OrderIndex);
         newOrder.setPizzaAndSize(chosenPizza.getPizzaID(),pizzaSize);
 
     }
@@ -203,23 +196,26 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         }
     }
 
-
     public void Checkout(ActionEvent event) throws IOException {
         //openscene(event,"checkout","GeneralWindowStyle","checkout","Global_Resources");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/checkout/checkout.fxml"));
         Parent root = loader.load();
 
         CheckoutControl checkoutc = loader.getController();
-        checkoutc.getPrice((int) newOrder.getFinalPrice());
+        checkoutc.getOrder(newOrder);
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
         root.getStylesheets().add("/view/Global_Resources/GeneralWindowStyle.css");
+        Image logo_icon = new Image("/view/Global_Resources/Logo.png");
+        stage.getIcons().add(logo_icon);
+        stage.setTitle("Pizzeria - oh Cheese!");
+
         if(newadress.isSelected()){
             openscene(event, "Adress","GeneralWindowStyle","Adress","Global_Resources");
         }
-        test(newOrder);
+//        test(newOrder);
 
 
     }

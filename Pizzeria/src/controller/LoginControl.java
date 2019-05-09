@@ -33,6 +33,7 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
     	Mode_choice.getItems().add("CUSTOMER");
         Mode_choice.getItems().add("ADMIN");
         Mode_choice.getItems().add("EMPLOYEE");
+        setID(22);
     }
 
     
@@ -63,19 +64,21 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
 
     }
 
+
+
     public void open_window(ActionEvent event) throws IOException {
         String value = Mode_choice.getValue();
         if(checkIfEmpty()) {
             try {
                 switch (value) {
                     case "ADMIN":
-                        changescene(event,"Admin","Admin","Admin");
+                        ChangeStage_PaassingID(event,"Admin","Admin","Admin");
                         break;
                     case "CUSTOMER":
-                        changescene(event,"Customer","Customer","Customer");
+                        ChangeStage_PaassingID(event,"Customer","Customer","Customer");
                         break;
                     case "EMPLOYEE":
-                        changescene(event,"Employee","Employee","Employee");
+                        ChangeStage_PaassingID(event,"Employee","Employee","Employee");
                         break;
                     default:
                         System.out.println("default");
@@ -86,7 +89,8 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
             }
         }
     }
-    
+
+
     
 	
 }

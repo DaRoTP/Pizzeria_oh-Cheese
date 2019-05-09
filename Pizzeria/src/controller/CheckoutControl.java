@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 import model.Order;
+import model.PizzaInfo;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,20 +19,34 @@ import java.util.ResourceBundle;
 
 public class CheckoutControl implements Initializable {
 
+    Order newOrder;
 
     @FXML RadioButton card = new RadioButton();
     @FXML RadioButton cash = new RadioButton();
     @FXML Label warning = new Label();
     @FXML Label Price = new Label();
 
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
     }
 
-    public void getPrice(int price){
-        Price.setText(price+" zlt");
+    public void test(Order some) {
+        System.out.println("Customer ID: " + some.getCustumerID());
+        System.out.println("Final Price: " + some.getFinalPrice());
+        System.out.println("Method: " + some.getPaymentMethod());
+        System.out.println("------ Pizzas ----");
+        for (int i = 0; i < some.getPizzasIDs().size(); i++) {
+            System.out.println("- ID: " + some.getPizzasIDs().get(i) + " -size: " + some.getSizeIDs().get(i));
+        }
     }
+
+    public void getOrder(Order newOrder){
+        this.newOrder = newOrder;
+        Price.setText(newOrder.getFinalPrice()+" zlt");
+    }
+
 
     public void submit(ActionEvent event) throws IOException {
         if (cash.isSelected() || card.isSelected()) {
@@ -42,6 +57,13 @@ public class CheckoutControl implements Initializable {
                 window.show();
                 scene.getStylesheets().clear();
                 scene.getStylesheets().add("/view/Global_Resources/GeneralWindowStyle.css");
+
+                if(cash.isSelected())
+                    newOrder.setPaymentMethod(0);
+                else
+                    newOrder.setPaymentMethod(1);
+
+                test(newOrder);
         }
         else
         {

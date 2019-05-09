@@ -12,6 +12,12 @@ import java.io.IOException;
 
 public class EmployeeControl extends GeneralWindowControl {
 
+    private int EmployeeID;
+
+    public void getIDFirst(int ID){
+        this.EmployeeID = ID;
+        System.out.println("Got Emp");
+    }
 
     public void add_pizza(ActionEvent event) throws IOException {
         openscene(event, "addpizza","GeneralWindowStyle", "pizzainfo","Global_Resources");
