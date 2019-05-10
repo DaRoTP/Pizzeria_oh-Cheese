@@ -72,7 +72,7 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
             try {
                 switch (value) {
                     case "ADMIN":
-                        ChangeStage_PaassingID(event,"Admin","Admin","Admin");
+                        changescene(event,"Admin","Admin","Admin","Admin");
                         break;
                     case "CUSTOMER":
                         ChangeStage_PaassingID(event,"Customer","Customer","Customer");

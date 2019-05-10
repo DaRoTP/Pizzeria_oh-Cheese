@@ -41,14 +41,14 @@ public class GeneralWindowControl {
     }
 
 
-    public void changescene(ActionEvent event, String scenename, String stylesheetname, String packagename)throws IOException {
-        Parent newScene = FXMLLoader.load(getClass().getResource("/view/" +packagename+"/"+scenename+".fxml"));
+    public void changescene(ActionEvent event, String scenename, String stylesheetname, String scene_packagename,String stylesheet_packagename)throws IOException {
+        Parent newScene = FXMLLoader.load(getClass().getResource("/view/" +scene_packagename+"/"+scenename+".fxml"));
         Scene scene = new Scene(newScene);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
         scene.getStylesheets().clear();
-        scene.getStylesheets().add("/view/" +packagename+"/"+stylesheetname+".css");
+        scene.getStylesheets().add("/view/" +stylesheet_packagename+"/"+stylesheetname+".css");
 
     }
 
@@ -66,7 +66,7 @@ public class GeneralWindowControl {
     }
 
     public void LogOut(ActionEvent event) throws IOException {
-        changescene(event, "Login","Login","Login");
+        changescene(event, "Login","Login","Login","Login");
     }
 
 

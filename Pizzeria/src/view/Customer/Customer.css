@@ -91,7 +91,7 @@
     -fx-background-color: #dfdfdf;
     -fx-text-fill: #666666;
     -fx-border-width: 0;
-    -fx-font-size: 10;
+    -fx-font-size: 20;
 }
 .arrow:hover
 {
@@ -105,7 +105,17 @@
 
 .price
 {
+    -fx-background-color: #67bc42;
+    -fx-background-radius: 20;
+    -fx-text-fill: white;
+    -fx-padding: 5;
+
+}
+.price2
+{
+    -fx-font-weight: bold;
     -fx-text-fill: #67bc42;
+    -fx-padding: 5;
 
 }
 .smalltext

@@ -72,3 +72,75 @@
     -fx-font-size: 14;
 }
 
+.Text-Area{
+    -fx-focus-color: transparent;
+    -fx-background-radius: 10;
+
+}
+.price
+{
+    -fx-background-color: #67bc42;
+    -fx-background-radius: 20;
+    -fx-text-fill: white;
+    -fx-padding: 10 ;
+
+}
+
+.radio-button .radio {
+    -fx-background-color: white;
+    -fx-padding: 4px;
+}
+.radio-button .dot {
+    -fx-background-radius: 15px;
+    -fx-padding: 8px;
+}
+
+.radio-button .selected{
+    -fx-background-color: red;
+}
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 10.0 0.0 0.0;
+
+}
+
+ .scroll-bar .increment-arrow,
+ .scroll-bar .decrement-arrow{
+    -fx-shape : " ";
+    -fx-padding :0.15em 0.0;
+}
+
+ .scroll-bar:vertical .increment-arrow,
+ .scroll-bar:vertical .decrement-arrow{
+    -fx-shape : " ";
+    -fx-padding :0.0 0.15em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color :derive(black,90.0%);
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0em;
+}
+
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color :derive(#4D4C4F,10.0%);
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0em;
+}
+
+.status_notActive{
+    -fx-background-color: #db3b2f;
+    -fx-background-radius: 100;
+}
+.lineActive{
+    -fx-stroke: #db3b2f;
+    -fx-stroke-width: 20;
+}
+
+.textWhite{
+    -fx-text-fill: white;
+}

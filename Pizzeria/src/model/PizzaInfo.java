@@ -8,6 +8,7 @@ public class PizzaInfo {
     private  int pizzaID;
     private String pizzaname;
     private String descriptioon;
+    private String type;
 
     //CONSTRUCTOR
     public PizzaInfo(int pizzaID,String pizzaname, String descriptioon) {

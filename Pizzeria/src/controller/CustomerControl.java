@@ -4,26 +4,50 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import model.Order;
 import model.PizzaInfo;
 
 
 public class CustomerControl extends GeneralWindowControl implements Initializable {
+
+    class OrderedPizzaTile {
+        private HBox orderTab;
+        private TextArea information_About_Chosen_Pizza;
+        private Button removePicaBtn;
+
+        public OrderedPizzaTile(PizzaInfo chosenPizza, String pizzaSize) {
+            this.orderTab = new HBox();
+            this.orderTab.setPrefSize(354, 20);
+
+            this.information_About_Chosen_Pizza = new TextArea();
+            this.information_About_Chosen_Pizza.setPrefSize(300, 20);
+            this.information_About_Chosen_Pizza.setText(chosenPizza.getPizzaname()+" -  | "+pizzaSize+"cm | "+pizzaSize+" zlt");
+
+            this.removePicaBtn = new Button("X");
+            this.removePicaBtn.setPrefSize(35, 20);
+            this.removePicaBtn.getStyleClass().add("removebtn");
+
+            this.orderTab.getChildren().addAll(this.information_About_Chosen_Pizza,this.removePicaBtn);
+            this.orderTab.setAlignment(Pos.CENTER);
+            this.orderTab.setSpacing(10);
+        }
+    }
+
 
     private int CustomerID = 3;
 
@@ -35,14 +59,17 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
     private Order newOrder;
 
-    private int amountOfPizzas = 9;
+    private int addedPizzasCounter = 0;
+
     private ArrayList<PizzaInfo> pizzas = new ArrayList<PizzaInfo>();
     private ArrayList<Button> picaBtnList = new ArrayList<Button>();
     private ArrayList<Integer> isButtonClicked = new ArrayList<Integer>();
+//
+    private ArrayList<HBox> orderTab = new ArrayList<HBox>();
+    private ArrayList<Integer> counterTab = new ArrayList<Integer>();
 
-
-    private Button[] removePicaBtn = new Button[100];
-    private HBox[] orderTab = new HBox[100];
+//    private Button[] removePicaBtn = new Button[100];
+//    private HBox[] orderTab = new HBox[100];
 
     @FXML CheckBox newadress = new CheckBox();
     @FXML Label largePizzaLabel = new Label();
@@ -56,6 +83,9 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
     @FXML AnchorPane pizzaanchor = new AnchorPane();
     @FXML AnchorPane orderanchor = new AnchorPane();
+
+    @FXML Button ViewStatus = new Button();
+    @FXML Button CheckoutBtn = new Button();
 
 
 
@@ -72,14 +102,17 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         pizzas.add(new PizzaInfo(7,"7","descr"));
         pizzas.add(new PizzaInfo(8,"8","descr"));
 
+        createPizzaTile(pizzas, pizzas.size());
+        ViewStatus.setDisable(true);
+        CheckoutBtn.setDisable(true);
 
-        createPizzaTile(pizzas, amountOfPizzas);
     }
 
     public void getIDFirst(int ID){
         this.CustomerID = ID;
         newOrder = new Order(CustomerID);
     }
+
 
     public void test(Order some){
         System.out.println("Customer ID: "+some.getCustumerID());
@@ -92,18 +125,30 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     }
 
     public void removePizzaFromOrder(int OrderIndex){
-        OrderContent.getChildren().remove(orderTab[OrderIndex]);
+        OrderContent.getChildren().remove(OrderIndex);
+        orderTab.remove(OrderIndex);
+        counterTab.remove(OrderIndex);
         //Shrink anchor pane and Vbox
         orderanchor.setPrefHeight(orderanchor.getPrefHeight() - 55);
         OrderContent.setPrefHeight(OrderContent.getPrefHeight() - 55);
         //change price
         newOrder.subFrom_FinalPrice(newOrder.getSizeIDs().get(OrderIndex));
-        newOrder.setFinalPrice(newOrder.getFinalPrice() - 1);
+        //remove pizzas from order
+        newOrder.removedFromOrdered(OrderIndex);
         //change units bought
         pizzaUnitsOrdered -= 1;
         //Update Labels
         pizzacounterLabel.setText(String.valueOf(pizzaUnitsOrdered));
-        finalPriceLabel.setText(newOrder.getFinalPrice()+" zlt");
+        finalPriceLabel.setText(((int)newOrder.getFinalPrice())+" zlt");
+
+        if(newOrder.getFinalPrice() != 0){
+            ViewStatus.setDisable(true);
+            CheckoutBtn.setDisable(false);
+        }
+        else {
+            ViewStatus.setDisable(true);
+            CheckoutBtn.setDisable(true);
+        }
 
     }
 
@@ -111,31 +156,52 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         orderanchor.setPrefHeight(orderanchor.getPrefHeight() + 55);
         OrderContent.setPrefHeight(OrderContent.getPrefHeight() + 55);
 
-        orderTab[OrderIndex] = new HBox();
-        orderTab[OrderIndex].setPrefSize(354, 20);
+        orderTab.add(new HBox());
+        counterTab.add(addedPizzasCounter);
+
+        orderTab.get(orderTab.size()-1).setPrefSize(354, 20);
 
         TextArea information_About_Chosen_Pizza = new TextArea();
         information_About_Chosen_Pizza.setPrefSize(300, 20);
         information_About_Chosen_Pizza.setText(chosenPizza.getPizzaname()+" -  | "+pizzaSize+"cm | "+pizzaPrice+" zlt");
 
-        removePicaBtn[OrderIndex] = new Button("X");
-        removePicaBtn[OrderIndex].setPrefSize(40, 20);
-        removePicaBtn[OrderIndex].getStyleClass().add("removebtn");
+        Button removePicaBtn = new Button("X");
+        removePicaBtn.setPrefSize(35, 20);
+        removePicaBtn.getStyleClass().add("removebtn");
 
-        removePicaBtn[OrderIndex].setOnAction(
-                event -> {removePizzaFromOrder(OrderIndex);
-                    newOrder.removedFromOrdered(OrderIndex);
+        int finalI = addedPizzasCounter;
+
+        removePicaBtn.setOnAction(
+                event -> {
+                    try {
+                        removePizzaFromOrder(counterTab.indexOf(finalI));
+                    }
+                    catch(IndexOutOfBoundsException e){
+                        System.out.println("XUj");
+                    }
+
                 });
 
-        orderTab[OrderIndex].getChildren().addAll(information_About_Chosen_Pizza,removePicaBtn[OrderIndex]);
-        orderTab[OrderIndex].setAlignment(Pos.CENTER);
-        orderTab[OrderIndex].setSpacing(10);
+        orderTab.get(orderTab.size()-1).getChildren().addAll(information_About_Chosen_Pizza,removePicaBtn);
+        orderTab.get(orderTab.size()-1).setAlignment(Pos.CENTER);
+        orderTab.get(orderTab.size()-1).setSpacing(10);
 
-        OrderContent.getChildren().add(orderTab[OrderIndex]);
+        OrderContent.getChildren().add(orderTab.get(orderTab.size()-1));
 
         newOrder.setPizzaAndSize(chosenPizza.getPizzaID(),pizzaSize);
 
+        if(newOrder.getFinalPrice() != 0){
+            ViewStatus.setDisable(true);
+            CheckoutBtn.setDisable(false);
+        }
+        else {
+            ViewStatus.setDisable(true);
+            CheckoutBtn.setDisable(true);
+        }
+
+        addedPizzasCounter ++;
     }
+
 
     public void createPizzaTile(ArrayList pizzas, int amountOfPizzas){
         for(int i = 0; i < amountOfPizzas; i++) {
@@ -143,11 +209,11 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
             PizzaContent.setPrefHeight(PizzaContent.getPrefHeight() + 80);
 
             HBox Pizzatab = new HBox();
-            Pizzatab.setPrefSize(589, 70);
+            Pizzatab.setPrefSize(750, 70);
 
 
             TextArea Description = new TextArea();
-            Description.setPrefSize(500, 70);
+            Description.setPrefSize(620, 70);
             Description.setText(((PizzaInfo) pizzas.get(i)).getPizzaname()+"\n__________________\n"+((PizzaInfo) pizzas.get(i)).getDescriptioon());
 
             //            Description.setDisable(true);
@@ -215,9 +281,13 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         if(newadress.isSelected()){
             openscene(event, "Adress","GeneralWindowStyle","Adress","Global_Resources");
         }
-//        test(newOrder);
+        ViewStatus.setDisable(false);
+        CheckoutBtn.setDisable(true);
+    }
 
-
+    //VIEW STATUS
+    public void viewStatus(ActionEvent event) throws IOException {
+        changescene(event,"thankyou","GeneralWindowStyle","thankyou","Global_Resources");
     }
     //LARGE PIZZA
     public void addLargePizza(ActionEvent event) throws IOException {
@@ -257,20 +327,20 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     public void addToOrder(ActionEvent event) throws IOException {
         //Sum everything
         newOrder.setFinalPrice(newOrder.getFinalPrice() + 40 * largePizzaUnit + 30 * mediumPizzaUnit + 25 * smallPizzaUnit);
-        finalPriceLabel.setText(newOrder.getFinalPrice()+" zlt");
+        finalPriceLabel.setText(((int)newOrder.getFinalPrice())+" zlt");
 
         //adds a tile to Order Tab
         try {
             for (int i = 0; i < smallPizzaUnit; i++) {
-                addPizzaToOrder(pizzas.get(chosenPizzaIndex), "25", "25", pizzaUnitsOrdered);
+                addPizzaToOrder(pizzas.get(chosenPizzaIndex), "25", "25", addedPizzasCounter);
                 pizzaUnitsOrdered++;
             }
             for (int i = 0; i < mediumPizzaUnit; i++) {
-                addPizzaToOrder(pizzas.get(chosenPizzaIndex), "30", "30", pizzaUnitsOrdered);
+                addPizzaToOrder(pizzas.get(chosenPizzaIndex), "30", "30", addedPizzasCounter);
                 pizzaUnitsOrdered++;
             }
             for (int i = 0; i < largePizzaUnit; i++) {
-                addPizzaToOrder(pizzas.get(chosenPizzaIndex), "40", "35", pizzaUnitsOrdered);
+                addPizzaToOrder(pizzas.get(chosenPizzaIndex), "40", "35", addedPizzasCounter);
                 pizzaUnitsOrdered++;
             }
         }
