@@ -14,7 +14,6 @@
     -fx-text-fill: #474747;
     -fx-font-family: Arial;
     -fx-font-weight: bold;
-    -fx-font-size: 20;
 }
 .button
 {
@@ -133,14 +132,65 @@
 }
 
 .status_notActive{
-    -fx-background-color: #db3b2f;
-    -fx-background-radius: 100;
+     -fx-background-color: #db3b2f;
+     -fx-background-radius: 100;
+ }
+ .status_Active{
+      -fx-background-color: #42BD72;
+      -fx-background-radius: 100;
+  }
+.lineinActive{
+    -fx-stroke: #db3b2f;
+    -fx-stroke-width: 20;
 }
 .lineActive{
-    -fx-stroke: #db3b2f;
+    -fx-stroke: #42BD72;
     -fx-stroke-width: 20;
 }
 
 .textWhite{
     -fx-text-fill: white;
 }
+
+.Mode_choice
+{
+    -fx-background-radius: 20;
+    -fx-background-color: #474747;
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-font-size: 15;
+    -fx-padding: 0;
+
+}
+.Mode_choice .context-menu{
+    -fx-background-color: #5d5d5d;
+}
+
+.Mode_choice .menu-item:focused{
+    -fx-background-color: #3c3c3c;
+}
+
+.Mode_choice .menu-item > .label{
+    -fx-text-fill: white;
+}
+
+.Mode_choice .menu-item:focused > .label{
+    -fx-text-fill: white;
+}
+
+.Mode_choice > .label{
+    -fx-text-fill: white;
+    -fx-alignment: center;
+ }
+
+#logout{
+
+     -fx-background-color: #db3b2f;
+     -fx-text-fill: #1e1414;
+     -fx-font-family: Arial;
+     -fx-font-weight: bold;
+     -fx-font-size: 20;
+     -fx-padding: 0;
+     -fx-border-width: 0;
+ }

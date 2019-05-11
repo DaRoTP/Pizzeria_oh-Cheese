@@ -75,7 +75,7 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
                         changescene(event,"Admin","Admin","Admin","Admin");
                         break;
                     case "CUSTOMER":
-                        ChangeStage_PaassingID(event,"Customer","Customer","Customer");
+                        changescene(event,"Customer","Customer","Customer","Customer");
                         break;
                     case "EMPLOYEE":
                         ChangeStage_PaassingID(event,"Employee","Employee","Employee");

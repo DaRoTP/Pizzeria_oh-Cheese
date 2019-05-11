@@ -72,50 +72,56 @@
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label text="Pizzas">
+                  <Label alignment="CENTER" prefHeight="28.0" prefWidth="98.0" styleClass="TableLabel" text="Pizzas">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin></Label>
-                  <TableView fx:id="pizzaTable" prefHeight="500.0" prefWidth="330.0" />
+                  <TableView fx:id="pizzaTable" prefHeight="500.0" prefWidth="330.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></TableView>
                   <HBox alignment="CENTER" prefHeight="35.0" prefWidth="330.0" spacing="5.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#add_pizza" prefHeight="30.0" prefWidth="30.0" styleClass="addbtn" text="+">
+                        <Button mnemonicParsing="false" onAction="#add_pizza_SceneOpen" prefHeight="30.0" prefWidth="30.0" styleClass="addbtn" text="+">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <Button mnemonicParsing="false" onAction="#remove_pizza" prefHeight="30.0" prefWidth="30.0" styleClass="removebtn" text="-">
+                        <Button mnemonicParsing="false" onAction="#remove_pizza_SceneOpen" prefHeight="30.0" prefWidth="30.0" styleClass="removebtn" text="-">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <Button mnemonicParsing="false" onAction="#edit_pizza" prefHeight="30.0" prefWidth="60.0" text="Edit">
+                        <Button mnemonicParsing="false" onAction="#edit_pizza_SceneOpen" prefHeight="30.0" prefWidth="60.0" text="Edit">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
+                        <Button mnemonicParsing="false" onAction="#edit_pizza" prefHeight="30.0" prefWidth="60.0" text="View">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                      </children>
                   </HBox>
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <Label text="Promo Codes">
+                  <Label alignment="CENTER" prefHeight="28.0" prefWidth="145.0" styleClass="TableLabel" text="Promo Codes">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TableView fx:id="prmocodes" prefHeight="500.0" prefWidth="408.0" />
+                  <TableView fx:id="prmocodes" prefHeight="500.0" prefWidth="408.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></TableView>
                   <HBox alignment="CENTER" prefHeight="35.0" prefWidth="330.0" spacing="5.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#add_pizza" prefHeight="30.0" prefWidth="30.0" styleClass="addbtn" text="+">
+                        <Button mnemonicParsing="false" onAction="#add_promo_code_SceneOpen" prefHeight="30.0" prefWidth="30.0" styleClass="addbtn" text="+">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#remove_pizza" prefHeight="30.0" prefWidth="30.0" styleClass="removebtn" text="-">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#edit_pizza" prefHeight="30.0" prefWidth="60.0" text="Edit">
+                        <Button mnemonicParsing="false" onAction="#remove_promo_code_SceneOpen" prefHeight="30.0" prefWidth="30.0" styleClass="removebtn" text="-">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -126,23 +132,29 @@
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
-                  <Label text="Top 10 pizzas of the Month">
+                  <Label alignment="CENTER" prefHeight="28.0" prefWidth="241.0" styleClass="TableLabel" text="Top 10 pizzas of the Month">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin></Label>
-                  <TableView fx:id="TopPizzas" prefHeight="500.0" prefWidth="408.0" />
+                  <TableView fx:id="TopPizzas" prefHeight="500.0" prefWidth="408.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></TableView>
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <children>
-                  <Label text="Order requests">
+                  <Label alignment="CENTER" prefHeight="31.0" prefWidth="152.0" styleClass="TableLabel" text="Order requests">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin></Label>
-                  <TableView fx:id="OrderRequests" prefHeight="500.0" prefWidth="408.0" />
+                  <TableView fx:id="OrderRequests" prefHeight="500.0" prefWidth="408.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></TableView>
                   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="377.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#accept_order" prefHeight="30.0" prefWidth="130.0" styleClass="addbtn" text="Accept Order">
+                        <Button mnemonicParsing="false" onAction="#accept_order_SceneOpen" prefHeight="30.0" prefWidth="130.0" styleClass="addbtn" text="Accept Order">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
@@ -150,7 +162,7 @@
                   </HBox>
                </children>
             </VBox>
-            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="93.0" text="Refresh" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button mnemonicParsing="false" onAction="#refresh_table_content" prefHeight="32.0" prefWidth="93.0" text="Refresh" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>

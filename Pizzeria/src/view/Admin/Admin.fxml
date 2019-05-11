@@ -96,17 +96,17 @@
                                     </TableView>
                                     <HBox alignment="CENTER" prefHeight="35.0" prefWidth="330.0" spacing="5.0">
                                        <children>
-                                          <Button mnemonicParsing="false" onAction="#add_pizza" prefHeight="30.0" prefWidth="30.0" styleClass="addbtn" text="+">
+                                          <Button mnemonicParsing="false" onAction="#add_pizza_SceneOpen" prefHeight="30.0" prefWidth="30.0" styleClass="addbtn" text="+">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button mnemonicParsing="false" onAction="#remove_pizza" prefHeight="30.0" prefWidth="30.0" styleClass="removebtn" text="-">
+                                          <Button mnemonicParsing="false" onAction="#remove_pizza_SceneOpen" prefHeight="30.0" prefWidth="30.0" styleClass="removebtn" text="-">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button mnemonicParsing="false" onAction="#edit_pizza" prefHeight="30.0" prefWidth="60.0" text="Edit">
+                                          <Button mnemonicParsing="false" onAction="#edit_pizza_SceneOpen" prefHeight="30.0" prefWidth="60.0" text="Edit">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -138,17 +138,17 @@
                                     </TableView>
                                     <HBox alignment="CENTER" prefHeight="35.0" prefWidth="330.0" spacing="5.0">
                                        <children>
-                                          <Button mnemonicParsing="false" onAction="#add_pizza" prefHeight="30.0" prefWidth="30.0" styleClass="addbtn" text="+">
+                                          <Button mnemonicParsing="false" onAction="#add_pizza_SceneOpen" prefHeight="30.0" prefWidth="30.0" styleClass="addbtn" text="+">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button mnemonicParsing="false" onAction="#remove_pizza" prefHeight="30.0" prefWidth="30.0" styleClass="removebtn" text="-">
+                                          <Button mnemonicParsing="false" onAction="#remove_pizza_SceneOpen" prefHeight="30.0" prefWidth="30.0" styleClass="removebtn" text="-">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button mnemonicParsing="false" onAction="#edit_pizza" prefHeight="30.0" prefWidth="60.0" text="Edit">
+                                          <Button mnemonicParsing="false" onAction="#edit_pizza_SceneOpen" prefHeight="30.0" prefWidth="60.0" text="Edit">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -193,7 +193,7 @@
                                     </TableView>
                                     <HBox alignment="CENTER" prefHeight="40.0" prefWidth="377.0">
                                        <children>
-                                          <Button mnemonicParsing="false" onAction="#accept_order" prefHeight="30.0" prefWidth="130.0" styleClass="addbtn" text="Accept Order">
+                                          <Button mnemonicParsing="false" onAction="#accept_order_SceneOpen" prefHeight="30.0" prefWidth="130.0" styleClass="addbtn" text="Accept Order">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>

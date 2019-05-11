@@ -4,49 +4,25 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Stack;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import model.Order;
 import model.PizzaInfo;
 
 
 public class CustomerControl extends GeneralWindowControl implements Initializable {
-
-    class OrderedPizzaTile {
-        private HBox orderTab;
-        private TextArea information_About_Chosen_Pizza;
-        private Button removePicaBtn;
-
-        public OrderedPizzaTile(PizzaInfo chosenPizza, String pizzaSize) {
-            this.orderTab = new HBox();
-            this.orderTab.setPrefSize(354, 20);
-
-            this.information_About_Chosen_Pizza = new TextArea();
-            this.information_About_Chosen_Pizza.setPrefSize(300, 20);
-            this.information_About_Chosen_Pizza.setText(chosenPizza.getPizzaname()+" -  | "+pizzaSize+"cm | "+pizzaSize+" zlt");
-
-            this.removePicaBtn = new Button("X");
-            this.removePicaBtn.setPrefSize(35, 20);
-            this.removePicaBtn.getStyleClass().add("removebtn");
-
-            this.orderTab.getChildren().addAll(this.information_About_Chosen_Pizza,this.removePicaBtn);
-            this.orderTab.setAlignment(Pos.CENTER);
-            this.orderTab.setSpacing(10);
-        }
-    }
 
 
     private int CustomerID = 3;
@@ -87,7 +63,12 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     @FXML Button ViewStatus = new Button();
     @FXML Button CheckoutBtn = new Button();
 
+    @FXML VBox acceptedVbox = new VBox();
+    @FXML VBox bakingVbox = new VBox();
+    @FXML VBox sendingVbox = new VBox();
 
+    @FXML Line first = new Line();
+    @FXML Line second = new Line();
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -102,6 +83,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         pizzas.add(new PizzaInfo(7,"7","descr"));
         pizzas.add(new PizzaInfo(8,"8","descr"));
 
+        newOrder = new Order(CustomerID);
         createPizzaTile(pizzas, pizzas.size());
         ViewStatus.setDisable(true);
         CheckoutBtn.setDisable(true);
@@ -219,7 +201,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
             //            Description.setDisable(true);
             Description.setEditable(false);
 
-            Image pica = new Image("view/pizzainfo/pizzaPhotos/"+((PizzaInfo) pizzas.get(i)).getPizzaname()+".png");
+            Image pica = new Image("view/pizzaPhotos/" +((PizzaInfo) pizzas.get(i)).getPizzaname()+".png");
             ImageView Picaphoto = new ImageView();
             Picaphoto.setFitHeight(70);
             Picaphoto.setFitWidth(70);
@@ -253,6 +235,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
                             picaBtnList.get(finalI).getStyleClass().remove("addbtn");
                             isButtonClicked.set(finalI, 1);
                         }
+
                     });
 
             Pizzatab.getChildren().addAll(Picaphoto, Description, picaBtnList.get(i));
@@ -288,6 +271,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     //VIEW STATUS
     public void viewStatus(ActionEvent event) throws IOException {
         changescene(event,"thankyou","GeneralWindowStyle","thankyou","Global_Resources");
+
     }
     //LARGE PIZZA
     public void addLargePizza(ActionEvent event) throws IOException {
@@ -360,5 +344,27 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         mediumPizzaLabel.setText("0");
         smallPizzaLabel.setText("0");
         picaBtnList.get(chosenPizzaIndex).fire();
+    }
+
+    public void chnageToActive(ActionEvent event){
+        if(true){
+            acceptedVbox.getStyleClass().clear();
+            acceptedVbox.getStyleClass().add("status_Active");
+            first.getStyleClass().clear();
+            first.getStyleClass().add("lineActive");
+        }
+
+        if(true) {
+            bakingVbox.getStyleClass().clear();
+            bakingVbox.getStyleClass().add("status_Active");
+            second.getStyleClass().clear();
+            second.getStyleClass().add("lineActive");
+        }
+
+        if(false) {
+            sendingVbox.getStyleClass().clear();
+            sendingVbox.getStyleClass().add("status_Active");
+        }
+
     }
 }

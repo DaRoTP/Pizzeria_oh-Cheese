@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="490.0" prefWidth="500.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignUpControl">
+<AnchorPane prefHeight="490.0" prefWidth="500.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmployeeControl">
    <children>
       <Pane layoutX="-61.0" layoutY="-70.0" prefHeight="100.0" prefWidth="612.0" styleClass="drops" AnchorPane.leftAnchor="-61.0" AnchorPane.rightAnchor="-79.0" AnchorPane.topAnchor="-70.0" />
       <Pane layoutX="380.0" layoutY="-2.0" prefHeight="56.0" prefWidth="30.0" styleClass="drops" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="0.0" />
@@ -43,12 +43,12 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="352.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="136.0" text="Remove Pizza" textAlignment="CENTER" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="136.0" text="Edit Pizza Info" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="name" prefHeight="40.0" prefWidth="82.0" promptText="ID" styleClass="TextFiel">
+                        <TextField fx:id="searchIDField" prefHeight="40.0" prefWidth="82.0" promptText="ID" styleClass="TextFiel">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -56,7 +56,7 @@
                               <Cursor fx:constant="TEXT" />
                            </cursor>
                         </TextField>
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Search">
+                        <Button mnemonicParsing="false" onAction="#searchID" prefHeight="35.0" prefWidth="100.0" text="Search">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
@@ -73,7 +73,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="surname" prefHeight="40.0" prefWidth="332.0" promptText="Name" styleClass="TextFiel">
+                        <TextField fx:id="pizza_name" prefHeight="40.0" prefWidth="332.0" promptText="Name" styleClass="TextFiel">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>
@@ -89,7 +89,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="e_mail" prefHeight="31.0" prefWidth="332.0" promptText="Toppings" styleClass="TextFiel">
+                        <TextField fx:id="pizza_toppings" prefHeight="31.0" prefWidth="332.0" promptText="Toppings" styleClass="TextFiel">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>
@@ -105,7 +105,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="phone_number" prefHeight="31.0" prefWidth="356.0" promptText="Type" styleClass="TextFiel">
+                        <TextField fx:id="pizza_type" prefHeight="31.0" prefWidth="356.0" promptText="Type" styleClass="TextFiel">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>
@@ -119,7 +119,7 @@
             </VBox>
          </center>
          <bottom>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#submit" prefHeight="31.0" prefWidth="89.0" text="Delete" textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#edit_pizza" prefHeight="31.0" prefWidth="89.0" text="Submit" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="15.0" top="20.0" />
                </BorderPane.margin>

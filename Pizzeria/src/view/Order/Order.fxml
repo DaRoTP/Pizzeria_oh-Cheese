@@ -15,8 +15,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="790.0" prefWidth="816.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignUpControl">
+<AnchorPane prefHeight="790.0" prefWidth="816.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmployeeControl">
    <children>
       <Pane layoutX="-61.0" layoutY="-70.0" prefHeight="100.0" prefWidth="612.0" styleClass="drops" AnchorPane.leftAnchor="-61.0" AnchorPane.rightAnchor="-79.0" AnchorPane.topAnchor="-70.0" />
       <Pane layoutX="380.0" layoutY="-2.0" prefHeight="56.0" prefWidth="30.0" styleClass="drops" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="0.0" />
@@ -27,165 +28,189 @@
          </image>
       </ImageView>
       <BorderPane prefHeight="608.0" prefWidth="463.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <bottom>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#submit" prefHeight="31.0" prefWidth="89.0" text="Accept" textAlignment="CENTER" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="15.0" top="20.0" />
-               </BorderPane.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </bottom>
          <center>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="TOP_CENTER">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                  <HBox alignment="TOP_CENTER" prefHeight="435.0" prefWidth="816.0" spacing="20.0">
                      <children>
-                        <VBox prefHeight="632.0" prefWidth="352.0" spacing="20.0">
+                        <VBox alignment="TOP_CENTER" prefHeight="632.0" prefWidth="352.0" spacing="10.0">
                            <children>
-                              <HBox alignment="CENTER" prefHeight="43.0" prefWidth="352.0">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="43.0" prefWidth="352.0">
+                              <HBox alignment="CENTER" prefHeight="44.0" prefWidth="352.0">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="156.0" text="Customer Info" textAlignment="CENTER" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER" prefHeight="32.0" prefWidth="352.0">
+                              <HBox alignment="CENTER" prefHeight="70.0" prefWidth="352.0" spacing="20.0">
                                  <children>
-                                    <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../SignUp/Private_Info_Icon.png" />
-                                       </image>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <TextField fx:id="name" prefHeight="40.0" prefWidth="152.0" promptText="Name" styleClass="TextFiel">
-                                       <HBox.margin>
-                                          <Insets right="20.0" />
-                                       </HBox.margin>
-                                       <cursor>
-                                          <Cursor fx:constant="TEXT" />
-                                       </cursor>
-                                    </TextField>
-                                    <TextField fx:id="surname" prefHeight="40.0" prefWidth="157.0" promptText="Surname" styleClass="TextFiel">
+                                    <VBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="171.0" spacing="3.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="17.0" prefWidth="58.0" text="Name">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="name" editable="false" prefHeight="40.0" prefWidth="135.0" promptText="-" styleClass="TextFiel">
+                                             <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                             </cursor>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="171.0" spacing="3.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="17.0" prefWidth="81.0" text="Surname">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="surname" editable="false" prefHeight="40.0" prefWidth="157.0" promptText="-" styleClass="TextFiel">
+                                             <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                             </cursor>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <VBox prefHeight="70.0" prefWidth="100.0" spacing="4.0">
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="58.0" text="E-Mail">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="e_mail" editable="false" prefHeight="40.0" prefWidth="339.0" promptText="-" styleClass="TextFiel">
                                        <cursor>
                                           <Cursor fx:constant="TEXT" />
                                        </cursor>
                                     </TextField>
                                  </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0">
+                              </VBox>
+                              <VBox prefHeight="70.0" prefWidth="100.0" spacing="4.0">
                                  <children>
-                                    <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../SignUp/email_icon.png" />
-                                       </image>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <TextField fx:id="e_mail" prefHeight="40.0" prefWidth="339.0" promptText="E-mail" styleClass="TextFiel">
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="120.0" text="Phone Number">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="phone_number" editable="false" prefHeight="31.0" prefWidth="356.0" promptText="-" styleClass="TextFiel">
                                        <cursor>
                                           <Cursor fx:constant="TEXT" />
                                        </cursor>
                                     </TextField>
                                  </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0">
+                              </VBox>
+                              <VBox prefHeight="70.0" prefWidth="352.0" spacing="4.0">
                                  <children>
-                                    <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../SignUp/phone_icon.png" />
-                                       </image>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <TextField fx:id="phone_number" prefHeight="31.0" prefWidth="356.0" promptText="Phone Number" styleClass="TextFiel">
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="87.0" text="Username">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="username" editable="false" prefHeight="31.0" prefWidth="332.0" promptText="-" styleClass="TextFiel">
                                        <cursor>
                                           <Cursor fx:constant="TEXT" />
                                        </cursor>
                                     </TextField>
                                  </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0">
-                                 <children>
-                                    <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Login/user_icon.png" />
-                                       </image>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <TextField fx:id="username" prefHeight="31.0" prefWidth="332.0" promptText="Username" styleClass="TextFiel">
-                                       <cursor>
-                                          <Cursor fx:constant="TEXT" />
-                                       </cursor>
-                                    </TextField>
-                                 </children>
-                              </HBox>
+                              </VBox>
                            </children>
                         </VBox>
-                        <VBox prefHeight="632.0" prefWidth="352.0" spacing="20.0">
+                        <VBox prefHeight="632.0" prefWidth="352.0" spacing="10.0">
                            <children>
-                              <HBox alignment="CENTER" prefHeight="43.0" prefWidth="352.0">
+                              <HBox alignment="CENTER" prefHeight="44.0" prefWidth="352.0">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="156.0" text="Adress" textAlignment="CENTER" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="156.0" text="Adress" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font></Label>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER" prefHeight="32.0" prefWidth="352.0">
+                              <HBox alignment="CENTER" prefHeight="70.0" prefWidth="352.0" spacing="20.0">
                                  <children>
-                                    <TextField fx:id="name1" prefHeight="40.0" prefWidth="152.0" promptText="City" styleClass="TextFiel">
-                                       <HBox.margin>
-                                          <Insets right="20.0" />
-                                       </HBox.margin>
-                                       <cursor>
-                                          <Cursor fx:constant="TEXT" />
-                                       </cursor>
-                                    </TextField>
-                                    <TextField fx:id="surname1" prefHeight="40.0" prefWidth="152.0" promptText="ZIP CODE" styleClass="TextFiel">
+                                    <VBox prefHeight="200.0" prefWidth="171.0" spacing="4.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="17.0" prefWidth="58.0" text="Name">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="name1" editable="false" prefHeight="40.0" prefWidth="152.0" promptText="-" styleClass="TextFiel">
+                                             <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                             </cursor>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="171.0" spacing="4.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="17.0" prefWidth="58.0" text="Name">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="surname1" editable="false" prefHeight="40.0" prefWidth="152.0" promptText="-" styleClass="TextFiel">
+                                             <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                             </cursor>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="70.0" prefWidth="312.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="171.0" spacing="4.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="17.0" prefWidth="58.0" text="Name">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="phone_number1" editable="false" prefHeight="40.0" prefWidth="152.0" promptText="-" styleClass="TextFiel">
+                                             <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                             </cursor>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="60.0" prefWidth="171.0" spacing="4.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="17.0" prefWidth="58.0" text="Name">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="e_mail1" editable="false" prefHeight="40.0" prefWidth="152.0" promptText="-" styleClass="TextFiel">
+                                             <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                             </cursor>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <VBox prefHeight="70.0" prefWidth="100.0" spacing="4.0">
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="58.0" text="Name">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="username1" editable="false" prefHeight="31.0" prefWidth="332.0" promptText="-" styleClass="TextFiel">
                                        <cursor>
                                           <Cursor fx:constant="TEXT" />
                                        </cursor>
                                     </TextField>
                                  </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0">
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="352.0" spacing="4.0">
                                  <children>
-                                    <TextField fx:id="phone_number1" prefHeight="40.0" prefWidth="152.0" promptText="House Number" styleClass="TextFiel">
-                                       <cursor>
-                                          <Cursor fx:constant="TEXT" />
-                                       </cursor>
-                                       <HBox.margin>
-                                          <Insets right="20.0" />
-                                       </HBox.margin>
-                                    </TextField>
-                                    <TextField fx:id="e_mail1" prefHeight="40.0" prefWidth="152.0" promptText="Apartment Number" styleClass="TextFiel">
-                                       <cursor>
-                                          <Cursor fx:constant="TEXT" />
-                                       </cursor>
-                                    </TextField>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0">
-                                 <children>
-                                    <TextField fx:id="username1" prefHeight="31.0" prefWidth="332.0" promptText="Street" styleClass="TextFiel">
-                                       <cursor>
-                                          <Cursor fx:constant="TEXT" />
-                                       </cursor>
-                                    </TextField>
-                                 </children>
-                              </HBox>
-                              <VBox alignment="TOP_CENTER" prefHeight="41.0" prefWidth="352.0">
-                                 <children>
-                                    <Label alignment="CENTER" prefHeight="23.0" prefWidth="244.0" text="chose a delivery person" />
-                                    <ChoiceBox prefHeight="25.0" prefWidth="343.0" />
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="178.0" text="chose a delivery person">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font></Label>
+                                    <ChoiceBox prefHeight="39.0" prefWidth="343.0" styleClass="Mode_choice" />
                                  </children>
                               </VBox>
                            </children>
@@ -197,12 +222,15 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Separator>
-                  <HBox alignment="TOP_CENTER" prefHeight="304.0" prefWidth="816.0" spacing="10.0">
+                  <HBox alignment="TOP_CENTER" prefHeight="281.0" prefWidth="816.0" spacing="10.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="304.0" prefWidth="734.0">
+                        <VBox alignment="CENTER" prefHeight="1000.0" prefWidth="734.0">
                            <children>
                               <Label text="Order Info" />
-                              <TextArea editable="false" prefHeight="255.0" prefWidth="734.0" />
+                              <TextArea editable="false" prefHeight="1000.0" prefWidth="100.0">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin></TextArea>
                            </children>
                         </VBox>
                      </children>
@@ -213,6 +241,27 @@
                </BorderPane.margin>
             </VBox>
          </center>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="816.0" spacing="30.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="activeOrder" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#accept_order" prefHeight="31.0" prefWidth="89.0" text="Accept" textAlignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="bakingOrder" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#baking_order" prefHeight="31.0" prefWidth="89.0" text="Baking" textAlignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="deliveringOrder" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#delivering_order" prefHeight="31.0" prefWidth="89.0" text="Sent" textAlignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>
