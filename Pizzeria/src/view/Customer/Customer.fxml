@@ -21,13 +21,16 @@
 
 <AnchorPane id="lox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerControl">
    <children>
-      <Pane layoutX="-42.0" prefHeight="58.0" prefWidth="1360.0" styleClass="drops" AnchorPane.leftAnchor="-40.0" AnchorPane.rightAnchor="-40.0" AnchorPane.topAnchor="-17.0" />
+      <Pane layoutX="-42.0" prefHeight="58.0" prefWidth="1360.0" styleClass="drops_border" stylesheets="@../Global_Resources/GeneralWindowStyle.css" AnchorPane.leftAnchor="-40.0" AnchorPane.rightAnchor="-40.0" AnchorPane.topAnchor="-17.0" />
       <HBox alignment="CENTER" prefHeight="38.0" prefWidth="370.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label styleClass="blacktext" text="Welcome customer!" />
+            <Label styleClass="blacktext" text="Welcome customer!" textFill="#1e1414">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Label>
             <Button fx:id="settings" alignment="CENTER" mnemonicParsing="false" onAction="#settings">
                <graphic>
-                  <ImageView fitHeight="19.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" styleClass="settings">
                      <image>
                         <Image url="@../Global_Resources/settings_icon.png" />
                      </image>
@@ -40,7 +43,7 @@
                   <Insets left="10.0" right="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="logout" alignment="CENTER" mnemonicParsing="false" onAction="#LogOut" styleClass="button1" text="Log out">
+            <Button fx:id="logout" alignment="CENTER" mnemonicParsing="false" onAction="#LogOut" styleClass="logout" text="Log out">
                <graphic>
                   <ImageView fitHeight="19.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -74,16 +77,22 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="65.0" prefWidth="230.0">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="80.0" styleClass="price2" text="40 zlt">
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="80.0" styleClass="green-text" text="40 zlt">
                                  <font>
                                     <Font size="24.0" />
                                  </font></Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="70.0" styleClass="blacktext" text="35 cm" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="70.0" styleClass="blacktext" text="35 cm">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
                               <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#removeLargePizza" prefHeight="10.0" prefWidth="30.0" rotate="180.0" styleClass="arrow" text="▶">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor></Button>
-                              <Label fx:id="largePizzaLabel" alignment="CENTER" prefHeight="40.0" prefWidth="40.0" styleClass="blacktext" text="0" />
+                              <Label fx:id="largePizzaLabel" alignment="CENTER" prefHeight="40.0" prefWidth="40.0" styleClass="blacktext" text="0">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font></Label>
                               <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addLargePizza" prefHeight="10.0" prefWidth="30.0" styleClass="arrow" text="▶">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -100,16 +109,22 @@
                         </Separator>
                         <HBox alignment="CENTER" prefHeight="65.0" prefWidth="230.0">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="80.0" styleClass="price2" text="30 zlt">
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="80.0" styleClass="green-text" text="30 zlt">
                                  <font>
                                     <Font size="24.0" />
                                  </font></Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="70.0" styleClass="blacktext" text="30 cm" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="70.0" styleClass="blacktext" text="30 cm">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
                               <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#removeMediumPizza" prefHeight="10.0" prefWidth="30.0" rotate="180.0" styleClass="arrow" text="▶">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor></Button>
-                              <Label fx:id="mediumPizzaLabel" alignment="CENTER" prefHeight="40.0" prefWidth="40.0" styleClass="blacktext" text="0" />
+                              <Label fx:id="mediumPizzaLabel" alignment="CENTER" prefHeight="40.0" prefWidth="40.0" styleClass="blacktext" text="0">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font></Label>
                               <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addMediumPizza" prefHeight="10.0" prefWidth="30.0" styleClass="arrow" text="▶">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -123,16 +138,22 @@
                         </Separator>
                         <HBox alignment="CENTER" prefHeight="65.0" prefWidth="230.0">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="80.0" styleClass="price2" text="25 zlt">
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="80.0" styleClass="green-text" text="25 zlt">
                                  <font>
                                     <Font size="24.0" />
                                  </font></Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="70.0" styleClass="blacktext" text="25 cm" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="70.0" styleClass="blacktext" text="25 cm">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
                               <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#removeSmallPizza" prefHeight="10.0" prefWidth="30.0" rotate="180.0" styleClass="arrow" text="▶">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor></Button>
-                              <Label fx:id="smallPizzaLabel" alignment="CENTER" prefHeight="40.0" prefWidth="40.0" styleClass="blacktext" text="0" />
+                              <Label fx:id="smallPizzaLabel" alignment="CENTER" prefHeight="40.0" prefWidth="40.0" styleClass="blacktext" text="0">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font></Label>
                               <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addSmallPizza" prefHeight="10.0" prefWidth="30.0" styleClass="arrow" text="▶">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -201,11 +222,11 @@
                            <HBox.margin>
                               <Insets left="5.0" right="10.0" />
                            </HBox.margin></Label>
-                        <VBox alignment="CENTER" prefHeight="65.0" prefWidth="44.0">
+                        <VBox alignment="CENTER" prefHeight="62.0" prefWidth="58.0">
                            <children>
-                              <Label prefHeight="37.0" prefWidth="46.0" styleClass="smalltext" text="Change Adress" wrapText="true">
+                              <Label prefHeight="37.0" prefWidth="54.0" text="CHANGE ADDRESS" textAlignment="CENTER" wrapText="true">
                                  <font>
-                                    <Font size="10.0" />
+                                    <Font name="System Bold" size="11.0" />
                                  </font>
                               </Label>
                               <CheckBox fx:id="newadress" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="14.0" />

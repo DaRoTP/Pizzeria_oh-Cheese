@@ -31,7 +31,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="352.0">
                      <children>
-                        <Label fx:id="warning" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="356.0" textAlignment="CENTER">
+                        <Label fx:id="warning" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="377.0" textAlignment="CENTER">
                            <font>
                               <Font size="11.0" />
                            </font>
@@ -48,7 +48,7 @@
                               <Image url="@../Global_Resources/settings_icon.png" />
                            </image>
                         </ImageView>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="136.0" text="Edit Profile" textAlignment="CENTER" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="136.0" styleClass="redish-text" text="Edit Profile" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="32.0" prefWidth="352.0">
@@ -61,7 +61,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="name" prefHeight="31.0" prefWidth="155.0" promptText="Name" styleClass="TextFiel">
+                        <TextField fx:id="name" prefHeight="31.0" prefWidth="155.0" promptText="Name" styleClass="TextField">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -69,7 +69,7 @@
                               <Cursor fx:constant="TEXT" />
                            </cursor>
                         </TextField>
-                        <TextField fx:id="surname" prefHeight="31.0" prefWidth="155.0" promptText="Surname" styleClass="TextFiel">
+                        <TextField fx:id="surname" prefHeight="31.0" prefWidth="155.0" promptText="Surname" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>
@@ -85,7 +85,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="e_mail" prefHeight="31.0" prefWidth="332.0" promptText="E-mail" styleClass="TextFiel">
+                        <TextField fx:id="e_mail" prefHeight="31.0" prefWidth="332.0" promptText="E-mail" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>
@@ -101,7 +101,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="phone_number" prefHeight="31.0" prefWidth="356.0" promptText="Phone Number" styleClass="TextFiel">
+                        <TextField fx:id="phone_number" prefHeight="31.0" prefWidth="356.0" promptText="Phone Number" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>
@@ -117,7 +117,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="username" prefHeight="31.0" prefWidth="332.0" promptText="Username" styleClass="TextFiel">
+                        <TextField fx:id="username" prefHeight="31.0" prefWidth="332.0" promptText="Username" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>
@@ -133,7 +133,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="password" prefHeight="31.0" prefWidth="332.0" promptText="Password" styleClass="TextFiel">
+                        <TextField fx:id="password" prefHeight="31.0" prefWidth="332.0" promptText="Password" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>
@@ -152,23 +152,11 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0" spacing="20.0">
                      <children>
-                        <TextField fx:id="city" prefHeight="31.0" promptText="City" styleClass="TextFiel">
+                        <TextField fx:id="city" prefHeight="31.0" promptText="City" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>
-                        <TextField fx:id="zip_code" prefHeight="31.0" promptText="ZIP CODE" styleClass="TextFiel">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor></TextField>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0" spacing="20.0">
-                     <children>
-                        <TextField fx:id="house_number" prefHeight="31.0" promptText="House Number" styleClass="TextFiel">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor></TextField>
-                        <TextField fx:id="apartment_number" prefHeight="31.0" promptText="Apartment Number" styleClass="TextFiel">
+                        <TextField fx:id="zip_code" prefHeight="31.0" promptText="ZIP CODE" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>
@@ -176,7 +164,19 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0" spacing="20.0">
                      <children>
-                        <TextField fx:id="street" prefHeight="31.0" promptText="Street" styleClass="TextFiel">
+                        <TextField fx:id="house_number" prefHeight="31.0" promptText="House Number" styleClass="TextField">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextField>
+                        <TextField fx:id="apartment_number" prefHeight="31.0" promptText="Apartment Number" styleClass="TextField">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0" spacing="20.0">
+                     <children>
+                        <TextField fx:id="street" prefHeight="31.0" promptText="Street" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>

@@ -43,7 +43,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="352.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="217.0" text="Add Prmo Code" textAlignment="CENTER" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="217.0" styleClass="redish-text" text="Add Prmo Code" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="32.0" prefWidth="352.0">
@@ -56,7 +56,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="promo_code" prefHeight="40.0" prefWidth="332.0" promptText="Promo Code" styleClass="TextFiel">
+                        <TextField fx:id="promo_code" prefHeight="40.0" prefWidth="332.0" promptText="Promo Code" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>

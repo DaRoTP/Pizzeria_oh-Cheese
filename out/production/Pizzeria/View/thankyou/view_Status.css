@@ -1,0 +1,16 @@
+.status_notActive{
+     -fx-background-color: #db3b2f;
+     -fx-background-radius: 100;
+ }
+ .status_Active{
+      -fx-background-color: #42BD72;
+      -fx-background-radius: 100;
+  }
+.lineinActive{
+    -fx-stroke: #db3b2f;
+    -fx-stroke-width: 20;
+}
+.lineActive{
+    -fx-stroke: #42BD72;
+    -fx-stroke-width: 20;
+}

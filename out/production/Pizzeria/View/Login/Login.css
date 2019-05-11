@@ -15,6 +15,7 @@
 {
     -fx-background-radius: 20;
     -fx-background-color: #474747;
+    -fx-border-width: 0;
     -fx-text-fill: white;
     -fx-font-family: Arial;
     -fx-font-weight: bold;

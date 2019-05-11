@@ -36,7 +36,10 @@
                         <Image url="@checked.png" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="50.0" prefWidth="91.0" styleClass="textWhite" text="Accepted Order" textAlignment="CENTER" wrapText="true" />
+                  <Label prefHeight="50.0" prefWidth="91.0" styleClass="white-text" text="Accepted Order" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
                </children>
                <HBox.margin>
                   <Insets />
@@ -54,7 +57,7 @@
                         <Image url="@oven.png" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="51.0" prefWidth="69.0" styleClass="textWhite" text="Baking">
+                  <Label prefHeight="51.0" prefWidth="69.0" styleClass="white-text" text="Baking">
                      <font>
                         <Font size="19.0" />
                      </font></Label>
@@ -75,7 +78,7 @@
                         <Image url="@delivery.png" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="54.0" prefWidth="132.0" styleClass="textWhite" text="Delivery coming" textAlignment="CENTER" wrapText="true" />
+                  <Label prefHeight="54.0" prefWidth="103.0" styleClass="white-text" text="Delivery coming" textAlignment="CENTER" wrapText="true" />
                </children>
                <HBox.margin>
                   <Insets />

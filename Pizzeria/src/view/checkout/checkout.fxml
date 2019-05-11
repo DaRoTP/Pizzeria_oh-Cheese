@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="550.0" prefWidth="472.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CheckoutControl">
    <children>
@@ -39,7 +40,7 @@
                               <Image url="@../Customer/shopping_cart_icon.png" />
                            </image>
                         </ImageView>
-                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="136.0" text="Check out" />
+                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="136.0" styleClass="redish-text" text="Check out" />
                      </children>
                   </HBox>
                   <TextArea fx:id="OrderInfo" editable="false" prefHeight="158.0" prefWidth="352.0" styleClass="Text-Area" wrapText="true" />
@@ -50,7 +51,7 @@
                               <Image url="@../Employee/discount.png" />
                            </image>
                         </ImageView>
-                        <TextField prefHeight="31.0" prefWidth="199.0" promptText="CODE2019" styleClass="TextFiel" />
+                        <TextField prefHeight="31.0" prefWidth="199.0" promptText="CODE2019" styleClass="TextField" />
                         <Button alignment="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="112.0" text="Redeem" />
                      </children>
                   </HBox>
@@ -58,8 +59,14 @@
                      <children>
                         <Label fx:id="Price" alignment="CENTER" prefHeight="43.0" prefWidth="208.0" styleClass="price" text="9999 zlt">
                            <graphic>
-                              <Label text="Price:" />
+                              <Label text="Price:">
+                                 <font>
+                                    <Font name="System Bold" size="21.0" />
+                                 </font></Label>
                            </graphic>
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
                         </Label>
                      </children>
                   </HBox>
@@ -78,6 +85,9 @@
                            <cursor>
                               <Cursor fx:constant="OPEN_HAND" />
                            </cursor>
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
                         </RadioButton>
                         <RadioButton fx:id="card" mnemonicParsing="false" text="Card" toggleGroup="$CardORCash">
                            <padding>
@@ -89,6 +99,9 @@
                            <cursor>
                               <Cursor fx:constant="OPEN_HAND" />
                            </cursor>
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
                         </RadioButton>
                      </children>
                   </HBox>

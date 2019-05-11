@@ -43,12 +43,12 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="352.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="136.0" text="Edit Pizza Info" textAlignment="CENTER" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="200.0" styleClass="redish-text" text="Edit Pizza Info" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="searchIDField" prefHeight="40.0" prefWidth="82.0" promptText="ID" styleClass="TextFiel">
+                        <TextField fx:id="searchIDField" prefHeight="40.0" prefWidth="82.0" promptText="ID" styleClass="TextField">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -73,7 +73,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="pizza_name" prefHeight="40.0" prefWidth="332.0" promptText="Name" styleClass="TextFiel">
+                        <TextField fx:id="pizza_name" prefHeight="40.0" prefWidth="332.0" promptText="Name" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>
@@ -89,7 +89,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="pizza_toppings" prefHeight="31.0" prefWidth="332.0" promptText="Toppings" styleClass="TextFiel">
+                        <TextField fx:id="pizza_toppings" prefHeight="31.0" prefWidth="332.0" promptText="Toppings" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>
@@ -105,7 +105,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="pizza_type" prefHeight="31.0" prefWidth="356.0" promptText="Type" styleClass="TextFiel">
+                        <TextField fx:id="pizza_type" prefHeight="31.0" prefWidth="356.0" promptText="Type" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>
@@ -119,7 +119,7 @@
             </VBox>
          </center>
          <bottom>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#edit_pizza" prefHeight="31.0" prefWidth="89.0" text="Submit" textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#edit_pizza" prefHeight="36.0" prefWidth="102.0" text="Submit" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="15.0" top="20.0" />
                </BorderPane.margin>

@@ -14,19 +14,23 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="lox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmployeeControl">
    <children>
-      <Pane layoutX="-42.0" prefHeight="58.0" prefWidth="1360.0" styleClass="drops" AnchorPane.leftAnchor="-40.0" AnchorPane.rightAnchor="-40.0" AnchorPane.topAnchor="-17.0" />
+      <Pane layoutX="-42.0" prefHeight="58.0" prefWidth="1360.0" styleClass="drops_border" AnchorPane.leftAnchor="-40.0" AnchorPane.rightAnchor="-40.0" AnchorPane.topAnchor="-17.0" />
       <HBox alignment="CENTER" prefHeight="38.0" prefWidth="370.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label styleClass="text" text="Welcome customer!" />
+            <Label styleClass="text" text="Welcome customer!" textFill="#1e1414">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Label>
             <Button fx:id="settings" mnemonicParsing="false" onAction="#settings">
                <HBox.margin>
                   <Insets left="10.0" right="10.0" />
                </HBox.margin>
                <graphic>
-                  <ImageView fitHeight="27.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="27.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true" styleClass="settings">
                      <image>
                         <Image url="@../Global_Resources/settings_icon.png" />
                      </image>
@@ -36,7 +40,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="logout" alignment="CENTER" mnemonicParsing="false" onAction="#LogOut" text="Log out">
+            <Button fx:id="logout" alignment="CENTER" mnemonicParsing="false" onAction="#LogOut" styleClass="logout" text="Log out">
                <graphic>
                   <ImageView fitHeight="19.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -105,7 +109,7 @@
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <Label alignment="CENTER" prefHeight="28.0" prefWidth="145.0" styleClass="TableLabel" text="Promo Codes">
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="153.0" styleClass="TableLabel" text="Promo Codes">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
@@ -154,7 +158,7 @@
                      </VBox.margin></TableView>
                   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="377.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#accept_order_SceneOpen" prefHeight="30.0" prefWidth="130.0" styleClass="addbtn" text="Accept Order">
+                        <Button mnemonicParsing="false" onAction="#accept_order_SceneOpen" prefHeight="31.0" prefWidth="161.0" styleClass="addbtn" text="Accept Order">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>

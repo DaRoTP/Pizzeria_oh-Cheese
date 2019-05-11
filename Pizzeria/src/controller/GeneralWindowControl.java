@@ -48,6 +48,8 @@ public class GeneralWindowControl {
         window.setScene(scene);
         window.show();
         scene.getStylesheets().clear();
+        if(stylesheetname != "GeneralWindowStyle")
+            scene.getStylesheets().add("/view/Global_Resources/GeneralWindowStyle.css");
         scene.getStylesheets().add("/view/" +stylesheet_packagename+"/"+stylesheetname+".css");
 
     }
@@ -59,6 +61,8 @@ public class GeneralWindowControl {
         window.setScene(scene);
         window.show();
         scene.getStylesheets().clear();
+        if(stylesheetname != "GeneralWindowStyle")
+            scene.getStylesheets().add("/view/Global_Resources/GeneralWindowStyle.css");
         scene.getStylesheets().add("/view/" +stylesheet_packagename+"/"+stylesheetname+".css");
         Image logo_icon = new Image("/view/Global_Resources/Logo.png");
         window.getIcons().add(logo_icon);

@@ -36,28 +36,19 @@
                               <Image url="@../SignUp/house_icon.png" />
                            </image>
                         </ImageView>
-                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="87.0" text="Adress" />
+                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="87.0" styleClass="redish-text" text="Adress">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></Label>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0" spacing="20.0">
                      <children>
-                        <TextField fx:id="city" promptText="City" styleClass="TextFiel">
+                        <TextField fx:id="city" promptText="City" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>
-                        <TextField fx:id="street" promptText="Street" styleClass="TextFiel">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor></TextField>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0" spacing="20.0">
-                     <children>
-                        <TextField fx:id="house_number" promptText="House Number" styleClass="TextFiel">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor></TextField>
-                        <TextField fx:id="apartment_number" promptText="Apartment Number" styleClass="TextFiel">
+                        <TextField fx:id="street" promptText="Street" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>
@@ -65,7 +56,19 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0" spacing="20.0">
                      <children>
-                        <TextField fx:id="zip_code" promptText="ZIP CODE" styleClass="TextFiel">
+                        <TextField fx:id="house_number" promptText="House Number" styleClass="TextField">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextField>
+                        <TextField fx:id="apartment_number" promptText="Apartment Number" styleClass="TextField">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0" spacing="20.0">
+                     <children>
+                        <TextField fx:id="zip_code" promptText="ZIP CODE" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>

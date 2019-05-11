@@ -270,7 +270,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
     //VIEW STATUS
     public void viewStatus(ActionEvent event) throws IOException {
-        changescene(event,"thankyou","GeneralWindowStyle","thankyou","Global_Resources");
+        changescene(event,"thankyou","view_Status","thankyou","thankyou");
 
     }
     //LARGE PIZZA

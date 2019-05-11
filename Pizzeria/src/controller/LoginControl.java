@@ -78,7 +78,7 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
                         changescene(event,"Customer","Customer","Customer","Customer");
                         break;
                     case "EMPLOYEE":
-                        ChangeStage_PaassingID(event,"Employee","Employee","Employee");
+                        changescene(event,"Employee","Employee","Employee","Employee");
                         break;
                     default:
                         System.out.println("default");

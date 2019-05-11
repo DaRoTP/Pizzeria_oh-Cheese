@@ -1,72 +1,5 @@
-.AnchorPane
-{
-    -fx-background-color: #dfdfdf;
-}
 
-.drops
-{
-    -fx-background-color: #db3b2f;
-    -fx-background-radius: 80;
-    -fx-border-width: 4 ;
-    -fx-border-color: #1a1214;
-}
 
-.text
-{
-    -fx-text-fill: #1e1414;
-    -fx-font-family: Arial;
-    -fx-font-weight: bold;
-    -fx-font-size: 17;
-}
-.text1
-{
-    -fx-text-fill: white;
-    -fx-font-family: Arial;
-    -fx-font-weight: bold;
-    -fx-font-size: 20;
-}
-#logout
-{
-
-    -fx-background-color: #db3b2f;
-    -fx-text-fill: #1e1414;
-    -fx-font-family: Arial;
-    -fx-font-weight: bold;
-    -fx-font-size: 20;
-    -fx-padding: 0;
-    -fx-border-width: 0;
-}
-#settings
-{
-    -fx-background-color: #db3b2f;
-    -fx-padding: 0;
-    -fx-border-width: 0;
-}
-
-.button
-{
-    -fx-background-radius: 15;
-    -fx-background-color: #949494;
-    -fx-text-fill: white;
-    -fx-font-family: Arial;
-    -fx-font-weight: bold;
-    -fx-font-size: 20;
-    -fx-padding: 0;
-    -fx-border-color: #666666;
-    -fx-border-width: 4;
-    -fx-border-radius: 15;
-}
-.button:hover
-{
-
-    -fx-background-color: #747474;
-    -fx-border-color: #616161;
-}
-.button:pressed
-{
-    -fx-background-color: #949494;
-    -fx-border-color: #b6b6b6;
-}
 
 .addbtn
 {
@@ -119,21 +52,6 @@
     -fx-text-fill: #9F2851;
 }
 
-.TextFiel
-{
-    -fx-background-color: white;
-    -fx-background-radius: 20;
-    -fx-padding: 10;
-    -fx-font-family: Arial;
-    -fx-font-weight: bold;
-    -fx-font-size: 17;
-}
-
-.TextFiel:focused
-{
-    -fx-background-color: #474747;
-    -fx-text-fill: white;
-}
 
 #count
 {
@@ -143,43 +61,7 @@
     -fx-padding: 2;
 }
 
-.scroll-bar:vertical .increment-button ,
-.scroll-bar:vertical .decrement-button {
-    -fx-background-color :transparent;
-    -fx-background-radius : 0.0em;
-    -fx-padding :0.0 10.0 0.0 0.0;
 
-}
-
- .scroll-bar .increment-arrow,
- .scroll-bar .decrement-arrow{
-    -fx-shape : " ";
-    -fx-padding :0.15em 0.0;
-}
-
- .scroll-bar:vertical .increment-arrow,
- .scroll-bar:vertical .decrement-arrow{
-    -fx-shape : " ";
-    -fx-padding :0.0 0.15em;
-}
-
-.scroll-bar:horizontal .thumb,
-.scroll-bar:vertical .thumb {
-    -fx-background-color :derive(black,90.0%);
-    -fx-background-insets : 2.0, 0.0, 0.0;
-    -fx-background-radius : 2.0em;
-}
-
-.scroll-bar:horizontal .thumb:hover,
-.scroll-bar:vertical .thumb:hover {
-    -fx-background-color :derive(#4D4C4F,10.0%);
-    -fx-background-insets : 2.0, 0.0, 0.0;
-    -fx-background-radius : 2.0em;
-}
-
-.scroll-pane {
-    -fx-focus-color: transparent;
-}
 
 .table-view{
    -fx-background-color: transparent;
