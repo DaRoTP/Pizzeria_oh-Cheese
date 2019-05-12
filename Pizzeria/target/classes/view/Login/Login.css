@@ -1,0 +1,99 @@
+.root{
+    -fx-background-image: url("/view/Login/Login_Background.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+.Warning_Label
+{
+	-fx-text-fill: #db3b2f;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-font-size: 15;
+}
+
+.button
+{
+    -fx-background-radius: 20;
+    -fx-background-color: #474747;
+    -fx-border-width: 0;
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+    -fx-padding: 0;
+}
+.button:hover
+{
+
+    -fx-background-color: #383838;
+    -fx-border-color: #606060;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+}
+.button:pressed
+{
+    -fx-background-color: #606060;
+    -fx-border-width: 0;
+    -fx-border-radius: 20;
+}
+
+#Mode_choice
+{
+    -fx-background-radius: 20;
+    -fx-background-color: #474747;
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-font-size: 15;
+    -fx-padding: 0;
+
+}
+#Mode_choice .context-menu{
+    -fx-background-color: #5d5d5d;
+}
+
+#Mode_choice .menu-item:focused{
+    -fx-background-color: #3c3c3c;
+}
+
+#Mode_choice .menu-item > .label{
+    -fx-text-fill: white;
+}
+
+#Mode_choice .menu-item:focused > .label{
+    -fx-text-fill: white;
+}
+
+#Mode_choice > .label{
+    -fx-text-fill: white;
+    -fx-alignment: center;
+ }
+
+.TextFiel
+{
+    -fx-background-color: #dfdfdf;
+    -fx-background-radius: 0;
+    -fx-padding: 10;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-font-size: 17;
+    -fx-effect: dropshadow(three-pass-box, #474747, 1, 4, 0, 5);
+
+}
+.warning
+{
+	-fx-effect: dropshadow(three-pass-box, #db3b2f, 1, 4, 0, 5);
+}
+
+.warning_choice
+{
+    -fx-border-color: #db3b2f;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+}
+
+.TextFiel:focused
+{
+    -fx-background-color: #474747;
+    -fx-text-fill: white;
+}
