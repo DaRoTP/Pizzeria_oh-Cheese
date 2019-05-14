@@ -1,13 +1,14 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/world?useSSL=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;characterEncoding=UTF-8</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/pizzeria?useSSL=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;characterEncoding=UTF-8</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">MyServer420</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 
-        <mapping class="sample.model.client_table" />
+        <mapping class="ohcheese.model.Customer" />
+        <mapping class="ohcheese.model.Employee" />
     </session-factory>
 </hibernate-configuration>
