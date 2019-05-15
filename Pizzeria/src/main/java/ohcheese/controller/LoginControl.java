@@ -15,6 +15,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import ohcheese.model.Customer;
 import ohcheese.model.Employee;
+import ohcheese.model.Job_Position;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -118,11 +119,13 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
 
 
     public void open_window(ActionEvent event) throws IOException {
+        List CustomerUser = checkIF_Customer_Exists();
+        List EmployeeUser = checkIF_Employee_Exists();
         String value = Mode_choice.getValue();
         if(checkIfEmpty()) {
-            if(checkIF_Customer_Exists().size() > 0){
-                loggedinUserID = ((Customer)checkIF_Customer_Exists().get(0)).getId();
-                loggedinUser_Username = ((Customer)checkIF_Customer_Exists().get(0)).getUsername();
+            if(CustomerUser.size() > 0){
+                loggedinUserID = ((Customer)CustomerUser.get(0)).getId();
+                loggedinUser_Username = ((Customer)CustomerUser.get(0)).getUsername();
                 try {
                     switch (value) {
                         case "ADMIN":
@@ -144,19 +147,31 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
                 }
             }
             else if(checkIF_Employee_Exists().size() > 0){
-                loggedinUserID = ((Employee)checkIF_Employee_Exists().get(0)).getId();
-                loggedinUser_Username = ((Employee)checkIF_Employee_Exists().get(0)).getUsername();
+                String position = ((Job_Position)((Employee) EmployeeUser.get(0)).getPosition_ID()).getPosition_Name();
+                System.out.println(position);
+                loggedinUserID = ((Employee)EmployeeUser.get(0)).getId();
+                loggedinUser_Username = ((Employee)EmployeeUser.get(0)).getUsername();
                 try {
                     switch (value) {
-                        case "ADMIN":
-                            changescene(event, "Admin", "Admin", "Admin", "Admin");
+                        case "ADMIN": {
+                            if(position.equals("Owner") || position.equals("Assistant Store General Managers ") || position.equals("Administrator"))
+                                changescene(event, "Admin", "Admin", "Admin", "Admin");
+                            else
+                                Warning_label.setText("Bad Login");
+
+                        }
                             break;
                         case "CUSTOMER": {
                             Warning_label.setText("Bad Login");                        }
                         break;
-                        case "EMPLOYEE":
-                            changescene(event, "Employee", "Employee", "Employee", "Employee");
+                        case "EMPLOYEE": {
+                            if (position.equals("Owner") || position.equals("Assistant Store General Managers ") || position.equals("Administrator") || position.equals("Pizza Maker") || position.equals("Delivery Drivers"))
+                                changescene(event, "Employee", "Employee", "Employee", "Employee");
+                            else
+                                Warning_label.setText("Bad Login");
+
                             break;
+                        }
                         default:
                             System.out.println("default");
                     }

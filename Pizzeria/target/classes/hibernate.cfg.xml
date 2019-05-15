@@ -10,5 +10,7 @@
 
         <mapping class="ohcheese.model.Customer" />
         <mapping class="ohcheese.model.Employee" />
+        <mapping class="ohcheese.model.Job_Position" />
+
     </session-factory>
 </hibernate-configuration>

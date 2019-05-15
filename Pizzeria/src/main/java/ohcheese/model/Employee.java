@@ -29,8 +29,9 @@ public class Employee {
     private String password;
     @Column(name = "Address_ID")
     private Integer address_ID;
-    @Column(name = "Position_ID")
-    private Integer position_ID;
+    @OneToOne
+    @JoinColumn(name = "Position_ID")
+    private Job_Position position_ID;
 
     public Employee() { }
 
@@ -67,6 +68,6 @@ public class Employee {
     public Integer getAddress_ID() { return address_ID; }
     public void setAddress_ID(Integer address_ID) { this.address_ID = address_ID; }
 
-    public Integer getPosition_ID() { return position_ID; }
-    public void setPosition_ID(Integer position_ID) { this.position_ID = position_ID; }
+    public Job_Position getPosition_ID() { return position_ID; }
+    public void setPosition_ID(Job_Position position_ID) { this.position_ID = position_ID; }
 }

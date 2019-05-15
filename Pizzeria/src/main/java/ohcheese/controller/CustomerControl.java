@@ -162,9 +162,8 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
                         removePizzaFromOrder(counterTab.indexOf(finalI));
                     }
                     catch(IndexOutOfBoundsException e){
-                        System.out.println("XUj");
+                        System.out.println("Blad");
                     }
-
                 });
 
         orderTab.get(orderTab.size()-1).getChildren().addAll(information_About_Chosen_Pizza,removePicaBtn);
