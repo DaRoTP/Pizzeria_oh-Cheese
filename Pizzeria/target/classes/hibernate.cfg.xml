@@ -11,6 +11,19 @@
         <mapping class="ohcheese.model.Customer" />
         <mapping class="ohcheese.model.Employee" />
         <mapping class="ohcheese.model.Job_Position" />
+        <mapping class="ohcheese.model.Address" />
+        <mapping class="ohcheese.model.Pizza" />
+        <mapping class="ohcheese.model.Pizza_Type" />
+        <mapping class="ohcheese.model.Toppings" />
+        <mapping class="ohcheese.model.Size" />
+        <mapping class="ohcheese.model.Promo_Codes" />
+        <mapping class="ohcheese.model.Order_status" />
+        <mapping class="ohcheese.model.Shopping_Cart" />
+        <mapping class="ohcheese.model.Pizza_Order" />
+
+
+
+
 
     </session-factory>
 </hibernate-configuration>

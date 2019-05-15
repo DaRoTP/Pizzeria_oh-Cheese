@@ -21,8 +21,9 @@ public class Customer {
     private String Username;
     @Column(name = "Customer_Password")
     private String Password;
-    @Column(name = "Address_ID")
-    private Integer Address_ID;
+    @ManyToOne
+    @JoinColumn(name = "Address_ID")
+    private Address Address_ID;
 
     public Customer() { }
 
@@ -48,6 +49,6 @@ public class Customer {
     public String getPassword() { return Password; }
     public void setPassword(String password) { Password = password; }
 
-    public Integer getAddress_ID() { return Address_ID; }
-    public void setAddress_ID(Integer address_ID) { Address_ID = address_ID; }
+    public Address getAddress_ID() { return Address_ID; }
+    public void setAddress_ID(Address address_ID) { Address_ID = address_ID; }
 }

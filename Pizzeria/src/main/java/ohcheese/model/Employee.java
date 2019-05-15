@@ -1,6 +1,8 @@
 package ohcheese.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Employee")
@@ -27,11 +29,14 @@ public class Employee {
     private String username;
     @Column(name = "Employee_Password")
     private String password;
-    @Column(name = "Address_ID")
-    private Integer address_ID;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "Address_ID")
+    private Address address_ID;
+    @ManyToOne
     @JoinColumn(name = "Position_ID")
     private Job_Position position_ID;
+    @ManyToMany
+    private Set<Shopping_Cart> shopping_cart = new HashSet<>();
 
     public Employee() { }
 
@@ -65,9 +70,12 @@ public class Employee {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
-    public Integer getAddress_ID() { return address_ID; }
-    public void setAddress_ID(Integer address_ID) { this.address_ID = address_ID; }
+    public Address getAddress_ID() { return address_ID; }
+    public void setAddress_ID(Address address_ID) { this.address_ID = address_ID; }
 
     public Job_Position getPosition_ID() { return position_ID; }
     public void setPosition_ID(Job_Position position_ID) { this.position_ID = position_ID; }
+
+    public Set<Shopping_Cart> getShopping_cart() { return shopping_cart; }
+    public void setShopping_cart(Set<Shopping_Cart> shopping_cart) { this.shopping_cart = shopping_cart; }
 }

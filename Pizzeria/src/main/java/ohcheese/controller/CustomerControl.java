@@ -19,7 +19,7 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import ohcheese.model.Order;
-import OhCheese.model.PizzaInfo;
+import ohcheese.model.PizzaInfo;
 
 
 public class CustomerControl extends GeneralWindowControl implements Initializable {

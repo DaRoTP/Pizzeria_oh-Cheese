@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import OhCheese.model.PizzaInfo;
+import ohcheese.model.PizzaInfo;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,6 +56,9 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
         pizzaTable.getColumns().addAll(IdColumn,nameColumn,descriptioonColumn);
     }
 
+    public void create_promo_code(){
+
+    }
 
     public void getIDFirst(int ID){
         this.EmployeeID = ID;
@@ -134,6 +137,8 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
         deliveringOrder.getStyleClass().clear();
         deliveringOrder.getStyleClass().add("price");
     }
+
+
 
 
     public ObservableList<PizzaInfo> getPizzaInfo(){
