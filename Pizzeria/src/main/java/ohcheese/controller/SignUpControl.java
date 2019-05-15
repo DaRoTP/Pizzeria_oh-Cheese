@@ -7,6 +7,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import ohcheese.model.Address;
+import ohcheese.model.Customer;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 public class SignUpControl {
 
@@ -215,10 +222,126 @@ public class SignUpControl {
         return true;
     }
 
+    public int check_If_Customer_Of_Given_Username_Exists(){
+        SessionFactory factory = OhCheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Customer where Customer_Username='"+username.getText()+"'");
+            List c_user = query.list();
+
+            session.getTransaction().commit();
+
+            return c_user.size();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+        return 0;
+    }
+
+    public Address check_If__given_Address_Exists(){
+        SessionFactory factory = OhCheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Address where City = '"+city.getText()+"' and Street = '"+street.getText()+ "' and House_Number = "+
+                    house_number.getText()+" and Apartment_Number = "+apartment_number.getText()+" and ZIP_Code = '"+zip_code.getText()+"'");
+            List c_user = query.list();
+
+            session.getTransaction().commit();
+
+            if(c_user.size() > 0)
+                return (Address)c_user.get(0);
+            else
+                return null;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+        return null;
+    }
+
+    public void Insert_Values(){
+
+        if (check_If_Customer_Of_Given_Username_Exists() == 0) {
+            Address result_Address = check_If__given_Address_Exists();
+
+            SessionFactory factory = OhCheese.Utilities.HibernateUtil.getSessionFactory();
+            Session session = factory.getCurrentSession();
+
+            Customer new_customer = new Customer(name.getText(),surname.getText(),phone_number.getText(),e_mail.getText(),username.getText(),password.getText());
+                try {
+                    session.getTransaction().begin();
+                    if(result_Address == null) {
+                        Address new_address = new Address(city.getText(), street.getText(), house_number.getText(), apartment_number.getText(), zip_code.getText());
+                        session.save(new_address);
+
+                        new_customer.setAddress_ID(new_address);
+                        session.save(new_customer);
+
+                        session.getTransaction().commit();
+                    }
+                    else
+                    {
+                        new_customer.setAddress_ID(result_Address);
+                        session.save(new_customer);
+
+                        session.getTransaction().commit();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    session.getTransaction().rollback();
+                }
+                session.close();
+
+
+        }
+        else
+            warning.setText("User exists");
+    }
+
+    public void test() {
+
+        if (check_If_Customer_Of_Given_Username_Exists() == 0) {
+            SessionFactory factory = OhCheese.Utilities.HibernateUtil.getSessionFactory();
+            Session session = factory.getCurrentSession();
+            try {
+                session.getTransaction().begin();
+
+                Address new_address;
+                if(apartment_number.getText() == null || apartment_number.getText().trim().isEmpty())
+                    new_address = new Address(city.getText(),street.getText(),house_number.getText(),"-",zip_code.getText());
+                else
+                    new_address = new Address(city.getText(),street.getText(),house_number.getText(),apartment_number.getText(),zip_code.getText());
+                session.save(new_address);
+
+                session.getTransaction().commit();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                session.getTransaction().rollback();
+            }
+            session.close();
+        }
+        else
+            System.out.println("exists");
+    }
+
+
     public void submit(ActionEvent event){
         if(checkInputLogic()){
-            Stage stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-            stage.close();
+            Insert_Values();
+
         }
 
 

@@ -27,6 +27,15 @@ public class Customer {
 
     public Customer() { }
 
+    public Customer(String name, String surname, String phone_Number, String email, String username, String password) {
+        Name = name;
+        Surname = surname;
+        Phone_Number = phone_Number;
+        Email = email;
+        Username = username;
+        Password = password;
+    }
+
     //ID
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }

@@ -20,6 +20,17 @@ public class Address {
     @Column(name = "ZIP_Code")
     private String ZIP_Code;
 
+    public Address() { }
+
+    public Address(String city, String street, String house_Number, String apartment_Number, String ZIP_Code) {
+        this.city = city;
+        this.street = street;
+        this.house_Number = house_Number;
+        this.apartment_Number = apartment_Number;
+        this.ZIP_Code = ZIP_Code;
+    }
+
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -38,5 +49,5 @@ public class Address {
     public String getZIP_Code() { return ZIP_Code; }
     public void setZIP_Code(String ZIP_Code) { this.ZIP_Code = ZIP_Code; }
 
-    public Address() { }
+
 }
