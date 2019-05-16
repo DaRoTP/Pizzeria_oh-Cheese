@@ -23,8 +23,8 @@ import org.hibernate.query.Query;
 public class LoginControl extends GeneralWindowControl implements Initializable{
 
 
-    public static int loggedinUserID;
-    public static String loggedinUser_Username;
+    public static Customer loggedinCustomer;
+    public static Employee loggedinEmployee;
 
 
     @FXML private ChoiceBox<String> Mode_choice = new ChoiceBox<String>();
@@ -32,9 +32,9 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
 	@FXML PasswordField  passwordField = new PasswordField();
 	@FXML Label Warning_label = new Label();
 
-    public static int getLoggedinUserID() { return loggedinUserID; }
+    public static Customer get_loggedinCustomer() { return loggedinCustomer; }
 
-    public static String getLoggedinUser_Username() { return loggedinUser_Username; }
+    public static Employee get_loggedinEmployee() { return loggedinEmployee; }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -68,7 +68,7 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
 	}
 
 	public List checkIF_Customer_Exists(){
-        SessionFactory factory = OhCheese.Utilities.HibernateUtil.getSessionFactory();
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
         try {
@@ -90,7 +90,7 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
     }
 
     public List checkIF_Employee_Exists(){
-        SessionFactory factory = OhCheese.Utilities.HibernateUtil.getSessionFactory();
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
         try {
@@ -124,8 +124,7 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
         String value = Mode_choice.getValue();
         if(checkIfEmpty()) {
             if(CustomerUser.size() > 0){
-                loggedinUserID = ((Customer)CustomerUser.get(0)).getId();
-                loggedinUser_Username = ((Customer)CustomerUser.get(0)).getUsername();
+                loggedinCustomer = (Customer)CustomerUser.get(0);
                 try {
                     switch (value) {
                         case "ADMIN":
@@ -149,8 +148,7 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
             else if(checkIF_Employee_Exists().size() > 0){
                 String position = ((Job_Position)((Employee) EmployeeUser.get(0)).getPosition_ID()).getPosition_Name();
                 System.out.println(position);
-                loggedinUserID = ((Employee)EmployeeUser.get(0)).getId();
-                loggedinUser_Username = ((Employee)EmployeeUser.get(0)).getUsername();
+                loggedinEmployee = (Employee)EmployeeUser.get(0);
                 try {
                     switch (value) {
                         case "ADMIN": {

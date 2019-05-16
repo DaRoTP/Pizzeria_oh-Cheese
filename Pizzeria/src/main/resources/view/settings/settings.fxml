@@ -117,7 +117,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="username" prefHeight="31.0" prefWidth="332.0" promptText="Username" styleClass="TextField">
+                        <TextField fx:id="username" editable="false" prefHeight="31.0" prefWidth="332.0" promptText="Username" styleClass="TextField">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor></TextField>

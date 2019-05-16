@@ -5,7 +5,7 @@ import ohcheese.model.Customer;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import OhCheese.Utilities.HibernateUtil;
+import ohcheese.Utilities.HibernateUtil;
 import ohcheese.model.client_table;
 
 

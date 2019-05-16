@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import ohcheese.model.Customer;
 import ohcheese.model.PizzaInfo;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
     private int searchedID;
 
     @FXML private Label warning;
+    @FXML Label WelcomeUser = new Label();
 
     @FXML private TableView<PizzaInfo> pizzaTable = new TableView<>();
     @FXML private TableView<PizzaInfo> prmocodes = new TableView<>();
@@ -35,6 +37,7 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        WelcomeUser.setText("Welcome "+LoginControl.get_loggedinEmployee().getName()+" !");
         create_pizzaTable();
 
 

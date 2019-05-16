@@ -102,9 +102,9 @@ public class SignUpControl {
         {
             phone_number.getStyleClass().remove("warning");
 
-            if (!phone_number.getText().matches("\\+48\\d{8}")){
+            if (!phone_number.getText().matches("\\d{9}")){
                 phone_number.getStyleClass().add("warning");
-                warning.setText("phone number must be like: +48*******");
+                warning.setText("phone number must have 9 digits");
                 return false;
             }
             else
@@ -223,7 +223,7 @@ public class SignUpControl {
     }
 
     public int check_If_Customer_Of_Given_Username_Exists(){
-        SessionFactory factory = OhCheese.Utilities.HibernateUtil.getSessionFactory();
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
         try {
@@ -231,10 +231,12 @@ public class SignUpControl {
 
             Query query = session.createQuery("from Customer where Customer_Username='"+username.getText()+"'");
             List c_user = query.list();
+            query = session.createQuery("from Employee where Employee_Username='"+username.getText()+"'");
+            List e_user = query.list();
 
             session.getTransaction().commit();
-
-            return c_user.size();
+            System.out.println(c_user.size()+e_user.size());
+            return c_user.size()+e_user.size();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -245,7 +247,7 @@ public class SignUpControl {
     }
 
     public Address check_If__given_Address_Exists(){
-        SessionFactory factory = OhCheese.Utilities.HibernateUtil.getSessionFactory();
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
         try {
@@ -270,12 +272,12 @@ public class SignUpControl {
         return null;
     }
 
-    public void Insert_Values(){
+    public void Insert_Values(ActionEvent event){
 
         if (check_If_Customer_Of_Given_Username_Exists() == 0) {
             Address result_Address = check_If__given_Address_Exists();
 
-            SessionFactory factory = OhCheese.Utilities.HibernateUtil.getSessionFactory();
+            SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
             Session session = factory.getCurrentSession();
 
             Customer new_customer = new Customer(name.getText(),surname.getText(),phone_number.getText(),e_mail.getText(),username.getText(),password.getText());
@@ -303,8 +305,8 @@ public class SignUpControl {
                     session.getTransaction().rollback();
                 }
                 session.close();
-
-
+                Stage stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+                stage.close();
         }
         else
             warning.setText("User exists");
@@ -313,7 +315,7 @@ public class SignUpControl {
     public void test() {
 
         if (check_If_Customer_Of_Given_Username_Exists() == 0) {
-            SessionFactory factory = OhCheese.Utilities.HibernateUtil.getSessionFactory();
+            SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
             Session session = factory.getCurrentSession();
             try {
                 session.getTransaction().begin();
@@ -340,7 +342,7 @@ public class SignUpControl {
 
     public void submit(ActionEvent event){
         if(checkInputLogic()){
-            Insert_Values();
+            Insert_Values(event);
 
         }
 

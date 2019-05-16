@@ -74,7 +74,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
-        WelcomeUser.setText("Welcome "+LoginControl.getLoggedinUser_Username()+" !");
+        WelcomeUser.setText("Welcome "+LoginControl.get_loggedinCustomer().getName()+" !");
 
         pizzas.add(new PizzaInfo(0,"0","descr"));
         pizzas.add(new PizzaInfo(1,"1","descr"));

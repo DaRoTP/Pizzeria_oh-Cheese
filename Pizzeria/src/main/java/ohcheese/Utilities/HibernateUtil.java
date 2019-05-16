@@ -1,4 +1,4 @@
-package OhCheese.Utilities;
+package ohcheese.Utilities;
 
 
 //package org.o7planning.tutorial.hibernate;

@@ -7,14 +7,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import ohcheese.model.Address;
+import ohcheese.model.Customer;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class SettingsControl implements Initializable {
 
-    @FXML
-    public TextField name = new TextField();
+    private  Customer loged_in_Customer;
+
+    @FXML public TextField name = new TextField();
     @FXML public TextField surname = new TextField();
     @FXML public TextField e_mail = new TextField();
     @FXML public TextField phone_number = new TextField();
@@ -30,20 +37,24 @@ public class SettingsControl implements Initializable {
     @FXML public Label warning = new Label();
 
 
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        name.setText("Name");
-        surname.setText("Surname");
-        e_mail.setText("example@host.pl");
-        phone_number.setText("+4812345678");
-        username.setText("User");
-        password.setText("Admin111");
-        city.setText("Gdansk");
-        zip_code.setText("34-567");
-        house_number.setText("45");
-        apartment_number.setText("2");
-        street.setText("majowka");
+        loged_in_Customer = LoginControl.get_loggedinCustomer();
+        name.setText(loged_in_Customer.getName());
+        surname.setText(loged_in_Customer.getSurname());
+        e_mail.setText(loged_in_Customer.getEmail());
+        phone_number.setText(loged_in_Customer.getPhone_Number());
+        username.setText(loged_in_Customer.getUsername());
+        password.setText(loged_in_Customer.getPassword());
+        city.setText(loged_in_Customer.getAddress_ID().getCity());
+        zip_code.setText(loged_in_Customer.getAddress_ID().getZIP_Code());
+        house_number.setText(loged_in_Customer.getAddress_ID().getHouse_Number());
+        apartment_number.setText(loged_in_Customer.getAddress_ID().getApartment_Number());
+        street.setText(loged_in_Customer.getAddress_ID().getStreet());
     }
+
+
 
     public boolean checkInputLogic() {
         if (name.getText() != null || name.getText().trim().isEmpty() == false) {
@@ -90,9 +101,9 @@ public class SettingsControl implements Initializable {
         if (phone_number.getText() != null || phone_number.getText().trim().isEmpty() == false){
             phone_number.getStyleClass().remove("warning");
 
-            if (!phone_number.getText().matches("\\+48\\d{8}")){
+            if (!phone_number.getText().matches("\\d{9}")){
                 phone_number.getStyleClass().add("warning");
-                warning.setText("phone number must be like: +48*******");
+                warning.setText("phone number must have 9 digits");
                 return false;
             }
             else
@@ -171,12 +182,110 @@ public class SettingsControl implements Initializable {
         return true;
     }
 
+    public Address check_If__given_Address_Exists(){
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Address where City = '"+city.getText()+"' and Street = '"+street.getText()+ "' and House_Number = "+
+                    house_number.getText()+" and Apartment_Number = "+apartment_number.getText()+" and ZIP_Code = '"+zip_code.getText()+"'");
+            List c_user = query.list();
+
+            session.getTransaction().commit();
+
+            if(c_user.size() > 0)
+                return (Address)c_user.get(0);
+            else
+                return null;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+        return null;
+    }
+
+    public void set_new_value_for_Employee(){
+        if(!loged_in_Customer.getName().equals(name.getText()))
+            loged_in_Customer.setName(name.getText());
+
+        if(!loged_in_Customer.getSurname().equals(surname.getText()))
+            loged_in_Customer.setSurname(surname.getText());
+
+        if(!loged_in_Customer.getEmail().equals(e_mail.getText()))
+            loged_in_Customer.setEmail(e_mail.getText());
+
+        if(!loged_in_Customer.getPhone_Number().equals(phone_number.getText()))
+            loged_in_Customer.setPhone_Number(phone_number.getText());
+
+        if(!loged_in_Customer.getPassword().equals(password.getText()))
+            loged_in_Customer.setPassword(password.getText());
+
+    }
+
+    public void set_new_value_Address(){
+        if(!loged_in_Customer.getAddress_ID().getCity().equals(city.getText()))
+            loged_in_Customer.getAddress_ID().setCity(city.getText());
+
+        if(!loged_in_Customer.getAddress_ID().getZIP_Code().equals(zip_code.getText()))
+            loged_in_Customer.getAddress_ID().setZIP_Code(zip_code.getText());
+
+        if(!loged_in_Customer.getAddress_ID().getHouse_Number().equals(house_number.getText()))
+            loged_in_Customer.getAddress_ID().setHouse_Number(house_number.getText());
+
+        if(!loged_in_Customer.getAddress_ID().getApartment_Number().equals(apartment_number.getText()))
+            loged_in_Customer.getAddress_ID().setApartment_Number(apartment_number.getText());
+
+        if(!loged_in_Customer.getAddress_ID().getStreet().equals(street.getText()))
+            loged_in_Customer.getAddress_ID().setStreet(street.getText());
+
+
+
+    }
+
+    public void update_settings(ActionEvent event){
+        set_new_value_for_Employee();
+        Address result_Address = check_If__given_Address_Exists();
+
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+            if(result_Address == null) {
+                Address new_address = new Address(city.getText(), street.getText(), house_number.getText(), apartment_number.getText(), zip_code.getText());
+                session.save(new_address);
+
+                loged_in_Customer.setAddress_ID(new_address);
+                session.update(loged_in_Customer);
+
+                session.getTransaction().commit();
+            }
+            else
+            {
+                loged_in_Customer.setAddress_ID(result_Address);
+                session.update(loged_in_Customer);
+
+                session.getTransaction().commit();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+        Stage stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        stage.close();
+
+    }
+
     public void submit(ActionEvent event){
         if(checkInputLogic()){
-            Stage stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-            stage.close();
+            update_settings(event);
         }
-
 
     }
 }
