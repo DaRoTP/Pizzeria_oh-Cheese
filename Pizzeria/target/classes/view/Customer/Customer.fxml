@@ -28,9 +28,9 @@
                <font>
                   <Font name="System Bold" size="20.0" />
                </font></Label>
-            <Button fx:id="settings" alignment="CENTER" mnemonicParsing="false" onAction="#settings">
+            <Button fx:id="settings" alignment="CENTER" mnemonicParsing="false" onAction="#settings" styleClass="logout">
                <graphic>
-                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" styleClass="settings">
+                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Global_Resources/settings_icon.png" />
                      </image>
@@ -240,7 +240,7 @@
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                            <children>
-                              <Button fx:id="CheckoutBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Checkout" prefHeight="47.0" prefWidth="103.0" text="CHECK OUT">
+                              <Button fx:id="CheckoutBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Checkout" prefHeight="47.0" prefWidth="103.0" text="Check Out">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>

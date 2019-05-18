@@ -8,7 +8,7 @@ import java.util.Set;
 @Table(name = "Shopping_Cart")
 public class Shopping_Cart {
     @Id
-    @Column(name = "ID")
+    @Column(name = "Shopping_Cart_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @OneToOne

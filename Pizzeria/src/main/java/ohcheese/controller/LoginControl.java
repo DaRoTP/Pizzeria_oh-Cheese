@@ -33,7 +33,9 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
 	@FXML Label Warning_label = new Label();
 
     public static Customer get_loggedinCustomer() { return loggedinCustomer; }
+    public static void setLoggedinCustomer(Customer loggedinCustomer) { LoginControl.loggedinCustomer = loggedinCustomer; }
 
+    public static void setLoggedinEmployee(Employee loggedinEmployee) { LoginControl.loggedinEmployee = loggedinEmployee; }
     public static Employee get_loggedinEmployee() { return loggedinEmployee; }
 
     @Override
