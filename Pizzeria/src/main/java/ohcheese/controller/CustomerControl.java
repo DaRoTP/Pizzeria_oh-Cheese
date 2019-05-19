@@ -57,7 +57,6 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 //    private Button[] removePicaBtn = new Button[100];
 //    private HBox[] orderTab = new HBox[100];
 
-    @FXML CheckBox newadress = new CheckBox();
     @FXML Label largePizzaLabel = new Label();
     @FXML Label mediumPizzaLabel = new Label();
     @FXML Label smallPizzaLabel = new Label();
@@ -306,9 +305,6 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         stage.getIcons().add(logo_icon);
         stage.setTitle("Pizzeria - oh Cheese!");
 
-        if(newadress.isSelected()){
-            openscene(event, "Adress","GeneralWindowStyle","Adress","Global_Resources");
-        }
         ViewStatus.setDisable(false);
         CheckoutBtn.setDisable(true);
     }

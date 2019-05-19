@@ -23,24 +23,21 @@ public class CheckoutControl implements Initializable {
 
     Order newOrder;
 
-    @FXML RadioButton card = new RadioButton();
-    @FXML RadioButton cash = new RadioButton();
-    @FXML Label warning = new Label();
     @FXML Label Price = new Label();
     @FXML TextArea OrderInfo = new TextArea();
+
+    private List<Order_status> status;
+    private List<Pizza> pizza;
+    private List<Size> size;
 
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-
     }
-
 
 
     public String displayOrderInfo(){
         String message = "";
-        message += "Price:  "+newOrder.getFinalPrice()+" zlt\n";
-        message += "----------------\n";
         for (int i = 0; i < newOrder.getPizzasIDs().size(); i++) {
             message += "- ID: " + newOrder.getPizzasIDs().get(i) + " -size: " + newOrder.getSizeIDs().get(i)+"\n";
         }
@@ -50,7 +47,8 @@ public class CheckoutControl implements Initializable {
     public void getOrder(Order newOrder){
         this.newOrder = newOrder;
         Price.setText(newOrder.getFinalPrice()+" zlt");
-        OrderInfo.setText(displayOrderInfo());
+//        OrderInfo.setText(displayOrderInfo());
+        display_message();
     }
 
     public Pizza find_pizza(List<Pizza> find, int index){
@@ -73,31 +71,59 @@ public class CheckoutControl implements Initializable {
         return null;
     }
 
-    public void create_Order_DataBase(){
+    public void display_message(){
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         try {
             session.getTransaction().begin();
 
             Query query = session.createQuery("from Order_status");
-            List<Order_status> status = query.list();
+            status = query.list();
             query = session.createQuery("from Pizza");
-            List<Pizza> pizza = query.list();
+            pizza = query.list();
             query = session.createQuery("from Size");
-            List<Size> size = query.list();
+            size = query.list();
+
+            String message = new String();
+            message = "";
+            for (int i = 0; i < newOrder.getPizzasIDs().size(); i++) {
+                Pizza found_pizza = find_pizza(pizza, newOrder.getPizzasIDs().get(i));
+                Size found_size = find_size(size, newOrder.getSizeIDs().get(i));
+
+                message += found_pizza.getPizza_Name() +" - ";
+                message += found_size.getSize() + " - ";
+                message += found_size.getPrice() +" zł \n";
+
+            }
+            session.getTransaction().commit();
+            OrderInfo.setText(message);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+
+    public void create_Order_DataBase(){
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
 
             Customer user = LoginControl.get_loggedinCustomer();
             Shopping_Cart cart = new Shopping_Cart(user,user.getAddress_ID(),status.get(0));
 
-
             session.save(cart);
-//            session.getTransaction().commit();
 
             for (int i = 0; i < newOrder.getPizzasIDs().size(); i++) {
-                Pizza_Order newPizza = new Pizza_Order(find_pizza(pizza, newOrder.getPizzasIDs().get(i)),find_size(size, newOrder.getSizeIDs().get(i)),cart);
+                Pizza found_pizza = find_pizza(pizza, newOrder.getPizzasIDs().get(i));
+                Size found_size = find_size(size, newOrder.getSizeIDs().get(i));
+
+                Pizza_Order newPizza = new Pizza_Order(found_pizza,found_size,cart);
                 session.save(newPizza);
             }
-            System.out.println(cart.getId());
             session.getTransaction().commit();
 
 
@@ -110,22 +136,10 @@ public class CheckoutControl implements Initializable {
 
 
     public void submit(ActionEvent event) throws IOException {
-        if (cash.isSelected() || card.isSelected()) {
 
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.close();
+        create_Order_DataBase();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.close();
 
-
-                if(cash.isSelected())
-                    newOrder.setPaymentMethod(0);
-                else
-                    newOrder.setPaymentMethod(1);
-            create_Order_DataBase();
-
-        }
-        else
-        {
-            warning.setText("Please check payment method");
-        }
     }
 }
