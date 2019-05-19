@@ -179,16 +179,17 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     }
 
     public void addPizzaToOrder(Pizza chosenPizza, String pizzaPrice, String pizzaSize){
-        orderanchor.setPrefHeight(orderanchor.getPrefHeight() + 55);
-        OrderContent.setPrefHeight(OrderContent.getPrefHeight() + 55);
+        orderanchor.setPrefHeight(orderanchor.getPrefHeight() + 59);
+        OrderContent.setPrefHeight(OrderContent.getPrefHeight() + 59);
 
         orderTab.add(new HBox());
         counterTab.add(addedPizzasCounter);
 
-        orderTab.get(orderTab.size()-1).setPrefSize(354, 20);
+        orderTab.get(orderTab.size()-1).setPrefSize(354, 40);
 
-        TextArea information_About_Chosen_Pizza = new TextArea();
-        information_About_Chosen_Pizza.setPrefSize(300, 20);
+        Label information_About_Chosen_Pizza = new Label();
+        information_About_Chosen_Pizza.getStyleClass().add("added_pizza");
+        information_About_Chosen_Pizza.setPrefSize(280, 50);
         information_About_Chosen_Pizza.setText(chosenPizza.getPizza_Name()+" -  | "+pizzaSize+" | "+pizzaPrice+" zlt");
 
         Button removePicaBtn = new Button("X");
@@ -386,24 +387,45 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     }
 
     public void chnageToActive(ActionEvent event){
-        if(true){
-            acceptedVbox.getStyleClass().clear();
-            acceptedVbox.getStyleClass().add("status_Active");
-            first.getStyleClass().clear();
-            first.getStyleClass().add("lineActive");
-        }
 
-        if(true) {
-            bakingVbox.getStyleClass().clear();
-            bakingVbox.getStyleClass().add("status_Active");
-            second.getStyleClass().clear();
-            second.getStyleClass().add("lineActive");
-        }
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
 
-        if(false) {
-            sendingVbox.getStyleClass().clear();
-            sendingVbox.getStyleClass().add("status_Active");
+
+            Query query = session.createQuery("from Shopping_Cart where Shopping_Cart_ID = "+CheckoutControl.getCart().getId());
+            List<Shopping_Cart> shopping_cart = query.list();
+
+            int status = shopping_cart.get(0).getOrder_status_ID().getId();
+
+            if(status == 2){
+                acceptedVbox.getStyleClass().clear();
+                acceptedVbox.getStyleClass().add("status_Active");
+                first.getStyleClass().clear();
+                first.getStyleClass().add("lineActive");
+            }
+
+            if(status == 3) {
+                bakingVbox.getStyleClass().clear();
+                bakingVbox.getStyleClass().add("status_Active");
+                second.getStyleClass().clear();
+                second.getStyleClass().add("lineActive");
+            }
+
+            if(status == 4) {
+                sendingVbox.getStyleClass().clear();
+                sendingVbox.getStyleClass().add("status_Active");
+            }
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
         }
+        session.close();
+
 
     }
 }

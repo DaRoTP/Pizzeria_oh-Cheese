@@ -85,6 +85,28 @@
     -fx-border-color: #EB4339;
     -fx-text-fill: #9F2851;
 }
+.size_label
+{
+    -fx-background-radius: 15;
+    -fx-background-color: #949494;
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-padding: 5;
+
+}
+.added_pizza
+{
+    -fx-background-radius: 5;
+    -fx-background-color: #949494;
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-padding: 5;
+
+}
 
 
 

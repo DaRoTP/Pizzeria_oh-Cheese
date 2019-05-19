@@ -7,11 +7,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import ohcheese.model.Customer;
-import ohcheese.model.PizzaInfo;
+import ohcheese.Utilities.HibernateUtil;
+import ohcheese.model.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EmployeeControl extends GeneralWindowControl implements Initializable {
@@ -22,9 +26,9 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
     @FXML private Label warning;
     @FXML Label WelcomeUser = new Label();
 
-    @FXML private TableView<PizzaInfo> pizzaTable = new TableView<>();
-    @FXML private TableView<PizzaInfo> prmocodes = new TableView<>();
-    @FXML private TableView<PizzaInfo> TopPizzas = new TableView<>();
+    @FXML private TableView<Pizza> pizzaTable = new TableView<>();
+    @FXML private TableView<Promo_Codes> prmocodeTable = new TableView<>();
+    @FXML private TableView<Toppings> toppingTable = new TableView<>();
     @FXML private TableView<PizzaInfo> OrderRequests = new TableView<>();
 
     @FXML private TextField pizza_name;
@@ -39,28 +43,58 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
     public void initialize(URL arg0, ResourceBundle arg1) {
         WelcomeUser.setText("Welcome "+LoginControl.get_loggedinEmployee().getName()+" !");
         create_pizzaTable();
+        create_promo_code();
+        create_toppings();
 
 
     }
     public void create_pizzaTable(){
-        TableColumn<PizzaInfo, Integer> IdColumn = new TableColumn<>("ID");
-        IdColumn.setCellValueFactory(new PropertyValueFactory<>("pizzaID"));
+        TableColumn<Pizza, Integer> IdColumn = new TableColumn<>("ID");
+        IdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         IdColumn.setMinWidth(53);
 
-        TableColumn<PizzaInfo, String> nameColumn = new TableColumn<>("Name");
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("pizzaname"));
+        TableColumn<Pizza, String> nameColumn = new TableColumn<>("Name");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("pizza_Name"));
         nameColumn.setMinWidth(134);
 
-        TableColumn<PizzaInfo, String> descriptioonColumn = new TableColumn<>("Descriptioon");
-        descriptioonColumn.setCellValueFactory(new PropertyValueFactory<>("descriptioon"));
-        descriptioonColumn.setMinWidth(214);
+//        TableColumn<Pizza, String> toppings = new TableColumn<>("toppings");
+//        toppings.setCellValueFactory(new PropertyValueFactory<>("descriptioon"));
+//        toppings.setMinWidth(214);
 
-        pizzaTable.setItems(getPizzaInfo());
-        pizzaTable.getColumns().addAll(IdColumn,nameColumn,descriptioonColumn);
+        pizzaTable.setItems(getPizzas());
+        pizzaTable.getColumns().addAll(IdColumn,nameColumn);
     }
 
     public void create_promo_code(){
+        TableColumn<Promo_Codes, Integer> IdColumn = new TableColumn<>("ID");
+        IdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        IdColumn.setMinWidth(53);
 
+        TableColumn<Promo_Codes, String> Promo_Code = new TableColumn<>("Promo Code");
+        Promo_Code.setCellValueFactory(new PropertyValueFactory<>("promo_Code"));
+        Promo_Code.setMinWidth(80);
+
+        TableColumn<Promo_Codes, Integer> Percent_Off = new TableColumn<>("Discount");
+        Percent_Off.setCellValueFactory(new PropertyValueFactory<>("Percent_Off"));
+        Percent_Off.setMinWidth(50);
+
+        prmocodeTable.setItems(getPromoCodes());
+        prmocodeTable.getColumns().addAll(IdColumn,Promo_Code,Percent_Off);
+    }
+
+    public void create_toppings(){
+        TableColumn<Toppings, Integer> IdColumn = new TableColumn<>("ID");
+        IdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        IdColumn.setMinWidth(53);
+
+        TableColumn<Toppings, String> topping_name = new TableColumn<>("Toppings");
+        topping_name.setCellValueFactory(new PropertyValueFactory<>("topping_Name"));
+        topping_name.setMinWidth(80);
+
+
+
+        toppingTable.setItems(getToppings());
+        toppingTable.getColumns().addAll(IdColumn,topping_name);
     }
 
 
@@ -139,7 +173,83 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
     }
 
 
+    public ObservableList<Pizza> getPizzas(){
+        ObservableList<Pizza> pizzas = FXCollections.observableArrayList();
 
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Pizza");
+            List<Pizza> pizzas_list = query.list();
+
+            for(int i = 0; i < pizzas_list.size(); i++){
+                pizzas.add(pizzas_list.get(i));
+            }
+            session.getTransaction().commit();
+            return pizzas;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+
+        return null;
+    }
+
+    public ObservableList<Promo_Codes> getPromoCodes(){
+        ObservableList<Promo_Codes> promocodes = FXCollections.observableArrayList();
+
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Promo_Codes");
+            List<Promo_Codes> promocode_list = query.list();
+
+            for(int i = 0; i < promocode_list.size(); i++){
+                promocodes.add(promocode_list.get(i));
+            }
+            session.getTransaction().commit();
+            return promocodes;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+
+        return null;
+    }
+
+    public ObservableList<Toppings> getToppings(){
+        ObservableList<Toppings> topping = FXCollections.observableArrayList();
+
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Toppings");
+            List<Toppings> topping_list = query.list();
+
+            for(int i = 0; i < topping_list.size(); i++){
+                topping.add(topping_list.get(i));
+            }
+            session.getTransaction().commit();
+            return topping;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+
+        return null;
+    }
 
     public ObservableList<PizzaInfo> getPizzaInfo(){
         ObservableList<PizzaInfo> pizzas = FXCollections.observableArrayList();
