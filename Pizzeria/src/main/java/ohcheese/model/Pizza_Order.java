@@ -32,4 +32,10 @@ public class Pizza_Order {
     public void setShopping_Cart_ID(Shopping_Cart shopping_Cart_ID) { this.shopping_Cart_ID = shopping_Cart_ID; }
 
     public Pizza_Order() { }
+
+    public Pizza_Order(Pizza pizza_ID, Size size_ID, Shopping_Cart shopping_Cart_ID) {
+        this.pizza_ID = pizza_ID;
+        this.size_ID = size_ID;
+        this.shopping_Cart_ID = shopping_Cart_ID;
+    }
 }

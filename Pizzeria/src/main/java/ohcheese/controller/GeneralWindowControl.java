@@ -16,10 +16,7 @@ import java.util.List;
 
 public class GeneralWindowControl {
 
-    private int ID;
 
-    public void setID(int ID) { this.ID = ID; }
-    public int getID() { return ID; }
 
     public void ChangeStage_PaassingID(ActionEvent event, String scenename, String stylesheetname, String packagename) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/" +packagename+"/"+scenename+".fxml"));
@@ -27,15 +24,12 @@ public class GeneralWindowControl {
 
         if(scenename == "Customer") {
             CustomerControl CustomerC = loader.getController();
-            CustomerC.getIDFirst(ID);
         }
         else if(scenename == "Employee"){
             EmployeeControl EmployeeC = loader.getController();
-            EmployeeC.getIDFirst(ID);
         }
         else{
             AdminControl AdminC = loader.getController();
-            AdminC.getIDFirst(ID);
         }
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();

@@ -3,6 +3,7 @@ package ohcheese.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -18,14 +19,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
-import ohcheese.model.Order;
-import ohcheese.model.PizzaInfo;
+import ohcheese.Utilities.HibernateUtil;
+import ohcheese.model.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 
 public class CustomerControl extends GeneralWindowControl implements Initializable {
 
 
     private int CustomerID = 3;
+
+//    private int small_price = 0;
+//    private int large_price = 0;
+//    private int medium_price = 0;
 
     private int largePizzaUnit = 0;
     private int mediumPizzaUnit = 0;
@@ -34,6 +42,8 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     private int chosenPizzaIndex = 0;
 
     private Order newOrder;
+
+    public List<Pizza> pizza_from_DataBase;
 
     private int addedPizzasCounter = 0;
 
@@ -55,6 +65,10 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     @FXML Label finalPriceLabel = new Label();
     @FXML Label WelcomeUser = new Label();
 
+    @FXML Label small_price = new Label();
+    @FXML Label medium_price = new Label();
+    @FXML Label large_price = new Label();
+
     @FXML VBox PizzaContent = new VBox();
     @FXML VBox OrderContent = new VBox();
 
@@ -75,6 +89,8 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     public void initialize(URL arg0, ResourceBundle arg1) {
 
         WelcomeUser.setText("Welcome "+LoginControl.get_loggedinCustomer().getName()+" !");
+        set_pricing();
+        get_PizzaFromDB();
 
         pizzas.add(new PizzaInfo(0,"0","descr"));
         pizzas.add(new PizzaInfo(1,"1","descr"));
@@ -93,21 +109,49 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
     }
 
-    public void getIDFirst(int ID){
-        this.CustomerID = ID;
-        newOrder = new Order(CustomerID);
-    }
+    public void set_pricing(){
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
 
+            Query query = session.createQuery("from Size");
+            List prices = query.list();
 
-    public void test(Order some){
-        System.out.println("Customer ID: "+some.getCustumerID());
-        System.out.println("Final Price: "+some.getFinalPrice());
-        System.out.println("Method: "+some.getPaymentMethod());
-        System.out.println("------ Pizzas ----");
-        for(int i = 0; i < some.getPizzasIDs().size(); i++){
-            System.out.println("- ID: "+some.getPizzasIDs().get(i)+" -size: "+some.getSizeIDs().get(i));
+            small_price.setText(((Size)prices.get(0)).getPrice()+" zł");
+            medium_price.setText(((Size)prices.get(1)).getPrice()+" zł");
+            large_price.setText(((Size)prices.get(2)).getPrice()+" zł");
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
         }
+        session.close();
+
+
     }
+
+    public void get_PizzaFromDB(){
+
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Pizza");
+            pizza_from_DataBase = query.list();
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+
 
     public void removePizzaFromOrder(int OrderIndex){
         OrderContent.getChildren().remove(OrderIndex);
@@ -137,7 +181,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
     }
 
-    public void addPizzaToOrder(PizzaInfo chosenPizza, String pizzaPrice, String pizzaSize, int OrderIndex){
+    public void addPizzaToOrder(Pizza chosenPizza, String pizzaPrice, String pizzaSize){
         orderanchor.setPrefHeight(orderanchor.getPrefHeight() + 55);
         OrderContent.setPrefHeight(OrderContent.getPrefHeight() + 55);
 
@@ -148,7 +192,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
         TextArea information_About_Chosen_Pizza = new TextArea();
         information_About_Chosen_Pizza.setPrefSize(300, 20);
-        information_About_Chosen_Pizza.setText(chosenPizza.getPizzaname()+" -  | "+pizzaSize+"cm | "+pizzaPrice+" zlt");
+        information_About_Chosen_Pizza.setText(chosenPizza.getPizza_Name()+" -  | "+pizzaSize+" | "+pizzaPrice+" zlt");
 
         Button removePicaBtn = new Button("X");
         removePicaBtn.setPrefSize(35, 20);
@@ -172,7 +216,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
         OrderContent.getChildren().add(orderTab.get(orderTab.size()-1));
 
-        newOrder.setPizzaAndSize(chosenPizza.getPizzaID(),pizzaSize);
+        newOrder.setPizzaAndSize(chosenPizza.getId(),pizzaSize);
 
         if(newOrder.getFinalPrice() != 0){
             ViewStatus.setDisable(true);
@@ -188,7 +232,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
 
     public void createPizzaTile(ArrayList pizzas, int amountOfPizzas){
-        for(int i = 0; i < amountOfPizzas; i++) {
+        for(int i = 0; i < pizza_from_DataBase.size(); i++) {
             pizzaanchor.setPrefHeight(pizzaanchor.getPrefHeight() + 80);
             PizzaContent.setPrefHeight(PizzaContent.getPrefHeight() + 80);
 
@@ -198,12 +242,11 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
             TextArea Description = new TextArea();
             Description.setPrefSize(620, 70);
-            Description.setText(((PizzaInfo) pizzas.get(i)).getPizzaname()+"\n__________________\n"+((PizzaInfo) pizzas.get(i)).getDescriptioon());
-
-            //            Description.setDisable(true);
             Description.setEditable(false);
+            Description.setText(pizza_from_DataBase.get(i).getPizza_Name());
 
-            Image pica = new Image("view/pizzaPhotos/" +((PizzaInfo) pizzas.get(i)).getPizzaname()+".png");
+
+            Image pica = new Image("view/Global_Resources/Logo.png");
             ImageView Picaphoto = new ImageView();
             Picaphoto.setFitHeight(70);
             Picaphoto.setFitWidth(70);
@@ -318,15 +361,15 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         //adds a tile to Order Tab
         try {
             for (int i = 0; i < smallPizzaUnit; i++) {
-                addPizzaToOrder(pizzas.get(chosenPizzaIndex), "25", "25", addedPizzasCounter);
+                addPizzaToOrder(pizza_from_DataBase.get(chosenPizzaIndex), "25", "small");
                 pizzaUnitsOrdered++;
             }
             for (int i = 0; i < mediumPizzaUnit; i++) {
-                addPizzaToOrder(pizzas.get(chosenPizzaIndex), "30", "30", addedPizzasCounter);
+                addPizzaToOrder(pizza_from_DataBase.get(chosenPizzaIndex), "30", "medium");
                 pizzaUnitsOrdered++;
             }
             for (int i = 0; i < largePizzaUnit; i++) {
-                addPizzaToOrder(pizzas.get(chosenPizzaIndex), "40", "35", addedPizzasCounter);
+                addPizzaToOrder(pizza_from_DataBase.get(chosenPizzaIndex), "40", "large");
                 pizzaUnitsOrdered++;
             }
         }

@@ -63,9 +63,6 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
 
     }
 
-    public void getIDFirst(int ID){
-        this.EmployeeID = ID;
-    }
 
     public void add_pizza_SceneOpen(ActionEvent event) throws IOException {
         openscene(event, "addpizza","GeneralWindowStyle", "Employee","Global_Resources");

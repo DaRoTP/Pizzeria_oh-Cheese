@@ -8,10 +8,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import ohcheese.model.Order;
+import ohcheese.Utilities.HibernateUtil;
+import ohcheese.model.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CheckoutControl implements Initializable {
@@ -30,15 +35,7 @@ public class CheckoutControl implements Initializable {
 
     }
 
-    public void test(Order some) {
-        System.out.println("Customer ID: " + some.getCustumerID());
-        System.out.println("Final Price: " + some.getFinalPrice());
-        System.out.println("Method: " + some.getPaymentMethod());
-        System.out.println("------ Pizzas ----");
-        for (int i = 0; i < some.getPizzasIDs().size(); i++) {
-            System.out.println("- ID: " + some.getPizzasIDs().get(i) + " -size: " + some.getSizeIDs().get(i));
-        }
-    }
+
 
     public String displayOrderInfo(){
         String message = "";
@@ -56,16 +53,64 @@ public class CheckoutControl implements Initializable {
         OrderInfo.setText(displayOrderInfo());
     }
 
+    public Pizza find_pizza(List<Pizza> find, int index){
+        for(int i = 0; i < find.size(); i++){
+            if(find.get(i).getId() == index){
+                return find.get(i);
+            }
+        }
+
+        return null;
+    }
+
+    public Size find_size(List<Size> find, int index){
+        for(int i = 0; i < find.size(); i++){
+            if(find.get(i).getId() == index + 1){
+                return find.get(i);
+            }
+        }
+
+        return null;
+    }
+
+    public void create_Order_DataBase(){
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Order_status");
+            List<Order_status> status = query.list();
+            query = session.createQuery("from Pizza");
+            List<Pizza> pizza = query.list();
+            query = session.createQuery("from Size");
+            List<Size> size = query.list();
+
+            Customer user = LoginControl.get_loggedinCustomer();
+            Shopping_Cart cart = new Shopping_Cart(user,user.getAddress_ID(),status.get(0));
+
+
+            session.save(cart);
+//            session.getTransaction().commit();
+
+            for (int i = 0; i < newOrder.getPizzasIDs().size(); i++) {
+                Pizza_Order newPizza = new Pizza_Order(find_pizza(pizza, newOrder.getPizzasIDs().get(i)),find_size(size, newOrder.getSizeIDs().get(i)),cart);
+                session.save(newPizza);
+            }
+            System.out.println(cart.getId());
+            session.getTransaction().commit();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+
 
     public void submit(ActionEvent event) throws IOException {
         if (cash.isSelected() || card.isSelected()) {
-//                Parent extended_calculator = FXMLLoader.load(getClass().getResource("/Pizza_OhCheese.view/checkout/thankyou.fxml"));
-//                Scene scene = new Scene(extended_calculator);
-//                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//                window.setScene(scene);
-//                window.show();
-//                scene.getStylesheets().clear();
-//                scene.getStylesheets().add("/Pizza_OhCheese.view/Global_Resources/GeneralWindowStyle.css");
 
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.close();
@@ -75,8 +120,8 @@ public class CheckoutControl implements Initializable {
                     newOrder.setPaymentMethod(0);
                 else
                     newOrder.setPaymentMethod(1);
+            create_Order_DataBase();
 
-//                test(newOrder);
         }
         else
         {

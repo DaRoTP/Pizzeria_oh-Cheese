@@ -45,4 +45,10 @@ public class Shopping_Cart {
     public void setEmployee(Set<Employee> employee) { this.employee = employee; }
 
     public Shopping_Cart() { }
+
+    public Shopping_Cart( Customer customer_ID, Address address_ID, Order_status order_status_ID) {
+        this.customer_ID = customer_ID;
+        this.address_ID = address_ID;
+        this.order_status_ID = order_status_ID;
+    }
 }

@@ -43,7 +43,6 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
     	Mode_choice.getItems().add("CUSTOMER");
         Mode_choice.getItems().add("ADMIN");
         Mode_choice.getItems().add("EMPLOYEE");
-        setID(22);
     }
 
     

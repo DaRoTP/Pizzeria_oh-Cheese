@@ -38,9 +38,9 @@ public class Order {
 
     public void setPizzaAndSize(int pizzaID, String size){
         pizzasIDs.add(pizzaID);
-        if(size == "25")
+        if(size == "small")
             SizeIDs.add(0);
-        else if(size == "30")
+        else if(size == "medium")
             SizeIDs.add(1);
         else
             SizeIDs.add(2);
