@@ -54,8 +54,6 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     private ArrayList<HBox> orderTab = new ArrayList<HBox>();
     private ArrayList<Integer> counterTab = new ArrayList<Integer>();
 
-//    private Button[] removePicaBtn = new Button[100];
-//    private HBox[] orderTab = new HBox[100];
 
     @FXML Label largePizzaLabel = new Label();
     @FXML Label mediumPizzaLabel = new Label();

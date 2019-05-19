@@ -4,9 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import ohcheese.Utilities.HibernateUtil;
 import ohcheese.model.*;
@@ -19,35 +17,32 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class CheckoutControl implements Initializable {
+public class CheckoutControl{
 
     Order newOrder;
+    public static Shopping_Cart cart;
 
+    public static Shopping_Cart getCart() { return cart; }
+    public static void setCart(Shopping_Cart cart) { CheckoutControl.cart = cart; }
+
+    @FXML Label warning = new Label();
     @FXML Label Price = new Label();
     @FXML TextArea OrderInfo = new TextArea();
+    @FXML TextField promoCode_Field = new TextField();
+    @FXML Button redeem = new Button();
 
     private List<Order_status> status;
     private List<Pizza> pizza;
     private List<Size> size;
+    private List<Promo_Codes> promoCodes;
+
+    private Promo_Codes used_Promo_Code;
 
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-    }
-
-
-    public String displayOrderInfo(){
-        String message = "";
-        for (int i = 0; i < newOrder.getPizzasIDs().size(); i++) {
-            message += "- ID: " + newOrder.getPizzasIDs().get(i) + " -size: " + newOrder.getSizeIDs().get(i)+"\n";
-        }
-        return message;
-    }
 
     public void getOrder(Order newOrder){
         this.newOrder = newOrder;
         Price.setText(newOrder.getFinalPrice()+" zlt");
-//        OrderInfo.setText(displayOrderInfo());
         display_message();
     }
 
@@ -57,7 +52,6 @@ public class CheckoutControl implements Initializable {
                 return find.get(i);
             }
         }
-
         return null;
     }
 
@@ -67,7 +61,15 @@ public class CheckoutControl implements Initializable {
                 return find.get(i);
             }
         }
+        return null;
+    }
 
+    public Promo_Codes find_promoc_Code(List<Promo_Codes> find, String code){
+        for(int i = 0; i < find.size(); i++){
+            if(find.get(i).getPromo_Code() == code){
+                return find.get(i);
+            }
+        }
         return null;
     }
 
@@ -83,6 +85,8 @@ public class CheckoutControl implements Initializable {
             pizza = query.list();
             query = session.createQuery("from Size");
             size = query.list();
+            query = session.createQuery("from Promo_Codes");
+            promoCodes = query.list();
 
             String message = new String();
             message = "";
@@ -113,7 +117,11 @@ public class CheckoutControl implements Initializable {
             session.getTransaction().begin();
 
             Customer user = LoginControl.get_loggedinCustomer();
-            Shopping_Cart cart = new Shopping_Cart(user,user.getAddress_ID(),status.get(0));
+            cart = new Shopping_Cart(user,user.getAddress_ID(),status.get(0));
+
+            if(used_Promo_Code != null){
+                cart.setPromo_Code_ID(used_Promo_Code);
+            }
 
             session.save(cart);
 
@@ -124,6 +132,7 @@ public class CheckoutControl implements Initializable {
                 Pizza_Order newPizza = new Pizza_Order(found_pizza,found_size,cart);
                 session.save(newPizza);
             }
+
             session.getTransaction().commit();
 
 
@@ -132,6 +141,23 @@ public class CheckoutControl implements Initializable {
             session.getTransaction().rollback();
         }
         session.close();
+    }
+
+    public void redeem_promo_code(){
+        for(int i = 0; i < promoCodes.size(); i++) {
+            if (promoCode_Field.getText().equals(promoCodes.get(i).getPromo_Code())){
+                newOrder.setFinalPrice(newOrder.getFinalPrice() * (1 - (((float)promoCodes.get(i).getPercent_Off())/100)));
+                Price.setText(newOrder.getFinalPrice()+" zlt");
+                used_Promo_Code = promoCodes.get(i);
+                redeem.setDisable(true);
+                warning.setText("REDEEMED!");
+                break;
+            }
+            else{
+                warning.setText("Invalid Promo Code");
+            }
+
+        }
     }
 
 

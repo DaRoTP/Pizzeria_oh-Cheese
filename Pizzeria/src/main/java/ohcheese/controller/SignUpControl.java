@@ -312,32 +312,7 @@ public class SignUpControl {
             warning.setText("User exists");
     }
 
-    public void test() {
 
-        if (check_If_Customer_Of_Given_Username_Exists() == 0) {
-            SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
-            Session session = factory.getCurrentSession();
-            try {
-                session.getTransaction().begin();
-
-                Address new_address;
-                if(apartment_number.getText() == null || apartment_number.getText().trim().isEmpty())
-                    new_address = new Address(city.getText(),street.getText(),house_number.getText(),"-",zip_code.getText());
-                else
-                    new_address = new Address(city.getText(),street.getText(),house_number.getText(),apartment_number.getText(),zip_code.getText());
-                session.save(new_address);
-
-                session.getTransaction().commit();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                session.getTransaction().rollback();
-            }
-            session.close();
-        }
-        else
-            System.out.println("exists");
-    }
 
 
     public void submit(ActionEvent event){
