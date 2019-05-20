@@ -89,15 +89,15 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         set_pricing();
         get_PizzaFromDB();
 
-        pizzas.add(new PizzaInfo(0,"0","descr"));
-        pizzas.add(new PizzaInfo(1,"1","descr"));
-        pizzas.add(new PizzaInfo(2,"2","descr"));
-        pizzas.add(new PizzaInfo(3,"3","descr"));
-        pizzas.add(new PizzaInfo(4,"4","descr"));
-        pizzas.add(new PizzaInfo(5,"5","descr"));
-        pizzas.add(new PizzaInfo(6,"6","descr"));
-        pizzas.add(new PizzaInfo(7,"7","descr"));
-        pizzas.add(new PizzaInfo(8,"8","descr"));
+        pizzas.add(new PizzaInfo(0,"0"));
+        pizzas.add(new PizzaInfo(1,"1"));
+        pizzas.add(new PizzaInfo(2,"2"));
+        pizzas.add(new PizzaInfo(3,"3"));
+        pizzas.add(new PizzaInfo(4,"4"));
+        pizzas.add(new PizzaInfo(5,"5"));
+        pizzas.add(new PizzaInfo(6,"6"));
+        pizzas.add(new PizzaInfo(7,"7"));
+        pizzas.add(new PizzaInfo(8,"8"));
 
         newOrder = new Order(CustomerID);
         createPizzaTile(pizzas, pizzas.size());

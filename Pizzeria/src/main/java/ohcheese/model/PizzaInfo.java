@@ -1,19 +1,33 @@
 package ohcheese.model;
 
 
+import javafx.scene.control.Button;
+import ohcheese.controller.GeneralWindowControl;
 
-public class PizzaInfo {
+import java.io.IOException;
+
+public class PizzaInfo extends GeneralWindowControl {
 
     private  int pizzaID;
     private String pizzaname;
     private String descriptioon;
     private String type;
+    private Button btn;
 
     //CONSTRUCTOR
-    public PizzaInfo(int pizzaID,String pizzaname, String descriptioon) {
+    public PizzaInfo(int pizzaID,String pizzaname) {
         this.pizzaID = pizzaID;
         this.pizzaname = pizzaname;
-        this.descriptioon = descriptioon;
+        this.btn = new Button("test");
+        this.btn.setOnAction( e->{
+            System.out.println(this.pizzaID);
+            try {
+                openscene(e, "editpizza","GeneralWindowStyle", "Employee","Global_Resources");
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+        });
     }
 
     //GETTERS & SETTERS
@@ -27,4 +41,6 @@ public class PizzaInfo {
     public int getPizzaID() { return pizzaID; }
     public void setPizzaID(int pizzaID) { this.pizzaID = pizzaID; }
 
+    public Button getBtn() { return btn; }
+    public void setBtn(Button btn) { this.btn = btn; }
 }

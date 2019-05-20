@@ -3,8 +3,11 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="490.0" prefWidth="500.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ohcheese.controller.EmployeeControl">
+<AnchorPane prefHeight="748.0" prefWidth="698.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ohcheese.controller.EmployeeControl">
    <children>
       <Pane layoutX="-61.0" layoutY="-70.0" prefHeight="100.0" prefWidth="612.0" styleClass="drops" AnchorPane.leftAnchor="-61.0" AnchorPane.rightAnchor="-79.0" AnchorPane.topAnchor="-70.0" />
       <Pane layoutX="380.0" layoutY="-2.0" prefHeight="56.0" prefWidth="30.0" styleClass="drops" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="0.0" />
@@ -25,13 +28,13 @@
             <Image url="@../Global_Resources/Logo.png" />
          </image>
       </ImageView>
-      <BorderPane prefHeight="608.0" prefWidth="463.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane layoutX="-80.0" prefHeight="490.0" prefWidth="698.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <VBox prefHeight="632.0" prefWidth="352.0" spacing="20.0" BorderPane.alignment="CENTER">
                <children>
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="352.0">
                      <children>
-                        <Label fx:id="warning" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="356.0" textAlignment="CENTER">
+                        <Label fx:id="warning" alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="415.0" textAlignment="CENTER">
                            <font>
                               <Font size="11.0" />
                            </font>
@@ -46,72 +49,107 @@
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="200.0" styleClass="redish-text" text="Edit Pizza Info" textAlignment="CENTER" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="53.0" prefWidth="578.0">
                      <children>
-                        <TextField fx:id="searchIDField" prefHeight="40.0" prefWidth="82.0" promptText="ID" styleClass="TextField">
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </TextField>
-                        <Button mnemonicParsing="false" onAction="#searchID" prefHeight="35.0" prefWidth="100.0" text="Search">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
+                        <Label alignment="CENTER" prefHeight="35.0" prefWidth="163.0" styleClass="redish-text" text="ID: 24" />
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" text="Delete" />
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <HBox alignment="CENTER" prefHeight="32.0" prefWidth="352.0">
+                  <HBox alignment="CENTER" prefHeight="32.0" prefWidth="352.0" spacing="10.0">
                      <children>
                         <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../SignUp/Private_Info_Icon.png" />
                            </image>
                            <HBox.margin>
-                              <Insets right="10.0" />
+                              <Insets top="20.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="pizza_name" prefHeight="40.0" prefWidth="332.0" promptText="Name" styleClass="TextField">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor></TextField>
+                        <VBox prefHeight="60.0" prefWidth="456.0" spacing="3.0">
+                           <children>
+                              <Label text="Name">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="pizza_name" prefHeight="40.0" prefWidth="332.0" promptText="Name" styleClass="TextField">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </VBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0">
+                  <HBox alignment="CENTER" prefHeight="32.0" prefWidth="352.0" spacing="10.0">
                      <children>
-                        <ImageView fitHeight="46.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@toppings_icon.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <TextField fx:id="pizza_toppings" prefHeight="31.0" prefWidth="332.0" promptText="Toppings" styleClass="TextField">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor></TextField>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0">
-                     <children>
-                        <ImageView fitHeight="39.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@type_icon.png" />
                            </image>
                            <HBox.margin>
-                              <Insets right="10.0" />
+                              <Insets top="20.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="pizza_type" prefHeight="31.0" prefWidth="356.0" promptText="Type" styleClass="TextField">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor></TextField>
+                        <VBox prefHeight="60.0" prefWidth="215.0" spacing="3.0">
+                           <children>
+                              <Label text="Type">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="pizza_name1" editable="false" prefHeight="40.0" prefWidth="199.0" promptText="Type" styleClass="TextField">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <ChoiceBox prefHeight="40.0" prefWidth="172.0" styleClass="dropdown_choice">
+                           <HBox.margin>
+                              <Insets top="15.0" />
+                           </HBox.margin>
+                        </ChoiceBox>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="+">
+                           <HBox.margin>
+                              <Insets top="15.0" />
+                           </HBox.margin>
+                        </Button>
                      </children>
                   </HBox>
-                  <Separator prefWidth="200.0" />
+                  <HBox alignment="CENTER" prefHeight="227.0" prefWidth="578.0" spacing="10.0">
+                     <children>
+                        <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@toppings_icon.png" />
+                           </image>
+                        </ImageView>
+                        <VBox prefHeight="227.0" prefWidth="220.0">
+                           <children>
+                              <Label text="Toppings">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TableView prefHeight="198.0" prefWidth="220.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                        <ChoiceBox prefHeight="40.0" prefWidth="172.0" styleClass="dropdown_choice" />
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="+" />
+                     </children>
+                  </HBox>
                </children>
                <BorderPane.margin>
                   <Insets left="60.0" right="60.0" top="50.0" />

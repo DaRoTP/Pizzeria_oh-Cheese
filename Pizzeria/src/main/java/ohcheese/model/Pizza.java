@@ -18,6 +18,7 @@ public class Pizza {
     @ManyToMany
     private Set<Toppings> toppings = new HashSet<>();
 
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -29,6 +30,9 @@ public class Pizza {
 
     public Set<Toppings> getToppings() { return toppings; }
     public void setToppings(Set<Toppings> toppings) { this.toppings = toppings; }
+//
 
-    public Pizza() { }
+    public Pizza() {
+
+    }
 }
