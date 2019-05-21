@@ -9,6 +9,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ohcheese.Utilities.HibernateUtil;
 import ohcheese.model.*;
+import ohcheese.model.helper.PizzaInfo;
+import ohcheese.model.helper.Promo_Code_Info;
+import ohcheese.model.helper.Toppings_Info;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -49,13 +52,13 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
 
     }
     public void Open_Add_Pizza(ActionEvent event) throws IOException {
-        openscene(event, "addtoppings","GeneralWindowStyle", "Employee","Global_Resources");
+        openscene(event, "addpizza","GeneralWindowStyle", "Employee/controls","Global_Resources");
     }
     public void Open_Add_Toppings(ActionEvent event) throws IOException {
-        openscene(event, "addpromocode","GeneralWindowStyle", "Employee","Global_Resources");
+        openscene(event, "addpromocode","GeneralWindowStyle", "Employee/controls","Global_Resources");
     }
     public void Open_Add_Promo_Code(ActionEvent event) throws IOException {
-        openscene(event, "addtoppings","GeneralWindowStyle", "Employee","Global_Resources");
+        openscene(event, "addtoppings","GeneralWindowStyle", "Employee/controls","Global_Resources");
     }
 
     public void create_pizzaTable(){
@@ -65,12 +68,12 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
 
         TableColumn<PizzaInfo, String> nameColumn = new TableColumn<>("Name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("pizzaname"));
-        nameColumn.setMinWidth(134);
+        nameColumn.setMinWidth(267);
 
 
         TableColumn<PizzaInfo, String> button = new TableColumn<>("Edit");
         button.setCellValueFactory(new PropertyValueFactory<>("btn"));
-        button.setMinWidth(50);
+        button.setMinWidth(69);
 
 
 
@@ -86,15 +89,15 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
 
         TableColumn<Promo_Code_Info, String> Promo_Code = new TableColumn<>("Promo Code");
         Promo_Code.setCellValueFactory(new PropertyValueFactory<>("promo_code_name"));
-        Promo_Code.setMinWidth(80);
+        Promo_Code.setMinWidth(132);
 
         TableColumn<Promo_Code_Info, Integer> Percent_Off = new TableColumn<>("Discount");
         Percent_Off.setCellValueFactory(new PropertyValueFactory<>("discount"));
-        Percent_Off.setMinWidth(50);
+        Percent_Off.setMinWidth(60);
 
         TableColumn<Promo_Code_Info, String> button = new TableColumn<>("Edit");
         button.setCellValueFactory(new PropertyValueFactory<>("edit_btn"));
-        button.setMinWidth(50);
+        button.setMinWidth(69);
 
         prmocodeTable.setItems(getPromoCodes());
         prmocodeTable.getColumns().addAll(IdColumn,Promo_Code,Percent_Off,button);
@@ -103,15 +106,15 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
     public void create_toppings(){
         TableColumn<Toppings_Info, Integer> IdColumn = new TableColumn<>("ID");
         IdColumn.setCellValueFactory(new PropertyValueFactory<>("topping_id"));
-        IdColumn.setMinWidth(53);
+        IdColumn.setMinWidth(60);
 
         TableColumn<Toppings_Info, String> topping_name = new TableColumn<>("Toppings");
         topping_name.setCellValueFactory(new PropertyValueFactory<>("topping_name"));
-        topping_name.setMinWidth(80);
+        topping_name.setMinWidth(126);
 
         TableColumn<Toppings_Info, String> edit = new TableColumn<>("Edit");
         edit.setCellValueFactory(new PropertyValueFactory<>("edit_btn"));
-        edit.setMinWidth(50);
+        edit.setMinWidth(72);
 
 
 

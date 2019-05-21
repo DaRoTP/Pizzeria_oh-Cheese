@@ -21,6 +21,7 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import ohcheese.Utilities.HibernateUtil;
 import ohcheese.model.*;
+import ohcheese.model.helper.PizzaInfo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -290,7 +291,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
     public void Checkout(ActionEvent event) throws IOException {
         //openscene(event,"checkout","GeneralWindowStyle","checkout","Global_Resources");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/checkout/checkout.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Customer/checkout/checkout.fxml"));
         Parent root = loader.load();
 
         CheckoutControl checkoutc = loader.getController();
@@ -310,7 +311,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
     //VIEW STATUS
     public void viewStatus(ActionEvent event) throws IOException {
-        changescene(event,"thankyou","view_Status","thankyou","thankyou");
+        changescene(event,"view_status","view_Status","Customer/view_status","Customer/view_status");
 
     }
     //LARGE PIZZA

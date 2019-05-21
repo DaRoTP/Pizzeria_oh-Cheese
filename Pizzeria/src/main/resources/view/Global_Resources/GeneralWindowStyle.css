@@ -65,6 +65,33 @@
     -fx-border-color: #b6b6b6;
 }
 
+.edit_btn
+{
+    -fx-background-radius: 15;
+    -fx-background-color: #949494;
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-padding: 3;
+    -fx-border-color: #949494;
+    -fx-border-width: 4;
+    -fx-border-radius: 15;
+    -fx-cursor: hand;
+}
+.edit_btn:hover
+{
+
+    -fx-background-color: #747474;
+    -fx-border-color: #616161;
+}
+.edit_btn:pressed
+{
+    -fx-background-color: #949494;
+    -fx-border-color: #b6b6b6;
+    -fx-border-width: 4;
+}
+
 .TextField-disabled
 {
     -fx-background-color: #474747;
