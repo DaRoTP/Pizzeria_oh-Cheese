@@ -12,7 +12,7 @@ public class PizzaInfo extends GeneralWindowControl {
     private String pizzaname;
     private String descriptioon;
     private String type;
-    private Button btn;
+    private Button edit_btn;
 
     public static int temp_id;
 
@@ -20,8 +20,8 @@ public class PizzaInfo extends GeneralWindowControl {
     public PizzaInfo(int pizzaID,String pizzaname) {
         this.pizzaID = pizzaID;
         this.pizzaname = pizzaname;
-        this.btn = new Button("test");
-        this.btn.setOnAction( e->{
+        this.edit_btn = new Button("test");
+        this.edit_btn.setOnAction(e->{
             this.temp_id = this.pizzaID;
             try {
                 openscene(e, "editpizza","GeneralWindowStyle", "Employee/controls","Global_Resources");
@@ -30,7 +30,7 @@ public class PizzaInfo extends GeneralWindowControl {
             }
 
         });
-        this.btn.getStyleClass().add("edit_btn");
+        this.edit_btn.getStyleClass().add("edit_btn");
     }
 
     public static int getTemp_id() { return temp_id; }
@@ -47,6 +47,6 @@ public class PizzaInfo extends GeneralWindowControl {
     public int getPizzaID() { return pizzaID; }
     public void setPizzaID(int pizzaID) { this.pizzaID = pizzaID; }
 
-    public Button getBtn() { return btn; }
-    public void setBtn(Button btn) { this.btn = btn; }
+    public Button getEdit_btn() { return edit_btn; }
+    public void setEdit_btn(Button edit_btn) { this.edit_btn = edit_btn; }
 }

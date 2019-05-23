@@ -6,12 +6,12 @@ import javax.persistence.*;
 @Table(name = "Promo_Codes")
 public class Promo_Codes {
     @Id
-    @Column(name = "Promo_Codes_ID")
+    @Column(name = "Promo_Code_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "Promo_Code")
     private String promo_Code;
-    @Column(name = "Percent_Off")
+    @Column(name = "Discount")
     private int percent_Off;
 
     public Integer getId() { return id; }

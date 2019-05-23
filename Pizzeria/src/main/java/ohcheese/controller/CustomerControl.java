@@ -120,6 +120,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
             medium_price.setText(((Size)prices.get(1)).getPrice()+" zł");
             large_price.setText(((Size)prices.get(2)).getPrice()+" zł");
 
+
             session.getTransaction().commit();
 
         } catch (Exception e) {

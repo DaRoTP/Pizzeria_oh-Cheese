@@ -33,7 +33,7 @@ public class Employee {
     @JoinColumn(name = "Address_ID")
     private Address address_ID;
     @ManyToOne
-    @JoinColumn(name = "Position_ID")
+    @JoinColumn(name = "Job_Position_ID")
     private Job_Position position_ID;
     @ManyToMany
     private Set<Shopping_Cart> shopping_cart = new HashSet<>();

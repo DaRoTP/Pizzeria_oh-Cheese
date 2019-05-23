@@ -9,9 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ohcheese.Utilities.HibernateUtil;
 import ohcheese.model.*;
-import ohcheese.model.helper.PizzaInfo;
-import ohcheese.model.helper.Promo_Code_Info;
-import ohcheese.model.helper.Toppings_Info;
+import ohcheese.model.helper.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -30,9 +28,11 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
     @FXML Label WelcomeUser = new Label();
 
     @FXML private TableView<PizzaInfo> pizzaTable = new TableView<>();
-    @FXML private TableView<Promo_Code_Info> prmocodeTable = new TableView<>();
+    @FXML private TableView<Promo_Code_Info> promocodeTable = new TableView<>();
     @FXML private TableView<Toppings_Info> toppingTable = new TableView<>();
-    @FXML private TableView<PizzaInfo> OrderRequests = new TableView<>();
+    @FXML private TableView<Pizza_type_Info> typeTable = new TableView<>();
+    @FXML private TableView<Size_Info> sizeTable = new TableView<>();
+    @FXML private TableView<Shopping_Cart_Info> ShoppingCartTable = new TableView<>();
 
     @FXML private TextField pizza_name;
     @FXML private TextField promo_code;
@@ -46,20 +46,15 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
     public void initialize(URL arg0, ResourceBundle arg1) {
         WelcomeUser.setText("Welcome "+LoginControl.get_loggedinEmployee().getName()+" !");
         create_pizzaTable();
-        create_promo_code();
         create_toppings();
+        create_pizzatype();
+        create_size();
+        create_promo_code();
+        create_Shopping_Cart();
 
 
     }
-    public void Open_Add_Pizza(ActionEvent event) throws IOException {
-        openscene(event, "addpizza","GeneralWindowStyle", "Employee/controls","Global_Resources");
-    }
-    public void Open_Add_Toppings(ActionEvent event) throws IOException {
-        openscene(event, "addpromocode","GeneralWindowStyle", "Employee/controls","Global_Resources");
-    }
-    public void Open_Add_Promo_Code(ActionEvent event) throws IOException {
-        openscene(event, "addtoppings","GeneralWindowStyle", "Employee/controls","Global_Resources");
-    }
+
 
     public void create_pizzaTable(){
         TableColumn<PizzaInfo, Integer> IdColumn = new TableColumn<>("ID");
@@ -72,7 +67,7 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
 
 
         TableColumn<PizzaInfo, String> button = new TableColumn<>("Edit");
-        button.setCellValueFactory(new PropertyValueFactory<>("btn"));
+        button.setCellValueFactory(new PropertyValueFactory<>("edit_btn"));
         button.setMinWidth(69);
 
 
@@ -99,8 +94,8 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
         button.setCellValueFactory(new PropertyValueFactory<>("edit_btn"));
         button.setMinWidth(69);
 
-        prmocodeTable.setItems(getPromoCodes());
-        prmocodeTable.getColumns().addAll(IdColumn,Promo_Code,Percent_Off,button);
+        promocodeTable.setItems(getPromoCodes());
+        promocodeTable.getColumns().addAll(IdColumn,Promo_Code,Percent_Off,button);
     }
 
     public void create_toppings(){
@@ -117,11 +112,113 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
         edit.setMinWidth(72);
 
 
-
         toppingTable.setItems(getToppings());
         toppingTable.getColumns().addAll(IdColumn,topping_name,edit);
     }
 
+    public void create_pizzatype(){
+        TableColumn<Pizza_type_Info, Integer> IdColumn = new TableColumn<>("ID");
+        IdColumn.setCellValueFactory(new PropertyValueFactory<>("pizza_type_ID"));
+        IdColumn.setMinWidth(60);
+
+        TableColumn<Pizza_type_Info, String> type_name = new TableColumn<>("Pizza Type");
+        type_name.setCellValueFactory(new PropertyValueFactory<>("pizza_type"));
+        type_name.setMinWidth(126);
+
+        TableColumn<Pizza_type_Info, String> edit = new TableColumn<>("Edit");
+        edit.setCellValueFactory(new PropertyValueFactory<>("edit_btn"));
+        edit.setMinWidth(72);
+
+
+        typeTable.setItems(getPizzaType());
+        typeTable.getColumns().addAll(IdColumn,type_name,edit);
+    }
+
+    public void create_size(){
+        TableColumn<Size_Info, Integer> IdColumn = new TableColumn<>("ID");
+        IdColumn.setCellValueFactory(new PropertyValueFactory<>("size_ID"));
+        IdColumn.setMinWidth(60);
+
+        TableColumn<Size_Info, String> Size = new TableColumn<>("Size");
+        Size.setCellValueFactory(new PropertyValueFactory<>("Size"));
+        Size.setMinWidth(126);
+
+        TableColumn<Size_Info, String> price = new TableColumn<>("Price");
+        price.setCellValueFactory(new PropertyValueFactory<>("Price"));
+        price.setMinWidth(126);
+
+        TableColumn<Size_Info, String> edit = new TableColumn<>("Edit");
+        edit.setCellValueFactory(new PropertyValueFactory<>("edit_btn"));
+        edit.setMinWidth(72);
+
+
+        sizeTable.setItems(getSize());
+        sizeTable.getColumns().addAll(IdColumn,Size,price,edit);
+    }
+
+    public void create_Shopping_Cart(){
+        TableColumn<Shopping_Cart_Info, Integer> IdColumn = new TableColumn<>("ID");
+        IdColumn.setCellValueFactory(new PropertyValueFactory<>("SC_ID"));
+        IdColumn.setMinWidth(60);
+
+        TableColumn<Shopping_Cart_Info, String> username = new TableColumn<>("Customer");
+        username.setCellValueFactory(new PropertyValueFactory<>("username"));
+        username.setMinWidth(60);
+
+        TableColumn<Shopping_Cart_Info, String> steet = new TableColumn<>("Street");
+        steet.setCellValueFactory(new PropertyValueFactory<>("street"));
+        steet.setMinWidth(60);
+
+        TableColumn<Shopping_Cart_Info, String> city = new TableColumn<>("City");
+        city.setCellValueFactory(new PropertyValueFactory<>("city"));
+        city.setMinWidth(60);
+
+        TableColumn<Shopping_Cart_Info, String> house_Nr = new TableColumn<>("House Number");
+        house_Nr.setCellValueFactory(new PropertyValueFactory<>("house_Nr"));
+        house_Nr.setMinWidth(60);
+
+        TableColumn<Shopping_Cart_Info, String> apartment_Nr = new TableColumn<>("Apartment Number");
+        apartment_Nr.setCellValueFactory(new PropertyValueFactory<>("apartment_Nr"));
+        apartment_Nr.setMinWidth(60);
+
+        TableColumn<Shopping_Cart_Info, String> status = new TableColumn<>("Status");
+        status.setCellValueFactory(new PropertyValueFactory<>("status"));
+        status.setMinWidth(60);
+
+        TableColumn<Shopping_Cart_Info, String> edit = new TableColumn<>("Edit");
+        edit.setCellValueFactory(new PropertyValueFactory<>("edit_btn"));
+        edit.setMinWidth(72);
+
+
+        ShoppingCartTable.setItems(getCart());
+        ShoppingCartTable.getColumns().addAll(IdColumn,username,city,steet,house_Nr,apartment_Nr,status,edit);
+    }
+
+    public ObservableList<Pizza_type_Info> getPizzaType(){
+        ObservableList<Pizza_type_Info> pizza_type = FXCollections.observableArrayList();
+
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Pizza_Type");
+            List<Pizza_Type> pizzatype_list = query.list();
+
+            for(int i = 0; i < pizzatype_list.size(); i++){
+                pizza_type.add(new Pizza_type_Info(pizzatype_list.get(i).getId(),pizzatype_list.get(i).getPizza_Type()));
+            }
+            session.getTransaction().commit();
+            return pizza_type;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+
+        return null;
+    }
 
     public ObservableList<Promo_Code_Info> getPromoCodes(){
         ObservableList<Promo_Code_Info> promocodes = FXCollections.observableArrayList();
@@ -201,6 +298,74 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
         return null;
     }
 
+    public ObservableList<Size_Info> getSize(){
+        ObservableList<Size_Info> size = FXCollections.observableArrayList();
+
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Size");
+            List<Size> size_list = query.list();
+
+            for(int i = 0; i < size_list.size(); i++){
+                size.add(new Size_Info(size_list.get(i).getId(),size_list.get(i).getSize(),size_list.get(i).getPrice()));
+            }
+            session.getTransaction().commit();
+            return size;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+
+        return null;
+    }
+
+    public ObservableList<Shopping_Cart_Info> getCart(){
+        ObservableList<Shopping_Cart_Info> size = FXCollections.observableArrayList();
+
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Shopping_Cart");
+            List<Shopping_Cart> sc_list = query.list();
+
+            for(int i = 0; i < sc_list.size(); i++){
+                size.add(new Shopping_Cart_Info(sc_list.get(i).getId(),sc_list.get(i).getCustomer_ID(),sc_list.get(i).getAddress_ID(),
+                        sc_list.get(i).getPromo_Code_ID(),sc_list.get(i).getOrder_status_ID()));
+            }
+            session.getTransaction().commit();
+            return size;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+
+        return null;
+    }
+
+    public void Open_Add_Pizza(ActionEvent event) throws IOException {
+        openscene(event, "addpizza","GeneralWindowStyle", "Employee/controls","Global_Resources");
+    }
+    public void Open_Add_Toppings(ActionEvent event) throws IOException {
+        openscene(event, "addpromocode","GeneralWindowStyle", "Employee/controls","Global_Resources");
+    }
+    public void Open_Add_Promo_Code(ActionEvent event) throws IOException {
+        openscene(event, "addpromocode","GeneralWindowStyle", "Employee/controls","Global_Resources");
+    }
+    public void Open_Add_Type(ActionEvent event) throws IOException {
+        openscene(event, "addtype","GeneralWindowStyle", "Employee/controls","Global_Resources");
+    }
+    public void Open_Add_Size(ActionEvent event) throws IOException {
+        openscene(event, "addSize","GeneralWindowStyle", "Employee/controls","Global_Resources");
+    }
 
 
     public void refresh_table_content(ActionEvent event){

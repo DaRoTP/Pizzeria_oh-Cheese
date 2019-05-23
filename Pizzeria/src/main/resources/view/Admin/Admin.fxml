@@ -2,14 +2,10 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -25,15 +21,19 @@
 <AnchorPane id="lox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ohcheese.controller.EmployeeControl">
    <children>
       <Pane layoutX="-42.0" prefHeight="58.0" prefWidth="1360.0" styleClass="drops_border" AnchorPane.leftAnchor="-40.0" AnchorPane.rightAnchor="-40.0" AnchorPane.topAnchor="-17.0" />
-      <HBox alignment="CENTER" prefHeight="38.0" prefWidth="370.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="746.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label styleClass="text" text="Welcome customer!" textFill="#1e1414">
+            <Label fx:id="WelcomeUser" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="427.0" styleClass="text" text="Welcome customer!" textFill="#1e1414">
                <font>
                   <Font name="System Bold" size="20.0" />
-               </font></Label>
-            <Button fx:id="settings" alignment="CENTER" mnemonicParsing="false" onAction="#settings">
+               </font>
+            </Label>
+            <Button fx:id="settings" mnemonicParsing="false" onAction="#settings" styleClass="logout">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
                <graphic>
-                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" styleClass="settings">
+                  <ImageView fitHeight="27.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true" styleClass="settings">
                      <image>
                         <Image url="@../Global_Resources/settings_icon.png" />
                      </image>
@@ -42,9 +42,6 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-               <HBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </HBox.margin>
             </Button>
             <Button fx:id="logout" alignment="CENTER" mnemonicParsing="false" onAction="#LogOut" styleClass="logout" text="Log out">
                <graphic>
@@ -65,80 +62,163 @@
             <Image url="@../Global_Resources/Main_Logo.png" />
          </image>
       </ImageView>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0">
-        <tabs>
-          <Tab text="Employees">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="531.0" prefWidth="795.0">
+      <TabPane prefHeight="591.0" prefWidth="1008.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+         <tabs>
+            <Tab closable="false">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <GridPane hgap="10.0" layoutY="10.0" prefHeight="596.0" prefWidth="1280.0" vgap="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="849.0" minWidth="10.0" prefWidth="848.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="615.0" minWidth="10.0" prefWidth="392.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="418.0" minWidth="10.0" prefWidth="409.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="658.0" minWidth="10.0" prefWidth="271.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="580.0" minWidth="10.0" prefWidth="334.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints maxHeight="476.0" minHeight="10.0" prefHeight="476.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="586.0" minHeight="10.0" prefHeight="533.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                              <VBox alignment="TOP_CENTER" prefHeight="711.0" prefWidth="418.0">
                                  <children>
-                                    <Label alignment="CENTER" prefHeight="34.0" prefWidth="114.0" styleClass="TableLabel" text="Emplyees">
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="31.0" prefWidth="128.0" styleClass="TableLabel" text="Employees" />
+                                          <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                       </children>
                                        <VBox.margin>
-                                          <Insets bottom="5.0" top="5.0" />
-                                       </VBox.margin></Label>
-                                    <TableView prefHeight="406.0" prefWidth="848.0">
-                                       <columns>
-                                          <TableColumn prefWidth="75.0" text="C1" />
-                                          <TableColumn prefWidth="75.0" text="C2" />
-                                       </columns>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <TableView prefHeight="700.0" prefWidth="418.0">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
                                     </TableView>
                                  </children>
                               </VBox>
-                              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                              <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="281.0" GridPane.columnIndex="2">
                                  <children>
-                                    <Label alignment="CENTER" prefHeight="34.0" prefWidth="337.0" styleClass="TableLabel" text="Top 10 Employees of the Month">
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="29.0" prefWidth="119.0" styleClass="TableLabel" text="Address" />
+                                          <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                       </children>
                                        <VBox.margin>
-                                          <Insets bottom="5.0" top="5.0" />
-                                       </VBox.margin></Label>
-                                    <TableView prefHeight="406.0" prefWidth="408.0">
-                                       <columns>
-                                          <TableColumn prefWidth="52.0" text="C1" />
-                                          <TableColumn prefWidth="98.0" text="C2" />
-                                       </columns>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <TableView prefHeight="700.0" prefWidth="281.0">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
                                     </TableView>
                                  </children>
                               </VBox>
-                              <HBox alignment="CENTER" prefHeight="54.0" prefWidth="848.0" spacing="5.0" GridPane.rowIndex="1">
+                              <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="100.0" GridPane.columnIndex="1">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="addbtn" text="+" />
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="removebtn" text="-" />
-                                    <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="61.0" text="Edit" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="29.0" prefWidth="164.0" styleClass="TableLabel" text="Job Postions" />
+                                          <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <TableView prefHeight="700.0" prefWidth="408.0">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </TableView>
                                  </children>
-                              </HBox>
+                              </VBox>
+                              <Button mnemonicParsing="false" onAction="#refresh_table_content" prefHeight="32.0" prefWidth="93.0" text="Refresh" GridPane.rowIndex="1">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
                            </children>
                         </GridPane>
                      </children>
                   </AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="Chart">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               </content>
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Global_Resources/settings_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Tab>
+            <Tab>
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <LineChart layoutX="25.0" layoutY="62.0" prefHeight="489.0" prefWidth="1190.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="62.0">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </LineChart>
+                        <GridPane hgap="10.0" prefHeight="596.0" prefWidth="1280.0" vgap="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="418.0" minWidth="10.0" prefWidth="409.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="658.0" minWidth="10.0" prefWidth="271.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="586.0" minHeight="10.0" prefHeight="533.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <VBox alignment="TOP_CENTER" prefHeight="711.0" prefWidth="418.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="31.0" prefWidth="128.0" styleClass="TableLabel" text="Customers" />
+                                          <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <TableView prefHeight="700.0" prefWidth="418.0">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="281.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="29.0" prefWidth="187.0" styleClass="TableLabel" text="Shopping Carts" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <TableView prefHeight="700.0" prefWidth="281.0">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                              <Button mnemonicParsing="false" onAction="#refresh_table_content" prefHeight="32.0" prefWidth="93.0" text="Refresh" GridPane.rowIndex="1">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </GridPane>
                      </children>
                   </AnchorPane>
-              </content>
+               </content>
+               <graphic>
+                  <ImageView fitHeight="53.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../settings/salary.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Tab>
-        </tabs>
+         </tabs>
       </TabPane>
    </children>
 </AnchorPane>
