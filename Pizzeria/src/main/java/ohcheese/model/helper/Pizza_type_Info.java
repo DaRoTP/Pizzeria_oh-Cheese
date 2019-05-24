@@ -11,15 +11,18 @@ public class Pizza_type_Info extends GeneralWindowControl {
     private String pizza_type;
     private Button edit_btn;
 
+    public static boolean class_type;
     public static int temp_id;
 
     public Pizza_type_Info(int pizza_type_ID, String pizza_type) {
         this.pizza_type_ID = pizza_type_ID;
         this.pizza_type = pizza_type;
         this.edit_btn = new Button("Edit");
+        this.class_type = false;
 
         this.edit_btn.setOnAction(e->{
             this.temp_id = this.pizza_type_ID;
+            this.class_type = true;
             try {
                 openscene(e, "edittype","GeneralWindowStyle", "Employee/controls","Global_Resources");
             } catch (IOException e1) {
@@ -41,4 +44,7 @@ public class Pizza_type_Info extends GeneralWindowControl {
 
     public static int getTemp_id() { return temp_id; }
     public static void setTemp_id(int temp_id) { Pizza_type_Info.temp_id = temp_id; }
+
+    public static boolean getClass_type() { return class_type; }
+    public static void setClass_type(boolean class_type) { Pizza_type_Info.class_type = class_type; }
 }

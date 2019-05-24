@@ -67,12 +67,12 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane hgap="10.0" layoutY="10.0" prefHeight="596.0" prefWidth="1280.0" vgap="10.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
+                        <GridPane hgap="10.0" layoutY="10.0" prefHeight="581.0" prefWidth="1067.0" vgap="10.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="10.0">
                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="418.0" minWidth="10.0" prefWidth="409.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="658.0" minWidth="10.0" prefWidth="271.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="580.0" minWidth="10.0" prefWidth="334.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="580.0" minWidth="10.0" prefWidth="334.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="424.0" minWidth="10.0" prefWidth="292.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="658.0" minWidth="10.0" prefWidth="253.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="580.0" minWidth="10.0" prefWidth="253.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="580.0" minWidth="10.0" prefWidth="240.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints maxHeight="586.0" minHeight="10.0" prefHeight="533.0" vgrow="SOMETIMES" />
@@ -83,13 +83,16 @@
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="35.0" prefWidth="98.0" styleClass="TableLabel" text="Pizzas" />
-                                          <Button mnemonicParsing="false" onAction="#Open_Add_Pizza" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                          <Button mnemonicParsing="false" onAction="#Open_Add_Pizza" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </HBox>
-                                    <TableView fx:id="pizzaTable" prefHeight="700.0" prefWidth="337.0">
+                                    <TableView fx:id="pizzaTable" prefHeight="700.0" prefWidth="400.0">
                                        <VBox.margin>
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
@@ -101,43 +104,52 @@
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="29.0" prefWidth="131.0" styleClass="TableLabel" text="Toppings" />
-                                          <Button mnemonicParsing="false" onAction="#Open_Add_Toppings" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                          <Button mnemonicParsing="false" onAction="#Open_Add_Toppings" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </HBox>
-                                    <TableView fx:id="toppingTable" prefHeight="700.0" prefWidth="281.0">
+                                    <TableView fx:id="toppingTable" prefHeight="700.0" prefWidth="400.0">
                                        <VBox.margin>
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </TableView>
                                  </children>
                               </VBox>
-                              <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="100.0" GridPane.columnIndex="3">
+                              <VBox alignment="TOP_CENTER" prefHeight="581.0" prefWidth="222.0" GridPane.columnIndex="3">
                                  <children>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="240.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="29.0" prefWidth="83.0" styleClass="TableLabel" text="Size" />
-                                          <Button mnemonicParsing="false" onAction="#Open_Add_Size" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                          <Button mnemonicParsing="false" onAction="#Open_Add_Size" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </HBox>
-                                    <TableView fx:id="sizeTable" prefHeight="700.0" prefWidth="408.0">
+                                    <TableView fx:id="sizeTable" prefHeight="700.0" prefWidth="240.0">
                                        <VBox.margin>
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </TableView>
                                  </children>
                               </VBox>
-                              <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="100.0" GridPane.columnIndex="2">
+                              <VBox alignment="TOP_CENTER" prefHeight="581.0" prefWidth="174.0" GridPane.columnIndex="2">
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="29.0" prefWidth="83.0" styleClass="TableLabel" text="Type" />
-                                          <Button mnemonicParsing="false" onAction="#Open_Add_Type" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                          <Button mnemonicParsing="false" onAction="#Open_Add_Type" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -172,17 +184,16 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane hgap="20.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="0.0">
+                        <GridPane hgap="20.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="1210.0" minWidth="10.0" prefWidth="737.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="1210.0" minWidth="10.0" prefWidth="334.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="199.0" minHeight="0.0" prefHeight="14.0" vgrow="SOMETIMES" />
                             <RowConstraints maxHeight="566.0" minHeight="10.0" prefHeight="565.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <Label alignment="CENTER" prefHeight="35.0" prefWidth="168.0" styleClass="TableLabel" text="Order requests">
                                        <VBox.margin>
@@ -196,12 +207,15 @@
                                     </TableView>
                                  </children>
                               </VBox>
-                              <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="100.0" GridPane.columnIndex="1">
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="29.0" prefWidth="173.0" styleClass="TableLabel" text="Promo Codes" />
-                                          <Button mnemonicParsing="false" onAction="#Open_Add_Promo_Code" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                          <Button mnemonicParsing="false" onAction="#Open_Add_Promo_Code" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />

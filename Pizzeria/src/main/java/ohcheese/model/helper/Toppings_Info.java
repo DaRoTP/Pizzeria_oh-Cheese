@@ -11,15 +11,19 @@ public class Toppings_Info extends GeneralWindowControl {
     private String topping_name;
     private Button edit_btn;
 
+    public static boolean class_type;
     public static int temp_id;
 
 
     public Toppings_Info(int topping_id, String topping_name) {
         this.topping_id = topping_id;
         this.topping_name = topping_name;
+        this.class_type = false;
+
         this.edit_btn = new Button("Edit");
         this.edit_btn.setOnAction( e->{
             this.temp_id = this.topping_id;
+            this.class_type = true;
             try {
                 openscene(e, "edittoppings","GeneralWindowStyle", "Employee/controls","Global_Resources");
             } catch (IOException e1) {
@@ -34,6 +38,9 @@ public class Toppings_Info extends GeneralWindowControl {
     public static int getTemp_id() { return temp_id; }
     public static void setTemp_id(int temp_id) { Toppings_Info.temp_id = temp_id; }
 
+    public static boolean getClass_type() { return class_type; }
+    public static void setClass_type(boolean class_type) { Toppings_Info.class_type = class_type; }
+
     public int getTopping_id() { return topping_id; }
     public void setTopping_id(int topping_id) { this.topping_id = topping_id; }
 
@@ -42,4 +49,5 @@ public class Toppings_Info extends GeneralWindowControl {
 
     public Button getEdit_btn() { return edit_btn; }
     public void setEdit_btn(Button edit_btn) { this.edit_btn = edit_btn; }
+
 }

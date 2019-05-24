@@ -1,12 +1,15 @@
 package ohcheese.model.helper;
 
 import javafx.scene.control.Button;
+import ohcheese.controller.GeneralWindowControl;
 import ohcheese.model.Address;
 import ohcheese.model.Customer;
 import ohcheese.model.Order_status;
 import ohcheese.model.Promo_Codes;
 
-public class Shopping_Cart_Info {
+import java.io.IOException;
+
+public class Shopping_Cart_Info extends GeneralWindowControl {
 
     private  int SC_ID;
     private Customer customer;
@@ -22,6 +25,7 @@ public class Shopping_Cart_Info {
     private String apartment_Nr;
     private String status;
 
+    public static boolean class_type;
     public static int temp_id;
 
     public Shopping_Cart_Info(int SC_ID, Customer customer, Address address, Promo_Codes promo_Code, Order_status order_status) {
@@ -30,15 +34,27 @@ public class Shopping_Cart_Info {
         this.address = address;
         this.promo_Code = promo_Code;
         this.order_status = order_status;
-        this.edit_btn = new Button("View");
-        this.edit_btn.getStyleClass().add("addbtn");
-
         this.username = this.customer.getUsername();
         this.street = this.address.getStreet();
-        this.city = this.address.getHouse_Number();
+        this.city = this.address.getCity();
         this.house_Nr = this.address.getHouse_Number();
         this.apartment_Nr = this.address.getApartment_Number();
         this.status = this.order_status.getOrder_status();
+
+        this.class_type = false;
+        this.edit_btn = new Button("View");
+        this.edit_btn.setOnAction(e->{
+            this.temp_id = this.SC_ID;
+            this.class_type = true;
+            try {
+                openscene(e, "Order","GeneralWindowStyle", "Order","Global_Resources");
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+        });
+        this.edit_btn.getStyleClass().add("addbtn");
+
     }
 
     public int getSC_ID() { return SC_ID; }
@@ -79,4 +95,7 @@ public class Shopping_Cart_Info {
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+    public static boolean isClass_type() { return class_type; }
+    public static void setClass_type(boolean class_type) { Shopping_Cart_Info.class_type = class_type; }
 }

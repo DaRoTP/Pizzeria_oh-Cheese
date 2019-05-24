@@ -51,147 +51,150 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
         create_size();
         create_promo_code();
         create_Shopping_Cart();
-
-
     }
 
 
     public void create_pizzaTable(){
         TableColumn<PizzaInfo, Integer> IdColumn = new TableColumn<>("ID");
         IdColumn.setCellValueFactory(new PropertyValueFactory<>("pizzaID"));
-        IdColumn.setMinWidth(53);
+        IdColumn.setMinWidth(50);
+        IdColumn.setMaxWidth(50);
 
         TableColumn<PizzaInfo, String> nameColumn = new TableColumn<>("Name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("pizzaname"));
-        nameColumn.setMinWidth(267);
-
 
         TableColumn<PizzaInfo, String> button = new TableColumn<>("Edit");
         button.setCellValueFactory(new PropertyValueFactory<>("edit_btn"));
-        button.setMinWidth(69);
-
-
+        button.setMinWidth(50);
+        button.setMaxWidth(50);
 
 
         pizzaTable.setItems(getPizzas());
         pizzaTable.getColumns().addAll(IdColumn,nameColumn,button);
+        pizzaTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     public void create_promo_code(){
         TableColumn<Promo_Code_Info, Integer> IdColumn = new TableColumn<>("ID");
         IdColumn.setCellValueFactory(new PropertyValueFactory<>("promo_code_id"));
-        IdColumn.setMinWidth(53);
+        IdColumn.setMinWidth(50);
+        IdColumn.setMaxWidth(50);
 
         TableColumn<Promo_Code_Info, String> Promo_Code = new TableColumn<>("Promo Code");
         Promo_Code.setCellValueFactory(new PropertyValueFactory<>("promo_code_name"));
-        Promo_Code.setMinWidth(132);
 
         TableColumn<Promo_Code_Info, Integer> Percent_Off = new TableColumn<>("Discount");
         Percent_Off.setCellValueFactory(new PropertyValueFactory<>("discount"));
-        Percent_Off.setMinWidth(60);
 
         TableColumn<Promo_Code_Info, String> button = new TableColumn<>("Edit");
         button.setCellValueFactory(new PropertyValueFactory<>("edit_btn"));
-        button.setMinWidth(69);
+        button.setMinWidth(50);
+        button.setMaxWidth(50);
 
         promocodeTable.setItems(getPromoCodes());
         promocodeTable.getColumns().addAll(IdColumn,Promo_Code,Percent_Off,button);
+        promocodeTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     public void create_toppings(){
         TableColumn<Toppings_Info, Integer> IdColumn = new TableColumn<>("ID");
         IdColumn.setCellValueFactory(new PropertyValueFactory<>("topping_id"));
-        IdColumn.setMinWidth(60);
+        IdColumn.setMinWidth(50);
+        IdColumn.setMaxWidth(50);
 
         TableColumn<Toppings_Info, String> topping_name = new TableColumn<>("Toppings");
         topping_name.setCellValueFactory(new PropertyValueFactory<>("topping_name"));
-        topping_name.setMinWidth(126);
 
         TableColumn<Toppings_Info, String> edit = new TableColumn<>("Edit");
         edit.setCellValueFactory(new PropertyValueFactory<>("edit_btn"));
-        edit.setMinWidth(72);
+        edit.setMinWidth(50);
+        edit.setMaxWidth(50);
 
 
         toppingTable.setItems(getToppings());
         toppingTable.getColumns().addAll(IdColumn,topping_name,edit);
+        toppingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     public void create_pizzatype(){
         TableColumn<Pizza_type_Info, Integer> IdColumn = new TableColumn<>("ID");
         IdColumn.setCellValueFactory(new PropertyValueFactory<>("pizza_type_ID"));
-        IdColumn.setMinWidth(60);
+        IdColumn.setMinWidth(50);
+        IdColumn.setMaxWidth(50);
 
         TableColumn<Pizza_type_Info, String> type_name = new TableColumn<>("Pizza Type");
         type_name.setCellValueFactory(new PropertyValueFactory<>("pizza_type"));
-        type_name.setMinWidth(126);
 
         TableColumn<Pizza_type_Info, String> edit = new TableColumn<>("Edit");
         edit.setCellValueFactory(new PropertyValueFactory<>("edit_btn"));
-        edit.setMinWidth(72);
-
+        edit.setMinWidth(50);
+        edit.setMaxWidth(50);
 
         typeTable.setItems(getPizzaType());
         typeTable.getColumns().addAll(IdColumn,type_name,edit);
+        typeTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     public void create_size(){
         TableColumn<Size_Info, Integer> IdColumn = new TableColumn<>("ID");
         IdColumn.setCellValueFactory(new PropertyValueFactory<>("size_ID"));
-        IdColumn.setMinWidth(60);
+        IdColumn.setMinWidth(50);
+        IdColumn.setMaxWidth(50);
 
         TableColumn<Size_Info, String> Size = new TableColumn<>("Size");
         Size.setCellValueFactory(new PropertyValueFactory<>("Size"));
-        Size.setMinWidth(126);
 
         TableColumn<Size_Info, String> price = new TableColumn<>("Price");
         price.setCellValueFactory(new PropertyValueFactory<>("Price"));
-        price.setMinWidth(126);
 
         TableColumn<Size_Info, String> edit = new TableColumn<>("Edit");
         edit.setCellValueFactory(new PropertyValueFactory<>("edit_btn"));
-        edit.setMinWidth(72);
+        edit.setMinWidth(50);
+        edit.setMaxWidth(50);
 
 
         sizeTable.setItems(getSize());
         sizeTable.getColumns().addAll(IdColumn,Size,price,edit);
+        sizeTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     public void create_Shopping_Cart(){
         TableColumn<Shopping_Cart_Info, Integer> IdColumn = new TableColumn<>("ID");
         IdColumn.setCellValueFactory(new PropertyValueFactory<>("SC_ID"));
-        IdColumn.setMinWidth(60);
+        IdColumn.setMinWidth(50);
+        IdColumn.setMaxWidth(50);
 
         TableColumn<Shopping_Cart_Info, String> username = new TableColumn<>("Customer");
         username.setCellValueFactory(new PropertyValueFactory<>("username"));
-        username.setMinWidth(60);
 
         TableColumn<Shopping_Cart_Info, String> steet = new TableColumn<>("Street");
         steet.setCellValueFactory(new PropertyValueFactory<>("street"));
-        steet.setMinWidth(60);
 
         TableColumn<Shopping_Cart_Info, String> city = new TableColumn<>("City");
         city.setCellValueFactory(new PropertyValueFactory<>("city"));
-        city.setMinWidth(60);
 
-        TableColumn<Shopping_Cart_Info, String> house_Nr = new TableColumn<>("House Number");
+        TableColumn<Shopping_Cart_Info, String> house_Nr = new TableColumn<>("House");
         house_Nr.setCellValueFactory(new PropertyValueFactory<>("house_Nr"));
-        house_Nr.setMinWidth(60);
+        house_Nr.setMinWidth(70);
+        house_Nr.setMaxWidth(70);
 
-        TableColumn<Shopping_Cart_Info, String> apartment_Nr = new TableColumn<>("Apartment Number");
+        TableColumn<Shopping_Cart_Info, String> apartment_Nr = new TableColumn<>("Apartment");
         apartment_Nr.setCellValueFactory(new PropertyValueFactory<>("apartment_Nr"));
-        apartment_Nr.setMinWidth(60);
+        apartment_Nr.setMinWidth(70);
+        apartment_Nr.setMaxWidth(70);
 
         TableColumn<Shopping_Cart_Info, String> status = new TableColumn<>("Status");
         status.setCellValueFactory(new PropertyValueFactory<>("status"));
-        status.setMinWidth(60);
 
         TableColumn<Shopping_Cart_Info, String> edit = new TableColumn<>("Edit");
         edit.setCellValueFactory(new PropertyValueFactory<>("edit_btn"));
-        edit.setMinWidth(72);
+        edit.setMinWidth(70);
+        edit.setMaxWidth(70);
 
 
         ShoppingCartTable.setItems(getCart());
         ShoppingCartTable.getColumns().addAll(IdColumn,username,city,steet,house_Nr,apartment_Nr,status,edit);
+        ShoppingCartTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     public ObservableList<Pizza_type_Info> getPizzaType(){
@@ -371,44 +374,14 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
     public void refresh_table_content(ActionEvent event){
         pizzaTable.getColumns().clear();
         create_pizzaTable();
+        create_toppings();
+        create_pizzatype();
+        create_size();
+        create_promo_code();
+        create_Shopping_Cart();
     }
 
-    public void add_pizza(ActionEvent event){
-        //pizza_name.getText();
-            //CHECK IF PIZZA OF THIS NAME ALREADY EXISTS
-            //IF YES warning.setText("Pizza already exists");
-            // IF NO
-        //pizza_toppings.getText();
-        //pizza_type.getText();
-            //add pizza to the database
-    }
 
-    public void searchID(ActionEvent event){
-        this.searchedID = Integer.parseInt(searchIDField.getText());
-    }
-
-    public void remove_pizza(ActionEvent event){
-        //select all pizzainfo of this.searchedID and display it on textfields
-    }
-    public void edit_pizza(ActionEvent event){
-        //select all pizzainfo of this.searchedID and display it on textfields
-        //pizza_name.getText();
-            //CHECK IF PIZZA OF THIS NAME ALREADY EXISTS
-             //IF YES warning.setText("Pizza already exists");
-            // IF NO
-        //pizza_toppings.getText();
-        //pizza_type.getText();
-        //alter pizza info of given ID
-    }
-    public void remove_promo_code(ActionEvent event){
-        //seatch for id from this.searchedID
-        //and remove from database
-    }
-    public void add_promo_code(ActionEvent event){
-        //search IF promo_code.getText() exists in database
-        //if yes warning.setText("promo code exists in database");
-        //if no, add
-    }
 
     public void accept_order(ActionEvent event){
         activeOrder.getStyleClass().clear();
@@ -423,17 +396,4 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
         deliveringOrder.getStyleClass().add("price");
     }
 
-
-
-
-    public ObservableList<PizzaInfo> getPizzaInfo(){
-        ObservableList<PizzaInfo> pizzas = FXCollections.observableArrayList();
-        pizzas.add(new PizzaInfo(0,"1"));
-        pizzas.add(new PizzaInfo(1,"2"));
-        pizzas.add(new PizzaInfo(2,"3"));
-        pizzas.add(new PizzaInfo(3,"4"));
-        pizzas.add(new PizzaInfo(4,"5"));
-        pizzas.add(new PizzaInfo(5,"6"));
-        return pizzas;
-    }
 }
