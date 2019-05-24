@@ -38,9 +38,6 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
     @FXML private TextField promo_code;
     @FXML private TextField searchIDField;
 
-    @FXML private Button activeOrder = new Button();
-    @FXML private Button bakingOrder = new Button();
-    @FXML private Button deliveringOrder = new Button();
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -358,7 +355,7 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
         openscene(event, "addpizza","GeneralWindowStyle", "Employee/controls","Global_Resources");
     }
     public void Open_Add_Toppings(ActionEvent event) throws IOException {
-        openscene(event, "addpromocode","GeneralWindowStyle", "Employee/controls","Global_Resources");
+        openscene(event, "addtoppings","GeneralWindowStyle", "Employee/controls","Global_Resources");
     }
     public void Open_Add_Promo_Code(ActionEvent event) throws IOException {
         openscene(event, "addpromocode","GeneralWindowStyle", "Employee/controls","Global_Resources");
@@ -373,6 +370,11 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
 
     public void refresh_table_content(ActionEvent event){
         pizzaTable.getColumns().clear();
+        toppingTable.getColumns().clear();
+        typeTable.getColumns().clear();
+        sizeTable.getColumns().clear();
+        promocodeTable.getColumns().clear();
+        ShoppingCartTable.getColumns().clear();
         create_pizzaTable();
         create_toppings();
         create_pizzatype();
@@ -382,18 +384,5 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
     }
 
 
-
-    public void accept_order(ActionEvent event){
-        activeOrder.getStyleClass().clear();
-        activeOrder.getStyleClass().add("price");
-    }
-    public void baking_order(ActionEvent event){
-        bakingOrder.getStyleClass().clear();
-        bakingOrder.getStyleClass().add("price");
-
-    }    public void delivering_order(ActionEvent event){
-        deliveringOrder.getStyleClass().clear();
-        deliveringOrder.getStyleClass().add("price");
-    }
 
 }

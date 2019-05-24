@@ -67,7 +67,7 @@
                                     <Insets left="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField prefHeight="40.0" prefWidth="332.0" promptText="Size" styleClass="TextField">
+                              <TextField fx:id="size_TF" prefHeight="40.0" prefWidth="332.0" promptText="Size" styleClass="TextField">
                                  <cursor>
                                     <Cursor fx:constant="TEXT" />
                                  </cursor>
@@ -96,7 +96,7 @@
                                     <Insets left="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField prefHeight="40.0" prefWidth="332.0" promptText="Price" styleClass="TextField">
+                              <TextField fx:id="price_TF" onAction="#add_size" prefHeight="40.0" prefWidth="332.0" promptText="Price" styleClass="TextField">
                                  <cursor>
                                     <Cursor fx:constant="TEXT" />
                                  </cursor>
@@ -112,7 +112,7 @@
             </VBox>
          </center>
          <bottom>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="36.0" prefWidth="102.0" text="Submit" textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#add_size" prefHeight="36.0" prefWidth="102.0" text="Submit" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="15.0" top="20.0" />
                </BorderPane.margin>

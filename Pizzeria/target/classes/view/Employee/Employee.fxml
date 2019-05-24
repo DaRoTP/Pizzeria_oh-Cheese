@@ -83,13 +83,16 @@
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="35.0" prefWidth="98.0" styleClass="TableLabel" text="Pizzas" />
-                                          <Button mnemonicParsing="false" onAction="#Open_Add_Pizza" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                          <Button mnemonicParsing="false" onAction="#Open_Add_Pizza" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </HBox>
-                                    <TableView fx:id="pizzaTable" prefHeight="700.0" prefWidth="337.0">
+                                    <TableView fx:id="pizzaTable" prefHeight="700.0" prefWidth="400.0">
                                        <VBox.margin>
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
@@ -101,13 +104,16 @@
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="29.0" prefWidth="131.0" styleClass="TableLabel" text="Toppings" />
-                                          <Button mnemonicParsing="false" onAction="#Open_Add_Toppings" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                          <Button mnemonicParsing="false" onAction="#Open_Add_Toppings" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </HBox>
-                                    <TableView fx:id="toppingTable" prefHeight="700.0" prefWidth="281.0">
+                                    <TableView fx:id="toppingTable" prefHeight="700.0" prefWidth="400.0">
                                        <VBox.margin>
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
@@ -119,7 +125,10 @@
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="240.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="29.0" prefWidth="83.0" styleClass="TableLabel" text="Size" />
-                                          <Button mnemonicParsing="false" onAction="#Open_Add_Size" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                          <Button mnemonicParsing="false" onAction="#Open_Add_Size" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -137,7 +146,10 @@
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="29.0" prefWidth="83.0" styleClass="TableLabel" text="Type" />
-                                          <Button mnemonicParsing="false" onAction="#Open_Add_Type" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                          <Button mnemonicParsing="false" onAction="#Open_Add_Type" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -200,7 +212,10 @@
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="29.0" prefWidth="173.0" styleClass="TableLabel" text="Promo Codes" />
-                                          <Button mnemonicParsing="false" onAction="#Open_Add_Promo_Code" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                          <Button mnemonicParsing="false" onAction="#Open_Add_Promo_Code" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />

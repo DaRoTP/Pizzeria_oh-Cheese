@@ -9,7 +9,7 @@ public class Promo_Codes {
     @Column(name = "Promo_Code_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "Promo_Code")
+    @Column(name = "Promo_Code_Name")
     private String promo_Code;
     @Column(name = "Discount")
     private int percent_Off;
@@ -24,4 +24,9 @@ public class Promo_Codes {
     public void setPercent_Off(int percent_Off) { this.percent_Off = percent_Off; }
 
     public Promo_Codes() { }
+
+    public Promo_Codes(String promo_Code, int percent_Off) {
+        this.promo_Code = promo_Code;
+        this.percent_Off = percent_Off;
+    }
 }

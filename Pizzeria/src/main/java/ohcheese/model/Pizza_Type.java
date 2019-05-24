@@ -11,7 +11,7 @@ public class Pizza_Type {
     @Column(name = "Pizza_Type_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "Pizza_Type")
+    @Column(name = "Pizza_Type_Name")
     private String pizza_Type;
 
     public Integer getId() { return id; }
@@ -22,4 +22,8 @@ public class Pizza_Type {
 
 
     public Pizza_Type() { }
+
+    public Pizza_Type(String pizza_Type) {
+        this.pizza_Type = pizza_Type;
+    }
 }

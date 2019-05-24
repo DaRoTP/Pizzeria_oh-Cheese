@@ -67,7 +67,7 @@
                                     <Insets left="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField fx:id="pizza_name" prefHeight="40.0" prefWidth="332.0" promptText="Name" styleClass="TextField">
+                              <TextField fx:id="topping_TF" prefHeight="40.0" prefWidth="332.0" promptText="Name" styleClass="TextField">
                                  <cursor>
                                     <Cursor fx:constant="TEXT" />
                                  </cursor>
@@ -83,7 +83,7 @@
             </VBox>
          </center>
          <bottom>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#edit_pizza" prefHeight="36.0" prefWidth="102.0" text="Submit" textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#add_topping" prefHeight="36.0" prefWidth="102.0" text="Submit" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="15.0" top="20.0" />
                </BorderPane.margin>

@@ -26,4 +26,8 @@ public class Toppings {
     public void setPizza(Set<Pizza> pizza) { this.pizza = pizza; }
 
     public Toppings() { }
+
+    public Toppings(String topping_Name) {
+        this.topping_Name = topping_Name;
+    }
 }

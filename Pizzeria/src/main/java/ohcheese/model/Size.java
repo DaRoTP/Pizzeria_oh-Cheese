@@ -9,7 +9,7 @@ public class Size {
     @Column(name = "Size_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "Size")
+    @Column(name = "Size_Name")
     private String size;
     @Column(name = "Price")
     private String price;
@@ -24,4 +24,9 @@ public class Size {
     public void setPrice(String price) { this.price = price; }
 
     public Size() { }
+
+    public Size(String size, String price) {
+        this.size = size;
+        this.price = price;
+    }
 }
