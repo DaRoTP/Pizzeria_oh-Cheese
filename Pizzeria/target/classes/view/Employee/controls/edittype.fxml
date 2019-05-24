@@ -49,7 +49,10 @@
                   <HBox alignment="CENTER" prefHeight="53.0" prefWidth="578.0">
                      <children>
                         <Label fx:id="id_label" alignment="CENTER" prefHeight="35.0" prefWidth="163.0" styleClass="redish-text" text="ID: 24" />
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" text="Delete" />
+                        <Button mnemonicParsing="false" onAction="#delete_typ" prefHeight="40.0" prefWidth="75.0" text="Delete">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
@@ -89,7 +92,7 @@
             </VBox>
          </center>
          <bottom>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="36.0" prefWidth="102.0" text="Submit" textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#update_type" prefHeight="36.0" prefWidth="102.0" text="Submit" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="15.0" top="20.0" />
                </BorderPane.margin>

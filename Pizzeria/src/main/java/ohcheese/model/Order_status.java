@@ -9,7 +9,7 @@ public class Order_status {
     @Column(name = "Order_status_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "Order_status")
+    @Column(name = "Order_status_Name")
     private String order_status;
 
 

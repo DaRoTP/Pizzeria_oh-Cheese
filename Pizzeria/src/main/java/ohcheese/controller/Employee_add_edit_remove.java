@@ -89,6 +89,39 @@ public class Employee_add_edit_remove implements Initializable {
 
     }
 
+    public void change_order_status(int status){
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        session.getTransaction().begin();
+
+        Shopping_Cart shopping_cart = session.get(Shopping_Cart.class, Shopping_Cart_Info.getTemp_id());
+        Order_status order_status = session.get(Order_status.class, status);
+        shopping_cart.setOrder_status_ID(order_status);
+        session.update(shopping_cart);
+
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void accepted_order(ActionEvent event){
+        activeOrder.getStyleClass().clear();
+        activeOrder.getStyleClass().add("price");
+        change_order_status(2);
+    }
+
+    public void baking_order(ActionEvent event){
+        bakingOrder.getStyleClass().clear();
+        bakingOrder.getStyleClass().add("price");
+        change_order_status(3);
+
+    }
+    public void delivering_order(ActionEvent event){
+        deliveringOrder.getStyleClass().clear();
+        deliveringOrder.getStyleClass().add("price");
+        change_order_status(4);
+    }
+
+
     public void set_toppings(){
 
         int id = Toppings_Info.getTemp_id();
@@ -96,8 +129,7 @@ public class Employee_add_edit_remove implements Initializable {
         Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
-        Toppings topping;
-        topping = session.get(Toppings.class, id);
+        Toppings topping = session.get(Toppings.class, id);
 
         id_label.setText("ID: "+topping.getId());
         topping_TF.setText(topping.getTopping_Name());
@@ -204,21 +236,62 @@ public class Employee_add_edit_remove implements Initializable {
     }
 
 
-    public void accept_order(ActionEvent event){
-        activeOrder.getStyleClass().clear();
-        activeOrder.getStyleClass().add("price");
-    }
-    public void baking_order(ActionEvent event){
-        bakingOrder.getStyleClass().clear();
-        bakingOrder.getStyleClass().add("price");
 
-    }
-    public void delivering_order(ActionEvent event){
-        deliveringOrder.getStyleClass().clear();
-        deliveringOrder.getStyleClass().add("price");
+    //PIZZA
+    public void add_pizza(ActionEvent event){
+        //pizza_name.getText();
+        //CHECK IF PIZZA OF THIS NAME ALREADY EXISTS
+        //IF YES warning.setText("Pizza already exists");
+        // IF NO
+        //pizza_toppings.getText();
+        //pizza_type.getText();
+        //add pizza to the database
     }
 
+    //PROMO CODES
+    public void update_promo_code(ActionEvent event){
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
 
+        try {
+            session.getTransaction().begin();
+
+                Promo_Codes updated_promocode = session.get(Promo_Codes.class, Promo_Code_Info.getTemp_id());
+                updated_promocode.setPercent_Off(Integer.parseInt(discount_TF.getText()));
+                session.update(updated_promocode);
+
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                window.close();
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+    public void delete_promo_code(ActionEvent event){
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Promo_Codes delete_promocode = session.get(Promo_Codes.class, Promo_Code_Info.getTemp_id());
+            session.delete(delete_promocode);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.close();
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
     public void add_promo_code(ActionEvent event){
         SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
@@ -230,7 +303,6 @@ public class Employee_add_edit_remove implements Initializable {
             List<Promo_Codes> promo_codes_list = query.list();
 
             if(promo_codes_list.size() == 0) {
-//                System.out.println(price_TF.getText());
                 Promo_Codes new_promocode = new Promo_Codes(promo_code_name_TF.getText(),Integer.parseInt(discount_TF.getText()));
                 session.save(new_promocode);
 
@@ -249,6 +321,50 @@ public class Employee_add_edit_remove implements Initializable {
         session.close();
     }
 
+    //Toppings
+    public void update_topping(ActionEvent event){
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Toppings updated_topping = session.get(Toppings.class, Toppings_Info.getTemp_id());
+            updated_topping.setTopping_Name(topping_TF.getText());
+            session.update(updated_topping);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.close();
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+    public void delete_topping(ActionEvent event){
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Toppings delete_topping = session.get(Toppings.class, Toppings_Info.getTemp_id());
+            session.delete(delete_topping);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.close();
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
     public void add_topping(ActionEvent event){
         SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
@@ -278,10 +394,61 @@ public class Employee_add_edit_remove implements Initializable {
         session.close();
     }
 
+    //SIZE
+    public void update_size(ActionEvent event){
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Size where Size_Name='"+size_TF.getText()+"' and Price='"+price_TF.getText()+"'");
+            List size_list = query.list();
+
+            if(size_list.size() == 0) {
+                Size updated_size = session.get(Size.class, Size_Info.getTemp_id());
+                updated_size.setSize(size_TF.getText());
+                updated_size.setPrice(price_TF.getText());
+                session.update(updated_size);
+
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                window.close();
+            }
+            else
+                warning.setText("Size already exists");
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+    public void delete_size(ActionEvent event){
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Size delete_size = session.get(Size.class, Size_Info.getTemp_id());
+            session.delete(delete_size);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.close();
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
     public void add_size(ActionEvent event){
         SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
-        System.out.println("active");
 
         try {
             session.getTransaction().begin();
@@ -308,6 +475,57 @@ public class Employee_add_edit_remove implements Initializable {
         session.close();
     }
 
+    //PIZZA TYPE
+    public void update_type(ActionEvent event){
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Pizza_Type where Pizza_Type_Name='"+type_TF.getText()+"'");
+            List type_list = query.list();
+
+            if(type_list.size() == 0) {
+                Pizza_Type updated_type = session.get(Pizza_Type.class, Pizza_type_Info.getTemp_id());
+                updated_type.setPizza_Type(type_TF.getText());
+                session.update(updated_type);
+
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                window.close();
+            }
+            else
+                warning.setText("Pizza Type already exists");
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+    public void delete_typ(ActionEvent event){
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Pizza_Type delete_type = session.get(Pizza_Type.class, Pizza_type_Info.getTemp_id());
+            session.delete(delete_type);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.close();
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
     public void add_type(ActionEvent event){
 
         SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
@@ -339,33 +557,8 @@ public class Employee_add_edit_remove implements Initializable {
         session.close();
     }
 
-    public void add_pizza(ActionEvent event){
-        //pizza_name.getText();
-        //CHECK IF PIZZA OF THIS NAME ALREADY EXISTS
-        //IF YES warning.setText("Pizza already exists");
-        // IF NO
-        //pizza_toppings.getText();
-        //pizza_type.getText();
-        //add pizza to the database
-    }
 
 
-    public void remove_pizza(ActionEvent event){
-        //select all pizzainfo of this.searchedID and display it on textfields
-    }
-    public void edit_pizza(ActionEvent event){
-        //select all pizzainfo of this.searchedID and display it on textfields
-        //pizza_name.getText();
-        //CHECK IF PIZZA OF THIS NAME ALREADY EXISTS
-        //IF YES warning.setText("Pizza already exists");
-        // IF NO
-        //pizza_toppings.getText();
-        //pizza_type.getText();
-        //alter pizza info of given ID
-    }
-    public void remove_promo_code(ActionEvent event){
-        //seatch for id from this.searchedID
-        //and remove from database
-    }
+
 }
 

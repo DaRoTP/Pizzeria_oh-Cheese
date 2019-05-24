@@ -16,8 +16,8 @@ public class Pizza {
     @ManyToOne
     @JoinColumn(name = "Pizza_Type_ID")
     private Pizza_Type Pizza_Type_ID;
-    @ManyToMany
-    private Set<Toppings> toppings = new HashSet<>();
+//    @ManyToMany
+//    private Set<Toppings> toppings = new HashSet<>();
 
 
     public Integer getId() { return id; }
@@ -29,8 +29,8 @@ public class Pizza {
     public Pizza_Type getPizza_Type_ID() { return Pizza_Type_ID; }
     public void setPizza_Type_ID(Pizza_Type pizza_Type_ID) { Pizza_Type_ID = pizza_Type_ID; }
 
-    public Set<Toppings> getToppings() { return toppings; }
-    public void setToppings(Set<Toppings> toppings) { this.toppings = toppings; }
+//    public Set<Toppings> getToppings() { return toppings; }
+//    public void setToppings(Set<Toppings> toppings) { this.toppings = toppings; }
 //
 
     public Pizza() {
