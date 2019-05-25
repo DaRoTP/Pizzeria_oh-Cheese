@@ -210,7 +210,7 @@
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font></Label>
-                                    <ChoiceBox prefHeight="39.0" prefWidth="343.0" styleClass="dropdown_choice" />
+                                    <ChoiceBox fx:id="delivery_choice" prefHeight="39.0" prefWidth="343.0" styleClass="dropdown_choice" />
                                  </children>
                               </VBox>
                            </children>
@@ -227,7 +227,7 @@
                         <VBox alignment="CENTER" prefHeight="1000.0" prefWidth="734.0">
                            <children>
                               <Label styleClass="redish-text" text="Order Info" />
-                              <TextArea editable="false" prefHeight="1000.0" prefWidth="100.0">
+                              <TextArea fx:id="order_info_TA" editable="false" prefHeight="1000.0" prefWidth="100.0">
                                  <VBox.margin>
                                     <Insets bottom="10.0" />
                                  </VBox.margin></TextArea>

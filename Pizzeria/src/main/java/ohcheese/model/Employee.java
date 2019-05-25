@@ -36,7 +36,12 @@ public class Employee {
     @JoinColumn(name = "Job_Position_ID")
     private Job_Position position_ID;
     @ManyToMany
-    private Set<Shopping_Cart> shopping_cart = new HashSet<>();
+    @JoinTable(
+            name = "Shopping_Cart_Employee",
+            joinColumns = { @JoinColumn(name = "Employee_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "Shopping_Cart_ID") }
+    )
+    private Set<Shopping_Cart> shopping_carts = new HashSet<>();
 
     public Employee() { }
 
@@ -76,6 +81,6 @@ public class Employee {
     public Job_Position getPosition_ID() { return position_ID; }
     public void setPosition_ID(Job_Position position_ID) { this.position_ID = position_ID; }
 
-    public Set<Shopping_Cart> getShopping_cart() { return shopping_cart; }
-    public void setShopping_cart(Set<Shopping_Cart> shopping_cart) { this.shopping_cart = shopping_cart; }
+    public Set<Shopping_Cart> getShopping_cart() { return shopping_carts; }
+    public void setShopping_cart(Set<Shopping_Cart> shopping_cart) { this.shopping_carts = shopping_cart; }
 }

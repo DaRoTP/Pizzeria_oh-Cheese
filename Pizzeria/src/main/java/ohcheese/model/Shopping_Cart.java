@@ -23,8 +23,8 @@ public class Shopping_Cart {
     @OneToOne
     @JoinColumn(name = "Order_status_ID")
     private Order_status order_status_ID;
-    @ManyToMany
-    private Set<Employee> employee = new HashSet<>();
+    @ManyToMany(mappedBy = "shopping_carts")
+    private Set<Employee> employees = new HashSet<>();
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -41,8 +41,8 @@ public class Shopping_Cart {
     public Order_status getOrder_status_ID() { return order_status_ID; }
     public void setOrder_status_ID(Order_status order_status_ID) { this.order_status_ID = order_status_ID; }
 
-    public Set<Employee> getEmployee() { return employee; }
-    public void setEmployee(Set<Employee> employee) { this.employee = employee; }
+    public Set<Employee> getEmployee() { return employees; }
+    public void setEmployee(Set<Employee> employee) { this.employees = employee; }
 
     public Shopping_Cart() { }
 

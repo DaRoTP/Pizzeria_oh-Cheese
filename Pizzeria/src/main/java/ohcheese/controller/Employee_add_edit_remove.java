@@ -5,9 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import ohcheese.Utilities.HibernateUtil;
 import ohcheese.model.*;
@@ -17,13 +15,17 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import java.net.URL;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class Employee_add_edit_remove implements Initializable {
 
     //general
     @FXML private Label id_label;
+    @FXML private ChoiceBox<String> delivery_choice = new ChoiceBox<String>();
+    @FXML private TextArea order_info_TA = new TextArea();
 
     // toppings
     @FXML private TextField topping_TF;
@@ -61,6 +63,7 @@ public class Employee_add_edit_remove implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        set_delivery_drivers();
 
         if(Toppings_Info.getClass_type()){
             set_toppings();
@@ -85,10 +88,65 @@ public class Employee_add_edit_remove implements Initializable {
         else if(Shopping_Cart_Info.isClass_type()){
             set_shopping_cart();
             Shopping_Cart_Info.setClass_type(false);
+            get_Order_details();
         }
 
     }
 
+    public void get_Order_details(){
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        session.getTransaction().begin();
+
+        Query query = session.createQuery("from Pizza_Order where Shopping_Cart_ID='"+Shopping_Cart_Info.getTemp_id()+"'");
+        List<Pizza_Order> Order_list = query.list();
+
+        String temp_Info = "";
+        for(int i = 0; i < Order_list.size(); i++){
+            temp_Info += "#"+Order_list.get(i).getPizza_ID().getId()+" | ";
+            temp_Info += Order_list.get(i).getPizza_ID().getPizza_Name()+" : ";
+            temp_Info += Order_list.get(i).getSize_ID().getSize()+" | ";
+            temp_Info += Order_list.get(i).getSize_ID().getPrice()+" zl";
+            temp_Info += "\n";
+        }
+        order_info_TA.setText(temp_Info);
+
+        session.getTransaction().commit();
+        session.close();
+
+    }
+
+    public void select_driver(){
+        System.out.println("test --------");
+        String temp = delivery_choice.getValue();
+        String number = "";
+        for (int i = 1; i < temp.length(); i++){
+            char c = temp.charAt(i);
+            if(c != '|')
+                number += c;
+            else
+                break;
+        }
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        session.getTransaction().begin();
+
+        System.out.println("selects--------");
+        Shopping_Cart shopping_cart = session.get(Shopping_Cart.class, Shopping_Cart_Info.getTemp_id());
+        Employee employee_driver = session.get(Employee.class, 2);
+        System.out.println("add--------");
+        Set<Employee> employeesss = new HashSet<>();
+        employeesss.add(employee_driver);
+        shopping_cart.setEmployee(employeesss);
+        System.out.println("update--------");
+        session.update(shopping_cart);
+
+        session.getTransaction().commit();
+        session.close();
+
+    }
+
+    //ORDER STATUS
     public void change_order_status(int status){
         SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
@@ -106,9 +164,9 @@ public class Employee_add_edit_remove implements Initializable {
     public void accepted_order(ActionEvent event){
         activeOrder.getStyleClass().clear();
         activeOrder.getStyleClass().add("price");
-        change_order_status(2);
+//        change_order_status(2);
+        select_driver();
     }
-
     public void baking_order(ActionEvent event){
         bakingOrder.getStyleClass().clear();
         bakingOrder.getStyleClass().add("price");
@@ -121,7 +179,29 @@ public class Employee_add_edit_remove implements Initializable {
         change_order_status(4);
     }
 
+    public void set_delivery_drivers(){
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
 
+            Query query = session.createQuery("from Employee where Job_Position_ID=5");
+            List<Employee> employee_list = query.list();
+            for(int i = 0; i < employee_list.size(); i++)
+                delivery_choice.getItems().add("#"+employee_list.get(i).getId()+"|"+employee_list.get(i).getName()+" "+
+                        employee_list.get(i).getSurname());
+
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+
+    //ON EDIT BUTTON PRESS
     public void set_toppings(){
 
         int id = Toppings_Info.getTemp_id();
