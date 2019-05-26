@@ -31,6 +31,10 @@ This is a pizzeria Java application, the theme of this project is pretty simple 
   * **Manage customers** - Edit, add or remove cistomers.
   * **Manage job positions** - Edit, add or remove job positions.
   * **Manage addresses** - Edit, add or remove addresses.
+  
+## Database schema
+![ERD](https://imgur.com/gxaI6uI "ERD")
+
 ## Bugs
 * @ManyToMany relationship in Java (hibernate) does not work properly
 * TBD (to be discovered)
