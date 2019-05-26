@@ -1,4 +1,4 @@
-# Pizzeia "oh-Cheese!!"
+# Pizzeria "oh-Cheese!!"
 
 This is a pizzeria Java application, the theme of this project is pretty simple - application that allows customers to view, order pizzas and Employees to see and respond to the orders. Inspiration for this project came from various pizza ordering websites like Dominos, Pizza-Hut, pizza-Portal and many more.
 
@@ -7,22 +7,35 @@ This is a pizzeria Java application, the theme of this project is pretty simple 
 * **Darek**  - [DaRoTP](https://github.com/DaRoTP)
 
 ## What can it do ?
-* **Modes** - Has three modes **Customer**, **Employee**, **Admin** and each has different actions that others can not perform
-* **Login** - First you are greated by **Login Screen** there you can type in your *username* and *password* (if you have and account in database) and choose who do you want to log in as (Customers and only log in as Customers, Employees only as Employees and Admins as Admins and Employees)
-* **Sign In** - if you don't have an account you can click sign in, fill out sign in form and create an account (a customer account).
-* **logout** - each user once loged in can log out of the account and will be returned to the main Login screen.
-* **edit profile** - each user can edit their profile to do so they have to click on the cog icon on the right top corner, then new window will be opened and they can edit their profile information.
-* **Customer** - when you log in as *Customer* you can view pizzas that are available in the database and order the.
-  * **ordering pizzas** - to do so you have to click on the grey buttoon of your chosen pizza and choose size and quantity on the top of the table, once you have chosen everything click **+** button on the right and pizzas will be added to the order, you can repeat this action multiple times.
-  * **checkout** - once you picked your pizzas, you click check out button, a new window will apear with your Order, if you don't like what you've orderd you can close the window and edit your order, but if you are happy with what you've picked you can click **submit** button and an Order will be made.
-  * **redeem promo code** - before clicking submit in checkout you also have the option to redeem a promo code (if you have it). Once redeemed it will change your final price and then you can click **submit** and confrm your order.
- * **View status** - after completing checkout a button on the right top corner will apear that once clicked will transition in to a new scene where you can view your Order status *(Accepted, baking, Sent to deliver)*.
-* **Employee** -
+* **ACCESSIBLE FOR "ALL USERS"** :
+  * **Login** - each user *(that has an account in database)* can Login by typing in their login information and choosing a correct mode (Customer | Employee | Admin).
+  * **Sign Up** - fill out the sign up form to register a new *Customer* account.
+  * **Log Out** - once loged in, a user has a privilege to log out of their account.
+  * **Account Settings** - All users that have an account in the database can change their profile information (eg. Name, Surname, Phone Num., Address ....).
+  
+* **ACCESSIBLE FOR "CUSTOMERS"** :
+  * **Add pizzas to order** - Customers may click on pizza of their choice, choose size and quantity, and add pizza to order. This action can be repeated multiple times.
+  * **Redeem Promo Code** - when clicked on checkout a new window appears with confirmation of the order. Customer can also type in a discount code (if he/she has one) to reduce the price of the order.
+  * **View Order Status** - after completing an order customer can view Order status, it will be represented by 3 stages *Accepted*, *Baking*, *Sent to deliver*.
+  
+* **ACCESSIBLE FOR "EMPLOYEES"** :
+  * **Manage pizzas** - Edit, add or remove pizzas.
+  * **Manage toppings** - Edit, add or remove toppings.
+  * **Manage size** - Edit, add or remove sizes.
+  * **Manage promo-codes** - Add or remove a promo-codes.
+  * **Respond to an Order** - Once customer makes an Order, Employee sees it in their interface. employee can see all needen information like Address name, surname and phone number of the customer and most important Order detail. Then Employee can accept the order, assign a delivery person to the order and update order status.
+  
+* **ACCESSIBLE FOR "ADMINS"** :
+  * **ALL EMPLOYEE PRIVILEGES ARE ACCESIBLE FOR ADMIN*
+  * **Manage employees** - Edit, add or remove employees.
+  * **Manage customers** - Edit, add or remove cistomers.
+  * **Manage job positions** - Edit, add or remove job positions.
+  * **Manage addresses** - Edit, add or remove addresses.
 ## Bugs
 * @ManyToMany relationship in Java (hibernate) does not work properly
 * TBD (to be discovered)
 
-## Tools used to build this 
+## Tools used to build this project
 
 * JavaFX Scene Builder 8.5.0
 * Java Version 8 (build 1.8.0_201-b09)
