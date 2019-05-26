@@ -26,7 +26,7 @@ This is a pizzeria Java application, the theme of this project is pretty simple 
   * **Respond to an Order** - Once customer makes an Order, Employee sees it in their interface. employee can see all needen information like Address name, surname and phone number of the customer and most important Order detail. Then Employee can accept the order, assign a delivery person to the order and update order status.
   
 * **ACCESSIBLE FOR "ADMINS"** :
-  * **ALL EMPLOYEE PRIVILEGES ARE ACCESIBLE FOR ADMIN*
+  * **ALL EMPLOYEE PRIVILEGES ARE ACCESIBLE FOR ADMIN**
   * **Manage employees** - Edit, add or remove employees.
   * **Manage customers** - Edit, add or remove cistomers.
   * **Manage job positions** - Edit, add or remove job positions.
