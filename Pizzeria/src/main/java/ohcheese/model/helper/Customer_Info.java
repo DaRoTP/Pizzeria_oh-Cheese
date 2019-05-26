@@ -36,7 +36,7 @@ public class Customer_Info extends GeneralWindowControl {
             this.temp_id = this.customer_ID;
             this.class_type = true;
             try {
-                openscene(e, "editsize","GeneralWindowStyle", "Employee/controls","Global_Resources");
+                openscene(e, "edit_customer","GeneralWindowStyle", "Admin/tools","Global_Resources");
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

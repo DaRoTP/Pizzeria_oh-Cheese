@@ -91,7 +91,7 @@
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="31.0" prefWidth="128.0" styleClass="TableLabel" text="Employees" />
-                                          <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                          <Button mnemonicParsing="false" onAction="#Open_Add_Employee" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -137,7 +137,7 @@
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="31.0" prefWidth="128.0" styleClass="TableLabel" text="Customers" />
-                                          <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                          <Button mnemonicParsing="false" onAction="#Open_Add_Customer" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -181,7 +181,7 @@
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="29.0" prefWidth="119.0" styleClass="TableLabel" text="Address" />
-                                          <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                          <Button mnemonicParsing="false" onAction="#Open_Add_Address" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -199,7 +199,7 @@
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="29.0" prefWidth="166.0" styleClass="TableLabel" text="Job Positions" />
-                                          <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
+                                          <Button mnemonicParsing="false" onAction="#Open_Job_position" prefHeight="33.0" prefWidth="33.0" styleClass="addbtn" text="+" />
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -220,7 +220,7 @@
             </Tab>
          </tabs>
       </TabPane>
-      <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="93.0" text="Refresh" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="160.0">
+      <Button mnemonicParsing="false" onAction="#refresh" prefHeight="32.0" prefWidth="93.0" text="Refresh" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="160.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

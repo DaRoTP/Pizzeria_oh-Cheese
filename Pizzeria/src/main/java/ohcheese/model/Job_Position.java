@@ -21,6 +21,9 @@ public class Job_Position {
     public String getPosition_Name() { return Position_Name; }
     public void setPosition_Name(String position_Name) { Position_Name = position_Name; }
 
-    public Job_Position(Integer id) { this.id = id; }
+
+    public Job_Position(String position_Name) {
+        Position_Name = position_Name;
+    }
     public Job_Position() {}
 }

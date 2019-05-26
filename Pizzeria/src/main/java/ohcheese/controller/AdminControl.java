@@ -2,6 +2,7 @@ package ohcheese.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -14,6 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -32,6 +34,17 @@ public class AdminControl extends GeneralWindowControl implements Initializable 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        create_CustomerTable();
+        create_AddressTable();
+        create_EmployeeTable();
+        create_JPositionTable();
+    }
+
+    public void refresh(ActionEvent event){
+        customer_table.getColumns().clear();
+        address_table.getColumns().clear();
+        employee_table.getColumns().clear();
+        jposition_table.getColumns().clear();
         create_CustomerTable();
         create_AddressTable();
         create_EmployeeTable();
@@ -282,6 +295,19 @@ public class AdminControl extends GeneralWindowControl implements Initializable 
         session.close();
 
         return null;
+    }
+
+    public void Open_Add_Employee(ActionEvent event) throws IOException {
+        openscene(event, "add_employee","GeneralWindowStyle", "Admin/tools","Global_Resources");
+    }
+    public void Open_Add_Customer(ActionEvent event) throws IOException {
+        openscene(event,"SignUp","GeneralWindowStyle","SignUp","Global_Resources");
+    }
+    public void Open_Add_Address(ActionEvent event) throws IOException {
+        openscene(event, "add_address","GeneralWindowStyle", "Admin/tools","Global_Resources");
+    }
+    public void Open_Job_position(ActionEvent event) throws IOException {
+        openscene(event, "add_jobposition","GeneralWindowStyle", "Admin/tools","Global_Resources");
     }
 
 
