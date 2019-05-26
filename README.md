@@ -33,7 +33,7 @@ This is a pizzeria Java application, the theme of this project is pretty simple 
   * **Manage addresses** - Edit, add or remove addresses.
   
 ## Database schema
-![ERD](https://imgur.com/gxaI6uI "ERD")
+![ERD](https://i.imgur.com/gxaI6uI.png "ERD")
 
 ## Bugs
 * @ManyToMany relationship in Java (hibernate) does not work properly
