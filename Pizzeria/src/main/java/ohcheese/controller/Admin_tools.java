@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ohcheese.Utilities.HibernateUtil;
 import ohcheese.model.Address;
+import ohcheese.model.Customer;
 import ohcheese.model.Employee;
 import ohcheese.model.Job_Position;
 import ohcheese.model.helper.*;
@@ -71,6 +72,10 @@ public class Admin_tools implements Initializable {
         else if(Employee_Info.isClass_type()){
             set_employees();
             Employee_Info.setClass_type(false);
+        }
+        else if(Customer_Info.isClass_type()){
+            set_customer();
+            Customer_Info.setClass_type(false);
         }
     }
     public void set_existing_job_pos(){
@@ -318,7 +323,6 @@ public class Admin_tools implements Initializable {
             }
         }
 
-        System.out.println(employee.getPosition_ID().getPosition_Name()+" --- ");
         salary.setText(Float.toString(employee.getSalary()));
         name.setText(employee.getName());
         surname.setText(employee.getSurname());
@@ -373,11 +377,9 @@ public class Admin_tools implements Initializable {
                 session.save(new_address);
 
                 updated_employee.setAddress_ID(new_address);
-                System.out.println("not");
             }
             else{
                 updated_employee.setAddress_ID(temp_address);
-                System.out.println("yes");
             }
 
             session.update(updated_employee);
@@ -459,6 +461,97 @@ public class Admin_tools implements Initializable {
             else {
                 warning.setText("Employee already exists");
             }
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+
+    public void set_customer(){
+        int id = Customer_Info.getTemp_id();
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        session.getTransaction().begin();
+
+        Customer customer = session.get(Customer.class, id);
+
+        id_label.setText("ID: "+customer.getId());
+
+
+        name.setText(customer.getName());
+        surname.setText(customer.getSurname());
+        e_mail.setText(customer.getEmail());
+        phone_number.setText(customer.getPhone_Number());
+        username.setText(customer.getUsername());
+        password.setText(customer.getPassword());
+
+        city.setText(customer.getAddress_ID().getCity());
+        zip_code.setText(customer.getAddress_ID().getZIP_Code());
+        house_number.setText(customer.getAddress_ID().getHouse_Number());
+        apartment_number.setText(customer.getAddress_ID().getApartment_Number());
+        street.setText(customer.getAddress_ID().getStreet());
+
+        session.getTransaction().commit();
+        session.close();
+    }
+    public void update_customer(ActionEvent event){
+
+        Address temp_address = check_If__given_Address_Exists();
+
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Customer updated_customer = session.get(Customer.class, Customer_Info.getTemp_id());
+            updated_customer.setName(name.getText());
+            updated_customer.setSurname(surname.getText());
+            updated_customer.setEmail(e_mail.getText());
+            updated_customer.setPhone_Number(phone_number.getText());
+            updated_customer.setUsername(username.getText());
+            updated_customer.setPassword(password.getText());
+
+
+            if(temp_address == null){
+                Address new_address = new Address(city.getText(), street.getText(), house_number.getText(), apartment_number.getText(), zip_code.getText());
+                session.save(new_address);
+
+                updated_customer.setAddress_ID(new_address);
+            }
+            else{
+                updated_customer.setAddress_ID(temp_address);
+            }
+
+            session.update(updated_customer);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.close();
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+    public void delete_customer(ActionEvent event){
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Customer delete_customer = session.get(Customer.class, Customer_Info.getTemp_id());
+            session.delete(delete_customer);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.close();
 
             session.getTransaction().commit();
 
