@@ -22,11 +22,11 @@ import java.util.ResourceBundle;
 
 public class AdminControl extends GeneralWindowControl implements Initializable {
 
-//    @FXML
-//    private TableView<-> employee_Table = new TableView<>();
-//    @FXML private TableView<-> job_position-Table = new TableView<>();
-//    @FXML private TableView<-> address_table = new TableView<>();
-//    @FXML private TableView<Shopping_Cart_Info> ShoppingCartTable = new TableView<>();
+    public static boolean job_pos;
+
+    public static boolean isJob_pos() { return job_pos; }
+    public static void setJob_pos(boolean job_pos) { AdminControl.job_pos = job_pos; }
+
     @FXML private TableView<Customer_Info> customer_table = new TableView<>();
     @FXML private TableView<Address_Info> address_table = new TableView<>();
     @FXML private TableView<Employee_Info> employee_table = new TableView<>();
@@ -38,6 +38,7 @@ public class AdminControl extends GeneralWindowControl implements Initializable 
         create_AddressTable();
         create_EmployeeTable();
         create_JPositionTable();
+        this.job_pos = false;
     }
 
     public void refresh(ActionEvent event){
@@ -298,6 +299,7 @@ public class AdminControl extends GeneralWindowControl implements Initializable 
     }
 
     public void Open_Add_Employee(ActionEvent event) throws IOException {
+        this.job_pos = true;
         openscene(event, "add_employee","GeneralWindowStyle", "Admin/tools","Global_Resources");
     }
     public void Open_Add_Customer(ActionEvent event) throws IOException {

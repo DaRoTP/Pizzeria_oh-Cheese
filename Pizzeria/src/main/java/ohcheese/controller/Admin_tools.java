@@ -1,20 +1,19 @@
 package ohcheese.controller;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMessages_pt_BR;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ohcheese.Utilities.HibernateUtil;
 import ohcheese.model.Address;
+import ohcheese.model.Employee;
 import ohcheese.model.Job_Position;
-import ohcheese.model.Promo_Codes;
-import ohcheese.model.helper.Address_Info;
-import ohcheese.model.helper.Job_position_Info;
-import ohcheese.model.helper.Promo_Code_Info;
-import ohcheese.model.helper.Toppings_Info;
+import ohcheese.model.helper.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -39,9 +38,28 @@ public class Admin_tools implements Initializable {
     //JOB POSITION
     @FXML private TextField job_position_TF;
 
+    //EMPLOYEE
+    @FXML private ChoiceBox<String> job_positons = new ChoiceBox<String>();
+    @FXML private TextField salary;
+    @FXML private TextField name;
+    @FXML private TextField surname;
+    @FXML private TextField e_mail;
+    @FXML private TextField phone_number;
+    @FXML private TextField pesel;
+    @FXML private TextField username;
+    @FXML private TextField password;
+    @FXML private TextField birthday;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        if(AdminControl.isJob_pos()) {
+            set_existing_job_pos();
+            AdminControl.setJob_pos(false);
+        }
+
         if(Address_Info.isClass_type()) {
             set_addresses();
             Address_Info.setClass_type(false);
@@ -50,8 +68,25 @@ public class Admin_tools implements Initializable {
             set_jobposition();
             Job_position_Info.setClass_type(false);
         }
+        else if(Employee_Info.isClass_type()){
+            set_employees();
+            Employee_Info.setClass_type(false);
+        }
     }
+    public void set_existing_job_pos(){
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("from Job_Position");
+        List<Job_Position> jobs = query.list();
 
+        for(int i = 0; i < jobs.size(); i++) {
+            job_positons.getItems().add(jobs.get(i).getPosition_Name());
+        }
+
+        session.getTransaction().commit();
+        session.close();
+    }
     public void set_jobposition(){
         int id = Job_position_Info.getTemp_id();
         SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -227,6 +262,202 @@ public class Admin_tools implements Initializable {
             else {
                 warning.setText("Address already exists");
                 System.out.println("no");
+            }
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+
+    public Address check_If__given_Address_Exists(){
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Address where City = '"+city.getText()+"' and Street = '"+street.getText()+ "' and House_Number = "+
+                    house_number.getText()+" and Apartment_Number = "+apartment_number.getText()+" and ZIP_Code = '"+zip_code.getText()+"'");
+            List c_user = query.list();
+
+            session.getTransaction().commit();
+
+            if(c_user.size() > 0)
+                return (Address)c_user.get(0);
+            else
+                return null;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+        return null;
+    }
+    public void set_employees(){
+        int id = Employee_Info.getTemp_id();
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        session.getTransaction().begin();
+
+        Employee employee = session.get(Employee.class, id);
+
+        id_label.setText("ID: "+employee.getId());
+
+        Query query = session.createQuery("from Job_Position");
+        List<Job_Position> jobs = query.list();
+
+        for(int i = 0; i < jobs.size(); i++) {
+            job_positons.getItems().add(jobs.get(i).getPosition_Name());
+            if(employee.getPosition_ID() == jobs.get(i)){
+                job_positons.getSelectionModel().select(i);
+            }
+        }
+
+        System.out.println(employee.getPosition_ID().getPosition_Name()+" --- ");
+        salary.setText(Float.toString(employee.getSalary()));
+        name.setText(employee.getName());
+        surname.setText(employee.getSurname());
+        e_mail.setText(employee.getEmail());
+        phone_number.setText(employee.getPhone_Number());
+        pesel.setText(employee.getPESEL());
+        username.setText(employee.getUsername());
+        password.setText(employee.getPassword());
+        birthday.setText(employee.getDate_Of_Birth());
+
+        city.setText(employee.getAddress_ID().getCity());
+        zip_code.setText(employee.getAddress_ID().getZIP_Code());
+        house_number.setText(employee.getAddress_ID().getHouse_Number());
+        apartment_number.setText(employee.getAddress_ID().getApartment_Number());
+        street.setText(employee.getAddress_ID().getStreet());
+
+        session.getTransaction().commit();
+        session.close();
+    }
+    public void update_employee(ActionEvent event){
+
+        Address temp_address = check_If__given_Address_Exists();
+
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Employee updated_employee = session.get(Employee.class, Employee_Info.getTemp_id());
+            updated_employee.setSalary(Float.parseFloat(salary.getText()));
+            updated_employee.setName(name.getText());
+            updated_employee.setSurname(surname.getText());
+            updated_employee.setEmail(e_mail.getText());
+            updated_employee.setPhone_Number(phone_number.getText());
+            updated_employee.setPESEL(pesel.getText());
+            updated_employee.setUsername(username.getText());
+            updated_employee.setPassword(password.getText());
+            updated_employee.setDate_Of_Birth(birthday.getText());
+
+            Query query = session.createQuery("from Job_Position");
+            List<Job_Position> jobs = query.list();
+            for(int i = 0; i < jobs.size(); i++){
+                if(jobs.get(i).getPosition_Name().equals(job_positons.getSelectionModel().getSelectedItem())){
+                    updated_employee.setPosition_ID(jobs.get(i));
+                    break;
+                }
+            }
+
+            if(temp_address == null){
+                Address new_address = new Address(city.getText(), street.getText(), house_number.getText(), apartment_number.getText(), zip_code.getText());
+                session.save(new_address);
+
+                updated_employee.setAddress_ID(new_address);
+                System.out.println("not");
+            }
+            else{
+                updated_employee.setAddress_ID(temp_address);
+                System.out.println("yes");
+            }
+
+            session.update(updated_employee);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.close();
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+    public void delete_employee(ActionEvent event){
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Employee delete_employee = session.get(Employee.class, Employee_Info.getTemp_id());
+            session.delete(delete_employee);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.close();
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+    public void add_employee(ActionEvent event){
+        Address temp_address = check_If__given_Address_Exists();
+        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Employee where Employee_Username='"+username.getText()+"'");
+            List<Employee> employee = query.list();
+
+            if(employee.size() == 0) {
+                Employee new_employee = new Employee(name.getText(),surname.getText(),birthday.getText(),phone_number.getText(),
+                        e_mail.getText(),pesel.getText(),Float.parseFloat(salary.getText()),username.getText(),password.getText());
+
+                //ADDRESS
+                if(temp_address == null){
+                    Address new_address = new Address(city.getText(), street.getText(), house_number.getText(), apartment_number.getText(), zip_code.getText());
+                    session.save(new_address);
+
+                    new_employee.setAddress_ID(new_address);
+                }
+                else{
+                    new_employee.setAddress_ID(temp_address);
+                }
+                //JOB POSITION
+
+                query = session.createQuery("from Job_Position");
+                List<Job_Position> jobs = query.list();
+
+
+                for(int i = 0; i < jobs.size(); i++){
+                    if(jobs.get(i).getPosition_Name().equals(job_positons.getSelectionModel().getSelectedItem())){
+                        new_employee.setPosition_ID(jobs.get(i));
+                        break;
+                    }
+                }
+
+                session.save(new_employee);
+
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                window.close();
+            }
+            else {
+                warning.setText("Employee already exists");
             }
 
             session.getTransaction().commit();

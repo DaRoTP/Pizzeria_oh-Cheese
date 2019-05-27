@@ -45,6 +45,19 @@ public class Employee {
 
     public Employee() { }
 
+    public Employee(String name, String surname, String date_Of_Birth, String phone_Number, String email, String PESEL,
+                    float salary, String username, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.date_Of_Birth = date_Of_Birth;
+        this.phone_Number = phone_Number;
+        this.email = email;
+        this.PESEL = PESEL;
+        this.salary = salary;
+        this.username = username;
+        this.password = password;
+    }
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 

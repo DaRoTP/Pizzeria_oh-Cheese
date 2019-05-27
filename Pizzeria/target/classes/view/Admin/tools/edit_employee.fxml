@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="767.0" prefWidth="892.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ohcheese.controller.Admin_tools">
+<AnchorPane prefHeight="825.0" prefWidth="892.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ohcheese.controller.Admin_tools">
    <children>
       <Pane layoutX="-61.0" layoutY="-70.0" prefHeight="100.0" prefWidth="612.0" styleClass="drops" AnchorPane.leftAnchor="-61.0" AnchorPane.rightAnchor="-79.0" AnchorPane.topAnchor="-70.0" />
       <Pane layoutX="380.0" layoutY="-2.0" prefHeight="56.0" prefWidth="30.0" styleClass="drops" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="0.0" />
@@ -27,7 +28,7 @@
       </ImageView>
       <BorderPane prefHeight="608.0" prefWidth="463.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="89.0" text="Submit" textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#update_employee" prefHeight="31.0" prefWidth="89.0" text="Submit" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="15.0" top="20.0" />
                </BorderPane.margin>
@@ -50,13 +51,22 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="352.0">
                      <children>
+                        <Label fx:id="id_label" alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="466.0" styleClass="redish-text" textAlignment="CENTER">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="43.0" prefWidth="352.0">
+                     <children>
                         <ImageView fitHeight="36.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../Global_Resources/settings_icon.png" />
                            </image>
                         </ImageView>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="202.0" styleClass="redish-text" text="Edit Employee" textAlignment="CENTER" />
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="89.0" text="Delete" textAlignment="CENTER">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#delete_employee" prefHeight="31.0" prefWidth="89.0" text="Delete" textAlignment="CENTER">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -86,11 +96,7 @@
                                                 <Insets right="10.0" />
                                              </HBox.margin>
                                           </ImageView>
-                                          <TextField fx:id="job_position" prefHeight="31.0" prefWidth="332.0" promptText="Job Position" styleClass="TextField">
-                                             <cursor>
-                                                <Cursor fx:constant="TEXT" />
-                                             </cursor>
-                                          </TextField>
+                                          <ChoiceBox fx:id="job_positons" prefHeight="31.0" prefWidth="332.0" styleClass="dropdown_choice" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -261,6 +267,35 @@
                         </VBox>
                         <VBox prefHeight="472.0" prefWidth="381.0" spacing="20.0">
                            <children>
+                              <VBox prefHeight="70.0" prefWidth="352.0" spacing="3.0">
+                                 <children>
+                                    <Label text="Date of birth">
+                                       <VBox.margin>
+                                          <Insets left="50.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox alignment="CENTER" prefHeight="32.0" prefWidth="312.0">
+                                       <children>
+                                          <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../SignUp/Private_Info_Icon.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets right="10.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <TextField fx:id="birthday" prefHeight="31.0" prefWidth="332.0" promptText="Date of birth" styleClass="TextField">
+                                             <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                             </cursor>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
                               <VBox prefHeight="70.0" prefWidth="100.0" spacing="3.0">
                                  <children>
                                     <Label text="Username">
