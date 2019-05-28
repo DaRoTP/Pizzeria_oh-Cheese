@@ -13,8 +13,8 @@ public class Toppings {
     private Integer id;
     @Column(name = "Topping_Name")
     private String topping_Name;
-//    @ManyToMany
-//    private Set<Pizza> pizza = new HashSet<>();
+    @ManyToMany(mappedBy = "toppings")
+    private Set<Pizza> pizzas = new HashSet<>();
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -22,8 +22,8 @@ public class Toppings {
     public String getTopping_Name() { return topping_Name; }
     public void setTopping_Name(String topping_Name) {   this.topping_Name = topping_Name; }
 
-//    public Set<Pizza> getPizza() { return pizza; }
-//    public void setPizza(Set<Pizza> pizza) { this.pizza = pizza; }
+    public Set<Pizza> getPizzas() { return pizzas; }
+    public void setPizzas(Set<Pizza> pizzas) { this.pizzas = pizzas; }
 
     public Toppings() { }
 

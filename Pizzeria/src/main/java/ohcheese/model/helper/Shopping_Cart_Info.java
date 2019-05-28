@@ -1,13 +1,15 @@
 package ohcheese.model.helper;
 
 import javafx.scene.control.Button;
+import ohcheese.Utilities.HibernateUtil;
 import ohcheese.controller.GeneralWindowControl;
-import ohcheese.model.Address;
-import ohcheese.model.Customer;
-import ohcheese.model.Order_status;
-import ohcheese.model.Promo_Codes;
+import ohcheese.model.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Shopping_Cart_Info extends GeneralWindowControl {
 
@@ -24,11 +26,12 @@ public class Shopping_Cart_Info extends GeneralWindowControl {
     private String house_Nr;
     private String apartment_Nr;
     private String status;
+    private float final_price;
 
     public static boolean class_type;
     public static int temp_id;
 
-    public Shopping_Cart_Info(int SC_ID, Customer customer, Address address, Promo_Codes promo_Code, Order_status order_status) {
+    public Shopping_Cart_Info(int SC_ID, Customer customer, Address address, Promo_Codes promo_Code, Order_status order_status, float final_price) {
         this.SC_ID = SC_ID;
         this.customer = customer;
         this.address = address;
@@ -40,6 +43,8 @@ public class Shopping_Cart_Info extends GeneralWindowControl {
         this.house_Nr = this.address.getHouse_Number();
         this.apartment_Nr = this.address.getApartment_Number();
         this.status = this.order_status.getOrder_status();
+        this.final_price = final_price;
+        this.final_price = discount();
 
         this.class_type = false;
         this.edit_btn = new Button("View");
@@ -55,6 +60,13 @@ public class Shopping_Cart_Info extends GeneralWindowControl {
         });
         this.edit_btn.getStyleClass().add("addbtn");
 
+    }
+
+    public float discount(){
+        if(this.promo_Code != null){
+            final_price -= final_price * ((float)promo_Code.getPercent_Off() / 100);
+        }
+        return final_price;
     }
 
     public int getSC_ID() { return SC_ID; }
@@ -96,6 +108,11 @@ public class Shopping_Cart_Info extends GeneralWindowControl {
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 
+    public float getFinal_price() { return final_price; }
+    public void setFinal_price(float final_price) { this.final_price = final_price; }
+
     public static boolean isClass_type() { return class_type; }
     public static void setClass_type(boolean class_type) { Shopping_Cart_Info.class_type = class_type; }
+
+
 }

@@ -30,11 +30,10 @@ import org.hibernate.query.Query;
 public class CustomerControl extends GeneralWindowControl implements Initializable {
 
 
-    private int CustomerID = 3;
-
-//    private int small_price = 0;
-//    private int large_price = 0;
-//    private int medium_price = 0;
+    private int small_price_zl = 0;
+    private int large_price_zl = 0;
+    private int medium_price_zl = 0;
+    private SessionFactory factory = HibernateUtil.getSessionFactory();
 
     private int largePizzaUnit = 0;
     private int mediumPizzaUnit = 0;
@@ -48,10 +47,8 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
     private int addedPizzasCounter = 0;
 
-    private ArrayList<PizzaInfo> pizzas = new ArrayList<PizzaInfo>();
     private ArrayList<Button> picaBtnList = new ArrayList<Button>();
     private ArrayList<Integer> isButtonClicked = new ArrayList<Integer>();
-//
     private ArrayList<HBox> orderTab = new ArrayList<HBox>();
     private ArrayList<Integer> counterTab = new ArrayList<Integer>();
 
@@ -90,36 +87,27 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         set_pricing();
         get_PizzaFromDB();
 
-        pizzas.add(new PizzaInfo(0,"0"));
-        pizzas.add(new PizzaInfo(1,"1"));
-        pizzas.add(new PizzaInfo(2,"2"));
-        pizzas.add(new PizzaInfo(3,"3"));
-        pizzas.add(new PizzaInfo(4,"4"));
-        pizzas.add(new PizzaInfo(5,"5"));
-        pizzas.add(new PizzaInfo(6,"6"));
-        pizzas.add(new PizzaInfo(7,"7"));
-        pizzas.add(new PizzaInfo(8,"8"));
-
-        newOrder = new Order(CustomerID);
-        createPizzaTile(pizzas, pizzas.size());
+        newOrder = new Order(small_price_zl,medium_price_zl,large_price_zl);
+        createPizzaTile();
         ViewStatus.setDisable(true);
         CheckoutBtn.setDisable(true);
 
     }
 
     public void set_pricing(){
-        SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         try {
             session.getTransaction().begin();
 
             Query query = session.createQuery("from Size");
-            List prices = query.list();
+            List<Size> prices = query.list();
 
-            small_price.setText(((Size)prices.get(0)).getPrice()+" zł");
-            medium_price.setText(((Size)prices.get(1)).getPrice()+" zł");
-            large_price.setText(((Size)prices.get(2)).getPrice()+" zł");
-
+            small_price.setText(prices.get(0).getPrice()+" zł");
+            small_price_zl = Integer.parseInt(prices.get(0).getPrice());
+            medium_price.setText(prices.get(1).getPrice()+" zł");
+            medium_price_zl = Integer.parseInt(prices.get(1).getPrice());
+            large_price.setText(prices.get(2).getPrice()+" zł");
+            large_price_zl = Integer.parseInt(prices.get(2).getPrice());
 
             session.getTransaction().commit();
 
@@ -128,13 +116,9 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
             session.getTransaction().rollback();
         }
         session.close();
-
-
     }
 
     public void get_PizzaFromDB(){
-
-        SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         try {
             session.getTransaction().begin();
@@ -150,7 +134,6 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         }
         session.close();
     }
-
 
     public void removePizzaFromOrder(int OrderIndex){
         OrderContent.getChildren().remove(OrderIndex);
@@ -178,7 +161,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
             CheckoutBtn.setDisable(true);
         }
 
-    }
+    } //*-------------------
 
     public void addPizzaToOrder(Pizza chosenPizza, String pizzaPrice, String pizzaSize){
         orderanchor.setPrefHeight(orderanchor.getPrefHeight() + 59);
@@ -228,10 +211,9 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         }
 
         addedPizzasCounter ++;
-    }
+    }//*-------------------
 
-
-    public void createPizzaTile(ArrayList pizzas, int amountOfPizzas){
+    public void createPizzaTile(){
         for(int i = 0; i < pizza_from_DataBase.size(); i++) {
             pizzaanchor.setPrefHeight(pizzaanchor.getPrefHeight() + 80);
             PizzaContent.setPrefHeight(PizzaContent.getPrefHeight() + 80);
@@ -240,13 +222,24 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
             Pizzatab.setPrefSize(750, 70);
 
 
+
             TextArea Description = new TextArea();
             Description.setPrefSize(620, 70);
             Description.setEditable(false);
-            Description.setText(pizza_from_DataBase.get(i).getPizza_Name());
+            String temp_description = pizza_from_DataBase.get(i).getPizza_Name();
+//            for(Toppings top : pizza_from_DataBase.get(i).getToppings()){
+//                temp_description +=  top.getTopping_Name();
+//            }
+            Description.setText(temp_description);
 
 
-            Image pica = new Image("view/Global_Resources/Logo.png");
+            Image pica;
+            if(pizza_from_DataBase.get(i).getPizza_image() != null){
+                pica = new Image(pizza_from_DataBase.get(i).getPizza_image());
+            }
+            else{
+                pica = new Image("view/Global_Resources/Logo.png");
+            }
             ImageView Picaphoto = new ImageView();
             Picaphoto.setFitHeight(70);
             Picaphoto.setFitWidth(70);
@@ -291,7 +284,6 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     }
 
     public void Checkout(ActionEvent event) throws IOException {
-        //openscene(event,"checkout","GeneralWindowStyle","checkout","Global_Resources");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Customer/checkout/checkout.fxml"));
         Parent root = loader.load();
 
@@ -352,21 +344,21 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
     public void addToOrder(ActionEvent event) throws IOException {
         //Sum everything
-        newOrder.setFinalPrice(newOrder.getFinalPrice() + 40 * largePizzaUnit + 30 * mediumPizzaUnit + 25 * smallPizzaUnit);
+        newOrder.setFinalPrice(newOrder.getFinalPrice() + large_price_zl * largePizzaUnit + medium_price_zl * mediumPizzaUnit + small_price_zl * smallPizzaUnit);
         finalPriceLabel.setText(((int)newOrder.getFinalPrice())+" zlt");
 
         //adds a tile to Order Tab
         try {
             for (int i = 0; i < smallPizzaUnit; i++) {
-                addPizzaToOrder(pizza_from_DataBase.get(chosenPizzaIndex), "25", "small");
+                addPizzaToOrder(pizza_from_DataBase.get(chosenPizzaIndex), Integer.toString(small_price_zl), "small");
                 pizzaUnitsOrdered++;
             }
             for (int i = 0; i < mediumPizzaUnit; i++) {
-                addPizzaToOrder(pizza_from_DataBase.get(chosenPizzaIndex), "30", "medium");
+                addPizzaToOrder(pizza_from_DataBase.get(chosenPizzaIndex), Integer.toString(medium_price_zl), "medium");
                 pizzaUnitsOrdered++;
             }
             for (int i = 0; i < largePizzaUnit; i++) {
-                addPizzaToOrder(pizza_from_DataBase.get(chosenPizzaIndex), "40", "large");
+                addPizzaToOrder(pizza_from_DataBase.get(chosenPizzaIndex), Integer.toString(large_price_zl), "large");
                 pizzaUnitsOrdered++;
             }
         }
@@ -390,7 +382,6 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
     public void chnageToActive(ActionEvent event){
 
-        SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         try {
             session.getTransaction().begin();

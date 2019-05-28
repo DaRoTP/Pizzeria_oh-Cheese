@@ -180,6 +180,9 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
         apartment_Nr.setMinWidth(70);
         apartment_Nr.setMaxWidth(70);
 
+        TableColumn<Shopping_Cart_Info, String> finalprice = new TableColumn<>("Price");
+        finalprice.setCellValueFactory(new PropertyValueFactory<>("final_price"));
+
         TableColumn<Shopping_Cart_Info, String> status = new TableColumn<>("Status");
         status.setCellValueFactory(new PropertyValueFactory<>("status"));
 
@@ -190,7 +193,7 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
 
 
         ShoppingCartTable.setItems(getCart());
-        ShoppingCartTable.getColumns().addAll(IdColumn,username,city,steet,house_Nr,apartment_Nr,status,edit);
+        ShoppingCartTable.getColumns().addAll(IdColumn,username,city,steet,house_Nr,apartment_Nr,finalprice,status,edit);
         ShoppingCartTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
@@ -324,11 +327,13 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
         return null;
     }
 
+
     public ObservableList<Shopping_Cart_Info> getCart(){
-        ObservableList<Shopping_Cart_Info> size = FXCollections.observableArrayList();
+        ObservableList<Shopping_Cart_Info> shoppingcart = FXCollections.observableArrayList();
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
+        float final_price_temp = 0;
         try {
             session.getTransaction().begin();
 
@@ -336,11 +341,20 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
             List<Shopping_Cart> sc_list = query.list();
 
             for(int i = 0; i < sc_list.size(); i++){
-                size.add(new Shopping_Cart_Info(sc_list.get(i).getId(),sc_list.get(i).getCustomer_ID(),sc_list.get(i).getAddress_ID(),
-                        sc_list.get(i).getPromo_Code_ID(),sc_list.get(i).getOrder_status_ID()));
+
+                query = session.createQuery("from Pizza_Order where Shopping_Cart_ID='" + sc_list.get(i).getId() + "'");
+                List<Pizza_Order> Order_list = query.list();
+//
+                for (int j = 0; j < Order_list.size(); j++) {
+                    final_price_temp += Float.parseFloat(Order_list.get(j).getSize_ID().getPrice());
+                }
+                shoppingcart.add(new Shopping_Cart_Info(sc_list.get(i).getId(),sc_list.get(i).getCustomer_ID(),sc_list.get(i).getAddress_ID(),
+                        sc_list.get(i).getPromo_Code_ID(),sc_list.get(i).getOrder_status_ID(),final_price_temp));
+                final_price_temp = 0;
+
             }
             session.getTransaction().commit();
-            return size;
+            return shoppingcart;
 
         } catch (Exception e) {
             e.printStackTrace();

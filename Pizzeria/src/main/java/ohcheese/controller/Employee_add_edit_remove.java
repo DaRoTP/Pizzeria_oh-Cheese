@@ -162,9 +162,10 @@ public class Employee_add_edit_remove implements Initializable {
     }
 
     public void accepted_order(ActionEvent event){
-        activeOrder.getStyleClass().clear();
-        activeOrder.getStyleClass().add("price");
-        select_driver();
+            activeOrder.getStyleClass().clear();
+            activeOrder.getStyleClass().add("price");
+            select_driver();
+
     }
     public void baking_order(ActionEvent event){
         bakingOrder.getStyleClass().clear();

@@ -26,6 +26,8 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
     public static Customer loggedinCustomer;
     public static Employee loggedinEmployee;
 
+    public SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+
 
     @FXML private ChoiceBox<String> Mode_choice = new ChoiceBox<String>();
 	@FXML TextField usernameField = new TextField();
@@ -69,7 +71,6 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
 	}
 
 	public List checkIF_Customer_Exists(){
-        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
         try {
@@ -91,7 +92,6 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
     }
 
     public List checkIF_Employee_Exists(){
-        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
         try {

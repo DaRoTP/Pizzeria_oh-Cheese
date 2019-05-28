@@ -4,22 +4,24 @@ package ohcheese.model;
 import java.util.ArrayList;
 
 public class Order {
-    private int CustumerID;
+    private int small_price;
+    private int medium_price;
+    private int large_price;
     private ArrayList<Integer> pizzasIDs = new ArrayList<Integer>();
     private ArrayList<Integer> SizeIDs = new ArrayList<Integer>();
     private float finalPrice;
     private int PaymentMethodID;
 
-    public Order(int CustumerID) {
-        this.CustumerID = CustumerID;
+    public Order(int sprice, int mprice, int lprice) {
+
+        this.small_price = sprice;
+        this.medium_price = mprice;
+        this.large_price = lprice;
         this.finalPrice = 0;
         this.PaymentMethodID = 0;
     }
 
     //GETTES & SETTERS
-    //Custumer ID
-    public void setCustumerID(int custumerID) { CustumerID = custumerID; }
-    public int getCustumerID() { return CustumerID; }
     //Final Price
     public void setFinalPrice(float finalPrice) { this.finalPrice = finalPrice; }
     public float getFinalPrice() { return finalPrice; }
@@ -48,11 +50,11 @@ public class Order {
 
     public void subFrom_FinalPrice(Integer size){
         if(size == 0)
-            this.finalPrice -= 25;
+            this.finalPrice -= small_price;
         else if(size == 1)
-            this.finalPrice -= 30;
+            this.finalPrice -= medium_price;
         else
-            this.finalPrice -= 40;
+            this.finalPrice -= large_price;
     }
 
     public void removedFromOrdered(int index){

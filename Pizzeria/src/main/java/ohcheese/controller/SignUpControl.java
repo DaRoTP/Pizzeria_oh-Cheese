@@ -17,6 +17,7 @@ import java.util.List;
 
 public class SignUpControl {
 
+    public SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
 
     @FXML public TextField name = new TextField();
     @FXML public TextField surname = new TextField();
@@ -223,7 +224,6 @@ public class SignUpControl {
     }
 
     public int check_If_Customer_Of_Given_Username_Exists(){
-        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
         try {
@@ -247,7 +247,6 @@ public class SignUpControl {
     }
 
     public Address check_If__given_Address_Exists(){
-        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
         try {
@@ -277,7 +276,6 @@ public class SignUpControl {
         if (check_If_Customer_Of_Given_Username_Exists() == 0) {
             Address result_Address = check_If__given_Address_Exists();
 
-            SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
             Session session = factory.getCurrentSession();
 
             Customer new_customer = new Customer(name.getText(),surname.getText(),phone_number.getText(),e_mail.getText(),username.getText(),password.getText());

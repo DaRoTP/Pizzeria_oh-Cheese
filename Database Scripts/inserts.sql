@@ -103,26 +103,26 @@ VALUES('Keir','Papps','1970-10-19','3298744432','smogforde@plala.or.jp','7852302
 INSERT INTO Employee(Employee_Name,Employee_Surname,Employee_Date_Of_Birth,Employee_Phone_Number,Employee_Email,Employee_PESEL,Employee_Salary,Address_ID,Job_Position_ID,Employee_Username,Employee_Password) 
 VALUES('Employee','Admin','1970-10-19','3293344432','Employee@Admin.or.jp','3452342424',1419,30,4,'Employee','Admin');	
 
-INSERT INTO Pizza_Type(Pizza_Type) VALUES('seafood');
-INSERT INTO Pizza_Type(Pizza_Type) VALUES('spicy');
-INSERT INTO Pizza_Type(Pizza_Type) VALUES('vegan');
-INSERT INTO Pizza_Type(Pizza_Type) VALUES('chicken');
-INSERT INTO Pizza_Type(Pizza_Type) VALUES('mild');
+INSERT INTO Pizza_Type(Pizza_Type_Name) VALUES('seafood');
+INSERT INTO Pizza_Type(Pizza_Type_Name) VALUES('spicy');
+INSERT INTO Pizza_Type(Pizza_Type_Name) VALUES('vegan');
+INSERT INTO Pizza_Type(Pizza_Type_Name) VALUES('chicken');
+INSERT INTO Pizza_Type(Pizza_Type_Name) VALUES('mild');
 
-INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID) VALUES('Marinara',1);
-INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID) VALUES('Quattro Stagioni',1);
-INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID) VALUES('Carbonara',1);
-INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID) VALUES('Frutti di Mare',2);
-INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID) VALUES('Quattro Formaggi.',2);
-INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID) VALUES('Crudo',3);
-INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID) VALUES('Napoletana',3);
-INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID) VALUES('Pugliese',4);
-INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID) VALUES('Montanara',4);
-INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID) VALUES('Emiliana',5);
-INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID) VALUES('Romana',5);
-INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID) VALUES('Fattoria',5);
-INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID) VALUES('Schiacciata',3);
-INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID) VALUES('Prosciutto',2);
+INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID,Pizza_image) VALUES('Marinara',1,'https://i.imgur.com/X9TorzJ.png');
+INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID,Pizza_image) VALUES('Quattro Stagioni',1,'https://i.imgur.com/LFsbY76.png');
+INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID,Pizza_image) VALUES('Carbonara',1,'https://i.imgur.com/R1ZhQf6.png');
+INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID,Pizza_image) VALUES('Frutti di Mare',2,'https://i.imgur.com/uQGiLSt.png');
+INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID,Pizza_image) VALUES('Quattro Formaggi.',2,'https://i.imgur.com/grxgtkF.png');
+INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID,Pizza_image) VALUES('Crudo',3,'https://i.imgur.com/QSGtnou.png');
+INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID,Pizza_image) VALUES('Napoletana',3,'https://i.imgur.com/SUEVyxK.png');
+INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID,Pizza_image) VALUES('Pugliese',4,'https://i.imgur.com/Dm8HjGO.png');
+INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID,Pizza_image) VALUES('Montanara',4,'https://i.imgur.com/nyfYmWu.png');
+INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID,Pizza_image) VALUES('Emiliana',5,'https://i.imgur.com/R1ZhQf6.png');
+INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID,Pizza_image) VALUES('Romana',5,'https://i.imgur.com/grxgtkF.png');
+INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID,Pizza_image) VALUES('Fattoria',5,'https://i.imgur.com/X9TorzJ.png');
+INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID,Pizza_image) VALUES('Schiacciata',3,'https://i.imgur.com/Dm8HjGO.png');
+INSERT INTO Pizza(Pizza_Name,Pizza_Type_ID,Pizza_image) VALUES('Prosciutto',2,'https://i.imgur.com/grxgtkF.png');
 
 
 INSERT INTO Toppings(Topping_Name) VALUES('Gouda');
@@ -198,18 +198,18 @@ INSERT INTO PizzaToppings(Pizza_ID,Topping_ID) VALUES(14,8);
 INSERT INTO PizzaToppings(Pizza_ID,Topping_ID) VALUES(14,11);
 INSERT INTO PizzaToppings(Pizza_ID,Topping_ID) VALUES(14,4);
 
-INSERT INTO Size(Size,Price) VALUES ('small',25);
-INSERT INTO Size(Size,Price) VALUES ('medium',30);
-INSERT INTO Size(Size,Price) VALUES ('large',40);
+INSERT INTO Size(Size_Name,Price) VALUES ('small',25);
+INSERT INTO Size(Size_Name,Price) VALUES ('medium',30);
+INSERT INTO Size(Size_Name,Price) VALUES ('large',40);
 
-INSERT INTO Promo_Codes(Promo_Code,Discount) VALUES('20%OFF',20);
-INSERT INTO Promo_Codes(Promo_Code,Discount) VALUES('25%OFF',25);
-INSERT INTO Promo_Codes(Promo_Code,Discount) VALUES('30%OFF',30);
+INSERT INTO Promo_Codes(Promo_Code_Name,Discount) VALUES('20%OFF',20);
+INSERT INTO Promo_Codes(Promo_Code_Name,Discount) VALUES('25%OFF',25);
+INSERT INTO Promo_Codes(Promo_Code_Name,Discount) VALUES('30%OFF',30);
 
-INSERT INTO Order_status(Order_status) VALUES('Pending');
-INSERT INTO Order_status(Order_status) VALUES('Accepted');
-INSERT INTO Order_status(Order_status) VALUES('Baking');
-INSERT INTO Order_status(Order_status) VALUES('delivery');
+INSERT INTO Order_status(Order_status_Name) VALUES('Pending');
+INSERT INTO Order_status(Order_status_Name) VALUES('Accepted');
+INSERT INTO Order_status(Order_status_Name) VALUES('Baking');
+INSERT INTO Order_status(Order_status_Name) VALUES('delivery');
 
 /* ORDERS */
 -- 1
