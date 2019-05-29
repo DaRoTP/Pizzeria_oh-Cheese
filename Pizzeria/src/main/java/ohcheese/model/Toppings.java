@@ -13,7 +13,7 @@ public class Toppings {
     private Integer id;
     @Column(name = "Topping_Name")
     private String topping_Name;
-    @ManyToMany(mappedBy = "toppings")
+    @ManyToMany(mappedBy = "toppings", fetch = FetchType.EAGER)
     private Set<Pizza> pizzas = new HashSet<>();
 
     public Integer getId() { return id; }

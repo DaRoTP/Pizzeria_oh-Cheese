@@ -220,19 +220,22 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
             HBox Pizzatab = new HBox();
             Pizzatab.setPrefSize(750, 70);
-
+            Session session = factory.getCurrentSession();
+            session.getTransaction().begin();
 
 
             TextArea Description = new TextArea();
             Description.setPrefSize(620, 70);
             Description.setEditable(false);
             String temp_description = pizza_from_DataBase.get(i).getPizza_Name();
-//            for(Toppings top : pizza_from_DataBase.get(i).getToppings()){
-//                temp_description +=  top.getTopping_Name();
-//            }
+            temp_description += " \n type: "+ pizza_from_DataBase.get(i).getPizza_Type_ID().getPizza_Type()+"\n";
+            for(Toppings top : pizza_from_DataBase.get(i).getToppings()){
+                temp_description +=  top.getTopping_Name();
+            }
+
             Description.setText(temp_description);
 
-
+            session.close();
             Image pica;
             if(pizza_from_DataBase.get(i).getPizza_image() != null){
                 pica = new Image(pizza_from_DataBase.get(i).getPizza_image());
