@@ -1,11 +1,14 @@
-package ohcheese.controller;
+package ohcheese.controller.EmployeeTools;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import ohcheese.Utilities.HibernateUtil;
 import ohcheese.model.*;
@@ -22,9 +25,12 @@ import java.util.Set;
 
 public class Employee_add_edit_remove implements Initializable {
 
+
+    public SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
     //general
     @FXML private Label id_label;
     @FXML private ChoiceBox<String> delivery_choice = new ChoiceBox<String>();
+    @FXML private ChoiceBox<String> pizzamaker_choice = new ChoiceBox<String>();
     @FXML private TextArea order_info_TA = new TextArea();
 
     // toppings
@@ -44,6 +50,12 @@ public class Employee_add_edit_remove implements Initializable {
 
     //Pizza
     @FXML private TextField pizza_name_TF;
+    @FXML private TextField Pizza_imageTF;
+    @FXML private ChoiceBox<String> typeChoice = new ChoiceBox<String>();
+    @FXML private ChoiceBox<String> toppingsChoice = new ChoiceBox<String>();
+    @FXML private TableView<Toppings_Info> toppingTable = new TableView<>();
+    public static ObservableList<Toppings_Info> topping = FXCollections.observableArrayList();
+    public static ObservableList<Toppings_Info> getTopping() { return topping; }
 
     //Shopping Cart
     @FXML private TextField name_TF;
@@ -63,8 +75,8 @@ public class Employee_add_edit_remove implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        set_delivery_drivers();
-
+        setTypesforPizza();
+        setToppingsforPizza();
         if(Toppings_Info.getClass_type()){
             set_toppings();
             Toppings_Info.setClass_type(false);
@@ -87,14 +99,55 @@ public class Employee_add_edit_remove implements Initializable {
         }
         else if(Shopping_Cart_Info.isClass_type()){
             set_shopping_cart();
-            Shopping_Cart_Info.setClass_type(false);
             get_Order_details();
+            set_delivery_drivers();
+            setPizzaMakers();
+            set_status();
+            Shopping_Cart_Info.setClass_type(false);
         }
 
     }
+    public void set_status(){
+        Session session = factory.getCurrentSession();
+        session.getTransaction().begin();
+
+        Query query = session.createQuery("from Order_status");
+        List<Order_status> OrderStatusList = query.list();
+
+        Shopping_Cart shopping_cart = session.get(Shopping_Cart.class, Shopping_Cart_Info.getTemp_id());
+
+        if(shopping_cart.getOrder_status_ID() == OrderStatusList.get(1)){
+            activeOrder.getStyleClass().clear();
+            activeOrder.getStyleClass().add("price");
+            activeOrder.setDisable(true);
+            bakingOrder.setDisable(false);
+            deliveringOrder.setDisable(true);
+        }
+        if(shopping_cart.getOrder_status_ID() == OrderStatusList.get(2)){
+            activeOrder.getStyleClass().clear();
+            bakingOrder.getStyleClass().clear();
+            activeOrder.getStyleClass().add("price");
+            bakingOrder.getStyleClass().add("price");
+            bakingOrder.setDisable(true);
+            activeOrder.setDisable(true);
+            deliveringOrder.setDisable(false);
+        }
+        if(shopping_cart.getOrder_status_ID() == OrderStatusList.get(3)){
+            activeOrder.getStyleClass().clear();
+            bakingOrder.getStyleClass().clear();
+            deliveringOrder.getStyleClass().clear();
+            activeOrder.getStyleClass().add("price");
+            bakingOrder.getStyleClass().add("price");
+            deliveringOrder.getStyleClass().add("price");
+            deliveringOrder.setDisable(true);
+            bakingOrder.setDisable(true);
+            activeOrder.setDisable(true);
+        }
+        session.getTransaction().commit();
+        session.close();
+    }
 
     public void get_Order_details(){
-        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
@@ -111,13 +164,13 @@ public class Employee_add_edit_remove implements Initializable {
         }
         order_info_TA.setText(temp_Info);
 
+
         session.getTransaction().commit();
         session.close();
 
     }
 
-    public void select_driver(){
-        System.out.println("test --------");
+    public void select_employees(){
         String temp = delivery_choice.getValue();
         String number = "";
         for (int i = 1; i < temp.length(); i++){
@@ -127,18 +180,29 @@ public class Employee_add_edit_remove implements Initializable {
             else
                 break;
         }
-        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+        System.out.println(number);
+        String temp2 = pizzamaker_choice.getValue();
+        String number2 = "";
+        for (int i = 1; i < temp2.length(); i++){
+            char c = temp2.charAt(i);
+            if(c != '|')
+                number2 += c;
+            else
+                break;
+        }
+        System.out.println(number2);
+
         Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
-        System.out.println("selects--------");
         Shopping_Cart shopping_cart = session.get(Shopping_Cart.class, Shopping_Cart_Info.getTemp_id());
-        Employee employee_driver = session.get(Employee.class, 2);
-        System.out.println("add--------");
-        Set<Employee> employeesss = new HashSet<>();
-        employeesss.add(employee_driver);
-        shopping_cart.setEmployee(employeesss);
-        System.out.println("update--------");
+        Employee employee_driver = session.get(Employee.class, Integer.parseInt(number));
+        Employee employee_pizzamaker = session.get(Employee.class, Integer.parseInt(number2));
+
+        shopping_cart.getEmployee().clear();
+        shopping_cart.getEmployee().add(employee_pizzamaker);
+        shopping_cart.getEmployee().add(employee_driver);
+
         session.update(shopping_cart);
 
         session.getTransaction().commit();
@@ -162,15 +226,26 @@ public class Employee_add_edit_remove implements Initializable {
     }
 
     public void accepted_order(ActionEvent event){
-            activeOrder.getStyleClass().clear();
-            activeOrder.getStyleClass().add("price");
-            select_driver();
+        activeOrder.getStyleClass().clear();
+        activeOrder.getStyleClass().add("price");
+        select_employees();
+        change_order_status(2);
+
+
+        activeOrder.setDisable(true);
+        bakingOrder.setDisable(false);
+        deliveringOrder.setDisable(true);
+
 
     }
     public void baking_order(ActionEvent event){
         bakingOrder.getStyleClass().clear();
         bakingOrder.getStyleClass().add("price");
         change_order_status(3);
+
+        activeOrder.setDisable(true);
+        bakingOrder.setDisable(true);
+        deliveringOrder.setDisable(false);
 
     }
     public void delivering_order(ActionEvent event){
@@ -187,10 +262,50 @@ public class Employee_add_edit_remove implements Initializable {
 
             Query query = session.createQuery("from Employee where Job_Position_ID=5");
             List<Employee> employee_list = query.list();
-            for(int i = 0; i < employee_list.size(); i++)
-                delivery_choice.getItems().add("#"+employee_list.get(i).getId()+"|"+employee_list.get(i).getName()+" "+
-                        employee_list.get(i).getSurname());
 
+            Shopping_Cart shoppingcart = session.get(Shopping_Cart.class, Shopping_Cart_Info.getTemp_id());
+
+            for(int i = 0; i < employee_list.size(); i++) {
+                delivery_choice.getItems().add("#" + employee_list.get(i).getId() + "|" + employee_list.get(i).getName() + " " +
+                        employee_list.get(i).getSurname());
+                for(Employee emp : shoppingcart.getEmployee()){
+                    if(emp == employee_list.get(i)){
+                        System.out.println("match");
+                        delivery_choice.getSelectionModel().select(i);
+                    }
+                }
+
+            }
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+    public void setPizzaMakers(){
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Employee where Job_Position_ID=1");
+            List<Employee> employee_list = query.list();
+
+            Shopping_Cart shoppingcart = session.get(Shopping_Cart.class, Shopping_Cart_Info.getTemp_id());
+
+            for(int i = 0; i < employee_list.size(); i++) {
+                pizzamaker_choice.getItems().add("#" + employee_list.get(i).getId() + "|" + employee_list.get(i).getName() + " " +
+                        employee_list.get(i).getSurname());
+                for(Employee emp : shoppingcart.getEmployee()){
+                    if(emp == employee_list.get(i)){
+                        pizzamaker_choice.getSelectionModel().select(i);
+                    }
+                }
+
+            }
 
             session.getTransaction().commit();
 
@@ -238,7 +353,6 @@ public class Employee_add_edit_remove implements Initializable {
     public void set_promo_code(){
 
         int id = Promo_Code_Info.getTemp_id();
-        SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         session.getTransaction().begin();
 
@@ -299,7 +413,6 @@ public class Employee_add_edit_remove implements Initializable {
         Shopping_Cart scart;
         scart = session.get(Shopping_Cart.class, id);
 
-//        id_label.setText("ID: "+scart.getId());
         name_TF.setText(scart.getCustomer_ID().getName());
         surname_TF.setText(scart.getCustomer_ID().getSurname());
         e_mail_TF.setText(scart.getCustomer_ID().getEmail());
@@ -318,19 +431,140 @@ public class Employee_add_edit_remove implements Initializable {
 
 
     //PIZZA
+    public void create_toppings(){
+        TableColumn<Toppings_Info, Integer> IdColumn = new TableColumn<>("ID");
+        IdColumn.setCellValueFactory(new PropertyValueFactory<>("topping_id"));
+        IdColumn.setMinWidth(50);
+        IdColumn.setMaxWidth(50);
+
+        TableColumn<Toppings_Info, String> topping_name = new TableColumn<>("Toppings");
+        topping_name.setCellValueFactory(new PropertyValueFactory<>("topping_name"));
+
+        TableColumn<Toppings_Info, String> remove = new TableColumn<>("remove");
+        remove.setCellValueFactory(new PropertyValueFactory<>("remove_btn"));
+        remove.setMinWidth(50);
+        remove.setMaxWidth(50);
+
+
+        toppingTable.setItems(topping);
+        toppingTable.getColumns().addAll(IdColumn,topping_name,remove);
+        toppingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    }
+   public void addTopping(ActionEvent event){
+       String temp = toppingsChoice.getValue();
+       String number = "";
+       for (int i = 1; i < temp.length(); i++){
+           char c = temp.charAt(i);
+           if(c != '|')
+               number += c;
+           else
+               break;
+       }
+
+       Session session = factory.getCurrentSession();
+       session.getTransaction().begin();
+
+       Toppings Chosentopping = session.get(Toppings.class, Integer.parseInt(number));
+       topping.add(new Toppings_Info(Chosentopping.getId(),Chosentopping.getTopping_Name()));
+
+       session.getTransaction().commit();
+       session.close();
+       toppingTable.getColumns().clear();
+       create_toppings();
+   }
+    public void setTypesforPizza(){
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Pizza_Type");
+            List<Pizza_Type> pizzaType_list = query.list();
+
+            for(Pizza_Type pType : pizzaType_list){
+                typeChoice.getItems().add("#"+pType.getId()+"| "+pType.getPizza_Type());
+            }
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+    public void setToppingsforPizza(){
+        Session session = factory.getCurrentSession();
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Toppings");
+            List<Toppings> toppping_list = query.list();
+
+            for(Toppings ptopping : toppping_list){
+                toppingsChoice.getItems().add("#"+ptopping.getId()+"| "+ptopping.getTopping_Name());
+            }
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
     public void add_pizza(ActionEvent event){
-        //pizza_name.getText();
-        //CHECK IF PIZZA OF THIS NAME ALREADY EXISTS
-        //IF YES warning.setText("Pizza already exists");
-        // IF NO
-        //pizza_toppings.getText();
-        //pizza_type.getText();
-        //add pizza to the database
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Pizza where Pizza_Name='"+pizza_name_TF.getText()+"'");
+            List<Pizza> pizza_list = query.list();
+
+            if(pizza_list.size() == 0) {
+
+                String temp = typeChoice.getValue();
+                String number = "";
+                for (int i = 1; i < temp.length(); i++){
+                    char c = temp.charAt(i);
+                    if(c != '|')
+                        number += c;
+                    else
+                        break;
+                }
+
+                Pizza_Type chosenType = session.get(Pizza_Type.class, Integer.parseInt(number));
+
+                query = session.createQuery("from Toppings");
+                List<Toppings> topping_list = query.list();
+
+                Set<Toppings> toBeAddedToppings = new HashSet<>();
+                for(Toppings_Info tp : topping){
+                    for(Toppings topp : topping_list){
+                        if(topp.getId() == tp.getTopping_id()){
+                            toBeAddedToppings.add(topp);
+                        }
+                    }
+                }
+
+                Pizza new_pizza = new Pizza(pizza_name_TF.getText(),Pizza_imageTF.getText(),chosenType,toBeAddedToppings);
+                session.save(new_pizza);
+
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                window.close();
+            }
+            else
+                warning.setText("Pizza already exists");
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
     }
 
     //PROMO CODES
     public void update_promo_code(ActionEvent event){
-        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
         try {
@@ -352,7 +586,6 @@ public class Employee_add_edit_remove implements Initializable {
         session.close();
     }
     public void delete_promo_code(ActionEvent event){
-        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
         try {
@@ -373,7 +606,6 @@ public class Employee_add_edit_remove implements Initializable {
         session.close();
     }
     public void add_promo_code(ActionEvent event){
-        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
         try {

@@ -7,12 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
+import ohcheese.controller.EmployeeTools.EmployeeControl;
 
 import java.io.IOException;
-import java.util.List;
 
 public class GeneralWindowControl {
 

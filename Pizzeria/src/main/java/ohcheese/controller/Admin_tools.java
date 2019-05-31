@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ohcheese.Utilities.HibernateUtil;
@@ -42,6 +43,7 @@ public class Admin_tools implements Initializable {
     //EMPLOYEE
     @FXML private ChoiceBox<String> job_positons = new ChoiceBox<String>();
     @FXML private TextField salary;
+    @FXML private Slider salarySl;
     @FXML private TextField name;
     @FXML private TextField surname;
     @FXML private TextField e_mail;
@@ -428,7 +430,7 @@ public class Admin_tools implements Initializable {
 
             if(employee.size() == 0) {
                 Employee new_employee = new Employee(name.getText(),surname.getText(),birthday.getText(),phone_number.getText(),
-                        e_mail.getText(),pesel.getText(),Float.parseFloat(salary.getText()),username.getText(),password.getText());
+                        e_mail.getText(),pesel.getText(),(float) salarySl.getValue(),username.getText(),password.getText());
 
                 //ADDRESS
                 if(temp_address == null){

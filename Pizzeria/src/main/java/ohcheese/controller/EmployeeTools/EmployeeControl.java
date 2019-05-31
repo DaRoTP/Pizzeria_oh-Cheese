@@ -1,4 +1,4 @@
-package ohcheese.controller;
+package ohcheese.controller.EmployeeTools;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ohcheese.Utilities.HibernateUtil;
+import ohcheese.controller.GeneralWindowControl;
+import ohcheese.controller.LoginControl;
 import ohcheese.model.*;
 import ohcheese.model.helper.*;
 import org.hibernate.Session;
@@ -41,7 +43,7 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        WelcomeUser.setText("Welcome "+LoginControl.get_loggedinEmployee().getName()+" !");
+        WelcomeUser.setText("Welcome "+ LoginControl.get_loggedinEmployee().getName()+" !");
         create_pizzaTable();
         create_toppings();
         create_pizzatype();

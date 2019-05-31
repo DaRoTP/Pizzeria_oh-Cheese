@@ -250,7 +250,7 @@
                               </Label>
                            </children>
                         </StackPane>
-                        <Label fx:id="finalPriceLabel" alignment="CENTER" prefHeight="45.0" prefWidth="107.0" styleClass="price" text="0 zlt">
+                        <Label fx:id="finalPriceLabel" alignment="CENTER" prefHeight="45.0" prefWidth="107.0" styleClass="price" text="0 zł">
                            <font>
                               <Font size="24.0" />
                            </font>

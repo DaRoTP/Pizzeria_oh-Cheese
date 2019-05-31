@@ -18,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import ohcheese.Utilities.HibernateUtil;
 import ohcheese.model.*;
@@ -73,12 +74,6 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     @FXML Button ViewStatus = new Button();
     @FXML Button CheckoutBtn = new Button();
 
-    @FXML VBox acceptedVbox = new VBox();
-    @FXML VBox bakingVbox = new VBox();
-    @FXML VBox sendingVbox = new VBox();
-
-    @FXML Line first = new Line();
-    @FXML Line second = new Line();
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -150,7 +145,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         pizzaUnitsOrdered -= 1;
         //Update Labels
         pizzacounterLabel.setText(String.valueOf(pizzaUnitsOrdered));
-        finalPriceLabel.setText(((int)newOrder.getFinalPrice())+" zlt");
+        finalPriceLabel.setText(((int)newOrder.getFinalPrice())+" zł");
 
         if(newOrder.getFinalPrice() != 0){
             ViewStatus.setDisable(true);
@@ -227,11 +222,12 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
             TextArea Description = new TextArea();
             Description.setPrefSize(620, 70);
             Description.setEditable(false);
-            String temp_description = pizza_from_DataBase.get(i).getPizza_Name();
-            temp_description += " \n type: "+ pizza_from_DataBase.get(i).getPizza_Type_ID().getPizza_Type()+"\n";
+            String temp_description ="● "+ pizza_from_DataBase.get(i).getPizza_Name();
+            temp_description += "\n type: "+ pizza_from_DataBase.get(i).getPizza_Type_ID().getPizza_Type()+"\n";
             for(Toppings top : pizza_from_DataBase.get(i).getToppings()){
-                temp_description +=  top.getTopping_Name();
+                temp_description +=  top.getTopping_Name() +", ";
             }
+
 
             Description.setText(temp_description);
 
@@ -348,7 +344,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
     public void addToOrder(ActionEvent event) throws IOException {
         //Sum everything
         newOrder.setFinalPrice(newOrder.getFinalPrice() + large_price_zl * largePizzaUnit + medium_price_zl * mediumPizzaUnit + small_price_zl * smallPizzaUnit);
-        finalPriceLabel.setText(((int)newOrder.getFinalPrice())+" zlt");
+        finalPriceLabel.setText(((int)newOrder.getFinalPrice())+" zł");
 
         //adds a tile to Order Tab
         try {
@@ -383,45 +379,5 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
         picaBtnList.get(chosenPizzaIndex).fire();
     }
 
-    public void chnageToActive(ActionEvent event){
 
-        Session session = factory.getCurrentSession();
-        try {
-            session.getTransaction().begin();
-
-
-            Query query = session.createQuery("from Shopping_Cart where Shopping_Cart_ID = "+CheckoutControl.getCart().getId());
-            List<Shopping_Cart> shopping_cart = query.list();
-
-            int status = shopping_cart.get(0).getOrder_status_ID().getId();
-
-            if(status == 2){
-                acceptedVbox.getStyleClass().clear();
-                acceptedVbox.getStyleClass().add("status_Active");
-                first.getStyleClass().clear();
-                first.getStyleClass().add("lineActive");
-            }
-
-            if(status == 3) {
-                bakingVbox.getStyleClass().clear();
-                bakingVbox.getStyleClass().add("status_Active");
-                second.getStyleClass().clear();
-                second.getStyleClass().add("lineActive");
-            }
-
-            if(status == 4) {
-                sendingVbox.getStyleClass().clear();
-                sendingVbox.getStyleClass().add("status_Active");
-            }
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
-        }
-        session.close();
-
-
-    }
 }

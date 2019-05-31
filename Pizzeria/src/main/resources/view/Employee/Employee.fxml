@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="lox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ohcheese.controller.EmployeeControl">
+<AnchorPane id="lox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ohcheese.controller.EmployeeTools.EmployeeControl">
    <children>
       <Pane layoutX="-42.0" prefHeight="58.0" prefWidth="1360.0" styleClass="drops_border" AnchorPane.leftAnchor="-40.0" AnchorPane.rightAnchor="-40.0" AnchorPane.topAnchor="-17.0" />
       <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="746.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
@@ -170,7 +170,7 @@
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Global_Resources/settings_icon.png" />
+                        <Image url="@controls/toppings_icon.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -231,7 +231,7 @@
                <graphic>
                   <ImageView fitHeight="53.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../settings/salary.png" />
+                        <Image url="@controls/type_icon.png" />
                      </image>
                   </ImageView>
                </graphic>

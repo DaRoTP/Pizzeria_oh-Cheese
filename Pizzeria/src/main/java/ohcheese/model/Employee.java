@@ -35,12 +35,7 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "Job_Position_ID")
     private Job_Position position_ID;
-    @ManyToMany
-    @JoinTable(
-            name = "Shopping_Cart_Employee",
-            joinColumns = { @JoinColumn(name = "Employee_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "Shopping_Cart_ID") }
-    )
+    @ManyToMany(mappedBy = "employees")
     private Set<Shopping_Cart> shopping_carts = new HashSet<>();
 
     public Employee() { }

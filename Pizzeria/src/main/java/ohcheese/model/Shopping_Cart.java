@@ -23,7 +23,12 @@ public class Shopping_Cart {
     @OneToOne
     @JoinColumn(name = "Order_status_ID")
     private Order_status order_status_ID;
-    @ManyToMany(mappedBy = "shopping_carts")
+    @ManyToMany
+    @JoinTable(
+            name = "Shopping_Cart_Employee",
+            joinColumns = { @JoinColumn(name = "Shopping_Cart_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "Employee_ID") }
+    )
     private Set<Employee> employees = new HashSet<>();
 
     public Integer getId() { return id; }

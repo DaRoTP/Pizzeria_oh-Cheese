@@ -27,6 +27,12 @@ public class Pizza {
     )
     private Set<Toppings> toppings = new HashSet<>();
 
+    public Pizza(String pizza_Name, String pizza_image, Pizza_Type pizza_Type_ID, Set<Toppings> toppings) {
+        this.pizza_Name = pizza_Name;
+        this.pizza_image = pizza_image;
+        Pizza_Type_ID = pizza_Type_ID;
+        this.toppings = toppings;
+    }
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }

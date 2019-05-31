@@ -1,6 +1,7 @@
 package ohcheese.model.helper;
 
 import javafx.scene.control.Button;
+import ohcheese.controller.EmployeeTools.Employee_add_edit_remove;
 import ohcheese.controller.GeneralWindowControl;
 
 import java.io.IOException;
@@ -10,6 +11,7 @@ public class Toppings_Info extends GeneralWindowControl {
     private int topping_id;
     private String topping_name;
     private Button edit_btn;
+    private Button remove_btn;
 
     public static boolean class_type;
     public static int temp_id;
@@ -19,6 +21,12 @@ public class Toppings_Info extends GeneralWindowControl {
         this.topping_id = topping_id;
         this.topping_name = topping_name;
         this.class_type = false;
+
+        this.remove_btn = new Button("-");
+        this.remove_btn.getStyleClass().add("edit_btn");
+        this.remove_btn.setOnAction( e->{
+            Employee_add_edit_remove.getTopping().remove(this);
+        });
 
         this.edit_btn = new Button("Edit");
         this.edit_btn.setOnAction( e->{
@@ -50,4 +58,6 @@ public class Toppings_Info extends GeneralWindowControl {
     public Button getEdit_btn() { return edit_btn; }
     public void setEdit_btn(Button edit_btn) { this.edit_btn = edit_btn; }
 
+    public Button getRemove_btn() { return remove_btn; }
+    public void setRemove_btn(Button remove_btn) { this.remove_btn = remove_btn; }
 }
