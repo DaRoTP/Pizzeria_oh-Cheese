@@ -233,10 +233,10 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
             session.close();
             Image pica;
-            if(pizza_from_DataBase.get(i).getPizza_image() != null){
+            try{
                 pica = new Image(pizza_from_DataBase.get(i).getPizza_image());
             }
-            else{
+            catch(Exception e){
                 pica = new Image("view/Global_Resources/Logo.png");
             }
             ImageView Picaphoto = new ImageView();

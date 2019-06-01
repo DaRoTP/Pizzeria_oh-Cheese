@@ -2,6 +2,7 @@ package ohcheese.model.helper;
 
 
 import javafx.scene.control.Button;
+import ohcheese.controller.EmployeeTools.Employee_add_edit_remove;
 import ohcheese.controller.GeneralWindowControl;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class PizzaInfo extends GeneralWindowControl {
         this.pizzaname = pizzaname;
         this.class_type = false;
 
-        this.edit_btn = new Button("test");
+        this.edit_btn = new Button("Edit");
         this.edit_btn.setOnAction(e->{
             this.temp_id = this.pizzaID;
             this.class_type = true;

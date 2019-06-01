@@ -56,6 +56,7 @@ public class Employee_add_edit_remove implements Initializable {
     @FXML private TableView<Toppings_Info> toppingTable = new TableView<>();
     public static ObservableList<Toppings_Info> topping = FXCollections.observableArrayList();
     public static ObservableList<Toppings_Info> getTopping() { return topping; }
+    public static void setTopping(ObservableList<Toppings_Info> topping) { Employee_add_edit_remove.topping = topping; }
 
     //Shopping Cart
     @FXML private TextField name_TF;
@@ -95,6 +96,9 @@ public class Employee_add_edit_remove implements Initializable {
         }
         else if(PizzaInfo.isClass_type()){
             set_pizza();
+            topping.clear();
+            getExistingToppings();
+            create_toppings();
             PizzaInfo.setClass_type(false);
         }
         else if(Shopping_Cart_Info.isClass_type()){
@@ -397,7 +401,9 @@ public class Employee_add_edit_remove implements Initializable {
 
         id_label.setText("ID: "+pizza.getId());
         pizza_name_TF.setText(pizza.getPizza_Name());
-        type_TF.setText(pizza.getPizza_Type_ID().getPizza_Type());
+        Pizza_imageTF.setText(pizza.getPizza_image());
+        typeChoice.getSelectionModel().select("#"+pizza.getPizza_Type_ID().getId()+"| "+pizza.getPizza_Type_ID().getPizza_Type());
+
 
         session.getTransaction().commit();
         session.close();
@@ -449,6 +455,19 @@ public class Employee_add_edit_remove implements Initializable {
         toppingTable.setItems(topping);
         toppingTable.getColumns().addAll(IdColumn,topping_name,remove);
         toppingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    }
+    public void getExistingToppings(){
+        Session session = factory.getCurrentSession();
+        session.getTransaction().begin();
+
+        Pizza chosenPizza = session.get(Pizza.class, PizzaInfo.getTemp_id());
+        for(Toppings tpp : chosenPizza.getToppings()){
+            topping.add(new Toppings_Info(tpp.getId(),tpp.getTopping_Name()));
+        }
+
+
+        session.getTransaction().commit();
+        session.close();
     }
    public void addTopping(ActionEvent event){
        String temp = toppingsChoice.getValue();
@@ -544,7 +563,7 @@ public class Employee_add_edit_remove implements Initializable {
                         }
                     }
                 }
-
+                topping.clear();
                 Pizza new_pizza = new Pizza(pizza_name_TF.getText(),Pizza_imageTF.getText(),chosenType,toBeAddedToppings);
                 session.save(new_pizza);
 
@@ -562,6 +581,86 @@ public class Employee_add_edit_remove implements Initializable {
         }
         session.close();
     }
+    public void update_pizza(ActionEvent event){
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Pizza where Pizza_Name='"+pizza_name_TF.getText()+"' and Pizza_ID!='"+PizzaInfo.getTemp_id()+"'");
+            List<Pizza> pizza_list = query.list();
+
+            if(pizza_list.size() == 0) {
+
+                String temp = typeChoice.getValue();
+                String number = "";
+                for (int i = 1; i < temp.length(); i++){
+                    char c = temp.charAt(i);
+                    if(c != '|')
+                        number += c;
+                    else
+                        break;
+                }
+
+                Pizza_Type chosenType = session.get(Pizza_Type.class, Integer.parseInt(number));
+
+                query = session.createQuery("from Toppings");
+                List<Toppings> topping_list = query.list();
+
+                Pizza updatePizza = session.get(Pizza.class, PizzaInfo.getTemp_id());
+
+                Set<Toppings> toBeAddedToppings = new HashSet<>();
+                for(Toppings_Info tp : topping){
+                    for(Toppings topp : topping_list){
+                        if(topp.getId() == tp.getTopping_id()){
+                            toBeAddedToppings.add(topp);
+                        }
+                    }
+                }
+
+
+                updatePizza.setPizza_image(Pizza_imageTF.getText());
+                updatePizza.setPizza_Name(pizza_name_TF.getText());
+                updatePizza.setPizza_Type_ID(chosenType);
+                updatePizza.setToppings(toBeAddedToppings);
+
+                session.update(updatePizza);
+
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                window.close();
+            }
+            else
+                warning.setText("Pizza already exists");
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+    public void delete_pizza(ActionEvent event){
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Pizza delete_pizza = session.get(Pizza.class, PizzaInfo.getTemp_id());
+            session.delete(delete_pizza);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.close();
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+
 
     //PROMO CODES
     public void update_promo_code(ActionEvent event){
