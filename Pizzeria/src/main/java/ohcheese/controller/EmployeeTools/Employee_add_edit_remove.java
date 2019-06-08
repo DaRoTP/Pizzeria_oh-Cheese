@@ -73,6 +73,8 @@ public class Employee_add_edit_remove implements Initializable {
     @FXML private Button activeOrder = new Button();
     @FXML private Button bakingOrder = new Button();
     @FXML private Button deliveringOrder = new Button();
+    @FXML private Button finishedOrder = new Button();
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -126,6 +128,7 @@ public class Employee_add_edit_remove implements Initializable {
             activeOrder.setDisable(true);
             bakingOrder.setDisable(false);
             deliveringOrder.setDisable(true);
+            finishedOrder.setDisable(true);
         }
         if(shopping_cart.getOrder_status_ID() == OrderStatusList.get(2)){
             activeOrder.getStyleClass().clear();
@@ -135,6 +138,7 @@ public class Employee_add_edit_remove implements Initializable {
             bakingOrder.setDisable(true);
             activeOrder.setDisable(true);
             deliveringOrder.setDisable(false);
+            finishedOrder.setDisable(true);
         }
         if(shopping_cart.getOrder_status_ID() == OrderStatusList.get(3)){
             activeOrder.getStyleClass().clear();
@@ -146,6 +150,21 @@ public class Employee_add_edit_remove implements Initializable {
             deliveringOrder.setDisable(true);
             bakingOrder.setDisable(true);
             activeOrder.setDisable(true);
+            finishedOrder.setDisable(false);
+        }
+        if(shopping_cart.getOrder_status_ID() == OrderStatusList.get(4)){
+            activeOrder.getStyleClass().clear();
+            bakingOrder.getStyleClass().clear();
+            deliveringOrder.getStyleClass().clear();
+            finishedOrder.getStyleClass().clear();
+            activeOrder.getStyleClass().add("price");
+            bakingOrder.getStyleClass().add("price");
+            deliveringOrder.getStyleClass().add("price");
+            finishedOrder.getStyleClass().add("price");
+            deliveringOrder.setDisable(true);
+            bakingOrder.setDisable(true);
+            activeOrder.setDisable(true);
+            finishedOrder.setDisable(true);
         }
         session.getTransaction().commit();
         session.close();
@@ -256,6 +275,17 @@ public class Employee_add_edit_remove implements Initializable {
         deliveringOrder.getStyleClass().clear();
         deliveringOrder.getStyleClass().add("price");
         change_order_status(4);
+
+        activeOrder.setDisable(true);
+        bakingOrder.setDisable(true);
+        deliveringOrder.setDisable(true);
+        finishedOrder.setDisable(false);
+    }
+
+    public void finished_order(ActionEvent event){
+        finishedOrder.getStyleClass().clear();
+        finishedOrder.getStyleClass().add("price");
+        change_order_status(5);
     }
 
     public void set_delivery_drivers(){

@@ -20,7 +20,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
-public class LoginControl extends GeneralWindowControl implements Initializable{
+public class LoginControl extends GeneralWindowControl{
 
 
     public static Customer loggedinCustomer;
@@ -29,7 +29,6 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
     public SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
 
 
-    @FXML private ChoiceBox<String> Mode_choice = new ChoiceBox<String>();
 	@FXML TextField usernameField = new TextField();
 	@FXML PasswordField  passwordField = new PasswordField();
 	@FXML Label Warning_label = new Label();
@@ -40,12 +39,6 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
     public static void setLoggedinEmployee(Employee loggedinEmployee) { LoginControl.loggedinEmployee = loggedinEmployee; }
     public static Employee get_loggedinEmployee() { return loggedinEmployee; }
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-    	Mode_choice.getItems().add("CUSTOMER");
-        Mode_choice.getItems().add("ADMIN");
-        Mode_choice.getItems().add("EMPLOYEE");
-    }
 
     
     public boolean checkIfEmpty() {
@@ -117,67 +110,23 @@ public class LoginControl extends GeneralWindowControl implements Initializable{
 
     }
 
-
-
     public void open_window(ActionEvent event) throws IOException {
-        List CustomerUser = checkIF_Customer_Exists();
-        List EmployeeUser = checkIF_Employee_Exists();
-        String value = Mode_choice.getValue();
+        List<Customer> CustomerUser = checkIF_Customer_Exists();
+        List<Employee> EmployeeUser = checkIF_Employee_Exists();
+
         if(checkIfEmpty()) {
             if(CustomerUser.size() > 0){
-                loggedinCustomer = (Customer)CustomerUser.get(0);
-                try {
-                    switch (value) {
-                        case "ADMIN":
-                            Warning_label.setText("Bad Login");
-                            break;
-                        case "CUSTOMER": {
-                            changescene(event, "Customer", "Customer", "Customer", "Customer");
-                        }
-                        break;
-                        case "EMPLOYEE":
-                            Warning_label.setText("Bad Login");
-                            break;
-                        default:
-                            System.out.println("default");
-                    }
-                } catch (NullPointerException e) {
-                    Mode_choice.getStyleClass().add("warning_choice");
-                    Warning_label.setText("User type not chosen");
-                }
+                loggedinCustomer = CustomerUser.get(0);
+                changescene(event, "Customer", "Customer", "Customer", "Customer");
             }
-            else if(checkIF_Employee_Exists().size() > 0){
-                String position = ((Job_Position)((Employee) EmployeeUser.get(0)).getPosition_ID()).getPosition_Name();
-                System.out.println(position);
-                loggedinEmployee = (Employee)EmployeeUser.get(0);
-                try {
-                    switch (value) {
-                        case "ADMIN": {
-                            if(position.equals("Owner") || position.equals("Assistant Store General Managers ") || position.equals("Administrator"))
-                                changescene(event, "Admin", "Admin", "Admin", "Admin");
-                            else
-                                Warning_label.setText("Bad Login");
+            else if(EmployeeUser.size() > 0){
+                int positionID =  EmployeeUser.get(0).getPosition_ID().getId();
+                loggedinEmployee = EmployeeUser.get(0);
 
-                        }
-                            break;
-                        case "CUSTOMER": {
-                            Warning_label.setText("Bad Login");                        }
-                        break;
-                        case "EMPLOYEE": {
-                            if (position.equals("Owner") || position.equals("Assistant Store General Managers ") || position.equals("Administrator") || position.equals("Pizza Maker") || position.equals("Delivery Drivers"))
-                                changescene(event, "Employee", "Employee", "Employee", "Employee");
-                            else
-                                Warning_label.setText("Bad Login");
-
-                            break;
-                        }
-                        default:
-                            System.out.println("default");
-                    }
-                } catch (NullPointerException e) {
-                    Mode_choice.getStyleClass().add("warning_choice");
-                    Warning_label.setText("User type not chosen");
-                }
+                if(positionID == 2 || positionID == 3 || positionID == 4)
+                    changescene(event, "Admin", "Admin", "Admin", "Admin");
+                else
+                    changescene(event, "Employee", "Employee", "Employee", "Employee");
             }
             else{
                 Warning_label.setText("Bad Login");

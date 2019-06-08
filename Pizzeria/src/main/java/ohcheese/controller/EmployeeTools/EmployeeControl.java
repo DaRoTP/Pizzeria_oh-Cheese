@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import ohcheese.Utilities.HibernateUtil;
 import ohcheese.controller.GeneralWindowControl;
 import ohcheese.controller.LoginControl;
@@ -23,8 +24,7 @@ import java.util.ResourceBundle;
 
 public class EmployeeControl extends GeneralWindowControl implements Initializable {
 
-    private int EmployeeID;
-    private int searchedID;
+
 
     @FXML private Label warning;
     @FXML Label WelcomeUser = new Label();
@@ -40,9 +40,24 @@ public class EmployeeControl extends GeneralWindowControl implements Initializab
     @FXML private TextField promo_code;
     @FXML private TextField searchIDField;
 
+    @FXML private Button switchToAdmin = new Button("Switch to Admin");
+    @FXML private HBox switchHB = new HBox();
+
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        if(LoginControl.get_loggedinEmployee().getPosition_ID().getId() == 2 || LoginControl.get_loggedinEmployee().getPosition_ID().getId() == 3 ||
+                LoginControl.get_loggedinEmployee().getPosition_ID().getId() == 4){
+            switchHB.getChildren().add(switchToAdmin);
+            switchToAdmin.setOnAction( event -> {
+                try {
+                    changescene(event, "Admin", "Admin", "Admin", "Admin");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+
         WelcomeUser.setText("Welcome "+ LoginControl.get_loggedinEmployee().getName()+" !");
         create_pizzaTable();
         create_toppings();

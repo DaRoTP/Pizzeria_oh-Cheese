@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -107,11 +106,11 @@
                                                 <Insets right="10.0" />
                                              </HBox.margin>
                                           </ImageView>
-                                          <Slider fx:id="salarySl" majorTickUnit="200.0" max="5000.0" min="1000.0" prefWidth="332.0" showTickLabels="true">
-                                             <HBox.margin>
-                                                <Insets left="10.0" />
-                                             </HBox.margin>
-                                          </Slider>
+                                          <TextField fx:id="salary" prefHeight="31.0" prefWidth="332.0" promptText="Salary" styleClass="TextField">
+                                             <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                             </cursor>
+                                          </TextField>
                                        </children>
                                     </HBox>
                                  </children>

@@ -52,6 +52,10 @@ public class AdminControl extends GeneralWindowControl implements Initializable 
         create_JPositionTable();
     }
 
+    public void switchToEmployee(ActionEvent event) throws IOException {
+        changescene(event, "Employee", "Employee", "Employee", "Employee");
+    }
+
     public void create_CustomerTable(){
         TableColumn<Customer_Info, Integer> IdColumn = new TableColumn<>("ID");
         IdColumn.setCellValueFactory(new PropertyValueFactory<>("customer_ID"));

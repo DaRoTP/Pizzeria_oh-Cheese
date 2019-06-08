@@ -283,6 +283,11 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
+                  <Button fx:id="finishedOrder" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#finished_order" prefHeight="31.0" prefWidth="89.0" text="Finish" textAlignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                </children>
             </HBox>
          </bottom>

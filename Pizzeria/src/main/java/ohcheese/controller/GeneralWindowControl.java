@@ -15,25 +15,6 @@ public class GeneralWindowControl {
 
 
 
-    public void ChangeStage_PaassingID(ActionEvent event, String scenename, String stylesheetname, String packagename) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/" +packagename+"/"+scenename+".fxml"));
-        Parent root = loader.load();
-
-        if(scenename == "Customer") {
-            CustomerControl CustomerC = loader.getController();
-        }
-        else if(scenename == "Employee"){
-            EmployeeControl EmployeeC = loader.getController();
-        }
-        else{
-            AdminControl AdminC = loader.getController();
-        }
-
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(new Scene(root));
-        window.show();
-        root.getStylesheets().add("/view/" +packagename+"/"+stylesheetname+".css");
-    }
 
 
     public void changescene(ActionEvent event, String scenename, String stylesheetname, String scene_packagename,String stylesheet_packagename)throws IOException {

@@ -98,15 +98,7 @@
 
 }
 
-.TableLabel{
-    -fx-background-radius: 15;
-    -fx-background-color: #949494;
-    -fx-text-fill: white;
-    -fx-font-family: Arial;
-    -fx-font-weight: bold;
-    -fx-font-size: 20;
-    -fx-padding: 0;
-}
+
 
 
 .TableLabel{

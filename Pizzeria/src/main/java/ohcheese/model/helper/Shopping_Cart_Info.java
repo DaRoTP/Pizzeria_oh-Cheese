@@ -1,6 +1,8 @@
 package ohcheese.model.helper;
 
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import ohcheese.Utilities.HibernateUtil;
 import ohcheese.controller.GeneralWindowControl;
 import ohcheese.model.*;
@@ -19,6 +21,7 @@ public class Shopping_Cart_Info extends GeneralWindowControl {
     private Promo_Codes promo_Code;
     private Order_status order_status;
     private Button edit_btn;
+    private Button view_btn;
 
     private String username;
     private String street;
@@ -27,6 +30,19 @@ public class Shopping_Cart_Info extends GeneralWindowControl {
     private String apartment_Nr;
     private String status;
     private float final_price;
+//    private String promocodeName;
+
+    private ImageView acceptedIV;
+    private ImageView bakingIV;
+    private ImageView deliveryIV;
+    private ImageView finishedIV;
+
+    private Image accpetedImg = new Image("view/Customer/view_status/checked.png");
+    private Image bakingImg = new Image("view/Customer/view_status/oven.png");
+    private Image deliveryImg = new Image("view/Customer/view_status/delivery.png");
+    private Image finishedImg = new Image("view/Customer/view_status/flags-crossed.png");
+
+
 
     public static boolean class_type;
     public static int temp_id;
@@ -46,8 +62,33 @@ public class Shopping_Cart_Info extends GeneralWindowControl {
         this.final_price = final_price;
         this.final_price = discount();
 
+        this.acceptedIV = new ImageView();
+        acceptedIV.setFitHeight(30);
+        acceptedIV.setFitWidth(30);
+        this.bakingIV = new ImageView();
+        bakingIV.setFitHeight(30);
+        bakingIV.setFitWidth(30);
+        this.deliveryIV = new ImageView();
+        deliveryIV.setFitHeight(30);
+        deliveryIV.setFitWidth(30);
+        this.finishedIV = new ImageView();
+        finishedIV.setFitHeight(30);
+        finishedIV.setFitWidth(30);
+
+        if(order_status.getId() == 2 || order_status.getId() == 3 || order_status.getId() == 4 || order_status.getId() == 5)
+            this.acceptedIV.setImage(accpetedImg);
+        if(order_status.getId() == 3 || order_status.getId() == 4 || order_status.getId() == 5)
+            this.bakingIV.setImage(bakingImg);
+        if(order_status.getId() == 4 || order_status.getId() == 5)
+            this.deliveryIV.setImage(deliveryImg);
+        if(order_status.getId() == 5)
+            this.finishedIV.setImage(finishedImg);
+
+
+
+
         this.class_type = false;
-        this.edit_btn = new Button("View");
+        this.edit_btn = new Button("Edit");
         this.edit_btn.setOnAction(e->{
             this.temp_id = this.SC_ID;
             this.class_type = true;
@@ -60,6 +101,18 @@ public class Shopping_Cart_Info extends GeneralWindowControl {
         });
         this.edit_btn.getStyleClass().add("addbtn");
 
+        this.view_btn = new Button("View");
+        this.view_btn.setOnAction(e->{
+            this.temp_id = this.SC_ID;
+            this.class_type = true;
+            try {
+                openscene(e, "viewOrder","GeneralWindowStyle", "Order","Global_Resources");
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+        });
+        this.view_btn.getStyleClass().add("addbtn");
     }
 
     public float discount(){
@@ -114,5 +167,31 @@ public class Shopping_Cart_Info extends GeneralWindowControl {
     public static boolean isClass_type() { return class_type; }
     public static void setClass_type(boolean class_type) { Shopping_Cart_Info.class_type = class_type; }
 
+    public ImageView getAcceptedIV() { return acceptedIV; }
+    public void setAcceptedIV(ImageView acceptedIV) { this.acceptedIV = acceptedIV; }
+
+    public ImageView getBakingIV() { return bakingIV; }
+    public void setBakingIV(ImageView bakingIV) { this.bakingIV = bakingIV; }
+
+    public ImageView getDeliveryIV() { return deliveryIV; }
+    public void setDeliveryIV(ImageView deliveryIV) { this.deliveryIV = deliveryIV; }
+
+    public ImageView getFinishedIV() { return finishedIV; }
+    public void setFinishedIV(ImageView finishedIV) { this.finishedIV = finishedIV; }
+
+    public Image getAccpetedImg() { return accpetedImg; }
+    public void setAccpetedImg(Image accpetedImg) { this.accpetedImg = accpetedImg; }
+
+    public Image getBakingImg() { return bakingImg; }
+    public void setBakingImg(Image bakingImg) { this.bakingImg = bakingImg; }
+
+    public Image getDeliveryImg() { return deliveryImg; }
+    public void setDeliveryImg(Image deliveryImg) { this.deliveryImg = deliveryImg; }
+
+    public Image getFinishedImg() { return finishedImg; }
+    public void setFinishedImg(Image finishedImg) { this.finishedImg = finishedImg; }
+
+    public Button getView_btn() { return view_btn; }
+    public void setView_btn(Button view_btn) { this.view_btn = view_btn; }
 
 }

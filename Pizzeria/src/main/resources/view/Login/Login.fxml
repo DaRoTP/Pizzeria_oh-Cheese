@@ -4,7 +4,6 @@
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -99,27 +98,19 @@
                                     <Cursor fx:constant="TEXT" />
                                  </cursor>
                               </PasswordField>
-                              <ChoiceBox fx:id="Mode_choice" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="128.0">
-                                 <HBox.margin>
-                                    <Insets left="20.0" />
-                                 </HBox.margin>
+                              <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_window" prefHeight="35.0" prefWidth="128.0" text="Login">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
-                              </ChoiceBox>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Button>
                            </children>
                            <VBox.margin>
                               <Insets left="128.0" />
                            </VBox.margin>
                         </HBox>
-                        <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_window" prefHeight="35.0" prefWidth="90.0" text="Login">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <VBox.margin>
-                              <Insets left="42.0" />
-                           </VBox.margin>
-                        </Button>
                         <Label fx:id="Warning_label" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="236.0" styleClass="Warning_Label">
                            <VBox.margin>
                               <Insets left="42.0" />

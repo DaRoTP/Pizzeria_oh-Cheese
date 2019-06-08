@@ -84,7 +84,7 @@ public class CustomerControl extends GeneralWindowControl implements Initializab
 
         newOrder = new Order(small_price_zl,medium_price_zl,large_price_zl);
         createPizzaTile();
-        ViewStatus.setDisable(true);
+        ViewStatus.setDisable(false);
         CheckoutBtn.setDisable(true);
 
     }
