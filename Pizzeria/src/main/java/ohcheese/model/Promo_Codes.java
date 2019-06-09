@@ -14,6 +14,13 @@ public class Promo_Codes {
     @Column(name = "Discount")
     private int percent_Off;
 
+    public Promo_Codes() { }
+
+    public Promo_Codes(String promo_Code, int percent_Off) {
+        this.promo_Code = promo_Code;
+        this.percent_Off = percent_Off;
+    }
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -23,10 +30,4 @@ public class Promo_Codes {
     public int getPercent_Off() { return percent_Off; }
     public void setPercent_Off(int percent_Off) { this.percent_Off = percent_Off; }
 
-    public Promo_Codes() { }
-
-    public Promo_Codes(String promo_Code, int percent_Off) {
-        this.promo_Code = promo_Code;
-        this.percent_Off = percent_Off;
-    }
 }

@@ -31,6 +31,14 @@ public class Shopping_Cart {
     )
     private Set<Employee> employees = new HashSet<>();
 
+    public Shopping_Cart() { }
+
+    public Shopping_Cart( Customer customer_ID, Address address_ID, Order_status order_status_ID) {
+        this.customer_ID = customer_ID;
+        this.address_ID = address_ID;
+        this.order_status_ID = order_status_ID;
+    }
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -49,11 +57,5 @@ public class Shopping_Cart {
     public Set<Employee> getEmployee() { return employees; }
     public void setEmployee(Set<Employee> employee) { this.employees = employee; }
 
-    public Shopping_Cart() { }
 
-    public Shopping_Cart( Customer customer_ID, Address address_ID, Order_status order_status_ID) {
-        this.customer_ID = customer_ID;
-        this.address_ID = address_ID;
-        this.order_status_ID = order_status_ID;
-    }
 }

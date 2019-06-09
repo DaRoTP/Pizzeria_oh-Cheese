@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="559.0" prefWidth="500.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ohcheese.controller.Admin_tools">
+<AnchorPane prefHeight="559.0" prefWidth="500.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ohcheese.controller.adminUntilities.Admin_tools">
    <children>
       <Pane layoutX="-61.0" layoutY="-70.0" prefHeight="100.0" prefWidth="612.0" styleClass="drops" AnchorPane.leftAnchor="-61.0" AnchorPane.rightAnchor="-79.0" AnchorPane.topAnchor="-70.0" />
       <Pane layoutX="380.0" layoutY="-2.0" prefHeight="56.0" prefWidth="30.0" styleClass="drops" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="0.0" />
@@ -53,7 +53,7 @@
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="352.0">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="212.0" styleClass="redish-text" text="Edit Address" textAlignment="CENTER" />
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#delete_address" prefHeight="31.0" prefWidth="89.0" text="Delete" textAlignment="CENTER">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#deleteAddress" prefHeight="31.0" prefWidth="89.0" text="Delete" textAlignment="CENTER">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -113,7 +113,7 @@
             </VBox>
          </center>
          <bottom>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#update_address" prefHeight="31.0" prefWidth="89.0" text="Submit" textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#updateAddress" prefHeight="31.0" prefWidth="89.0" text="Submit" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="15.0" top="20.0" />
                </BorderPane.margin>

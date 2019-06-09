@@ -223,7 +223,7 @@ public class SignUpControl {
         return true;
     }
 
-    public int check_If_Customer_Of_Given_Username_Exists(){
+    public int checkIfCustomerOfGivenUsernameExists(){
         Session session = factory.getCurrentSession();
 
         try {
@@ -246,7 +246,7 @@ public class SignUpControl {
         return 0;
     }
 
-    public Address check_If__given_Address_Exists(){
+    public Address checkIfGivenAddressExists(){
         Session session = factory.getCurrentSession();
 
         try {
@@ -271,10 +271,10 @@ public class SignUpControl {
         return null;
     }
 
-    public void Insert_Values(ActionEvent event){
+    public void insertValues(ActionEvent event){
 
-        if (check_If_Customer_Of_Given_Username_Exists() == 0) {
-            Address result_Address = check_If__given_Address_Exists();
+        if (checkIfCustomerOfGivenUsernameExists() == 0) {
+            Address result_Address = checkIfGivenAddressExists();
 
             Session session = factory.getCurrentSession();
 
@@ -311,15 +311,9 @@ public class SignUpControl {
     }
 
 
-
-
     public void submit(ActionEvent event){
         if(checkInputLogic()){
-            Insert_Values(event);
-
+            insertValues(event);
         }
-
-
     }
-
-    }
+}

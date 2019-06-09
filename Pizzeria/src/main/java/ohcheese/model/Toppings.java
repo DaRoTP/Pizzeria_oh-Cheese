@@ -16,6 +16,12 @@ public class Toppings {
     @ManyToMany(mappedBy = "toppings", fetch = FetchType.EAGER)
     private Set<Pizza> pizzas = new HashSet<>();
 
+    public Toppings() { }
+
+    public Toppings(String topping_Name) {
+        this.topping_Name = topping_Name;
+    }
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -25,9 +31,5 @@ public class Toppings {
     public Set<Pizza> getPizzas() { return pizzas; }
     public void setPizzas(Set<Pizza> pizzas) { this.pizzas = pizzas; }
 
-    public Toppings() { }
 
-    public Toppings(String topping_Name) {
-        this.topping_Name = topping_Name;
-    }
 }

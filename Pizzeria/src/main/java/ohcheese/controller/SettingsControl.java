@@ -20,8 +20,8 @@ import java.util.ResourceBundle;
 
 public class SettingsControl implements Initializable {
 
-    private  Customer loged_in_Customer;
-    private Employee loged_in_Employee;
+    private  Customer logedInCustomer;
+    private Employee logedInEmployee;
 
     @FXML public TextField name = new TextField();
     @FXML public TextField surname = new TextField();
@@ -46,37 +46,37 @@ public class SettingsControl implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        loged_in_Customer = LoginControl.get_loggedinCustomer();
-        loged_in_Employee = LoginControl.get_loggedinEmployee();
+        logedInCustomer = LoginControl.get_loggedinCustomer();
+        logedInEmployee = LoginControl.get_loggedinEmployee();
 
-        if(loged_in_Customer != null) {
-            name.setText(loged_in_Customer.getName());
-            surname.setText(loged_in_Customer.getSurname());
-            e_mail.setText(loged_in_Customer.getEmail());
-            phone_number.setText(loged_in_Customer.getPhone_Number());
-            username.setText(loged_in_Customer.getUsername());
-            password.setText(loged_in_Customer.getPassword());
-            city.setText(loged_in_Customer.getAddress_ID().getCity());
-            zip_code.setText(loged_in_Customer.getAddress_ID().getZIP_Code());
-            house_number.setText(loged_in_Customer.getAddress_ID().getHouse_Number());
-            apartment_number.setText(loged_in_Customer.getAddress_ID().getApartment_Number());
-            street.setText(loged_in_Customer.getAddress_ID().getStreet());
+        if(logedInCustomer != null) {
+            name.setText(logedInCustomer.getName());
+            surname.setText(logedInCustomer.getSurname());
+            e_mail.setText(logedInCustomer.getEmail());
+            phone_number.setText(logedInCustomer.getPhone_Number());
+            username.setText(logedInCustomer.getUsername());
+            password.setText(logedInCustomer.getPassword());
+            city.setText(logedInCustomer.getAddress_ID().getCity());
+            zip_code.setText(logedInCustomer.getAddress_ID().getZIP_Code());
+            house_number.setText(logedInCustomer.getAddress_ID().getHouse_Number());
+            apartment_number.setText(logedInCustomer.getAddress_ID().getApartment_Number());
+            street.setText(logedInCustomer.getAddress_ID().getStreet());
         }
         else{
-            name.setText(loged_in_Employee.getName());
-            surname.setText(loged_in_Employee.getSurname());
-            e_mail.setText(loged_in_Employee.getEmail());
-            phone_number.setText(loged_in_Employee.getPhone_Number());
-            username.setText(loged_in_Employee.getUsername());
-            password.setText(loged_in_Employee.getPassword());
-            city.setText(loged_in_Employee.getAddress_ID().getCity());
-            zip_code.setText(loged_in_Employee.getAddress_ID().getZIP_Code());
-            house_number.setText(loged_in_Employee.getAddress_ID().getHouse_Number());
-            street.setText(loged_in_Employee.getAddress_ID().getStreet());
-            apartment_number.setText(loged_in_Employee.getAddress_ID().getApartment_Number());
-            job_position.setText(loged_in_Employee.getPosition_ID().getPosition_Name());
-            salary.setText(Float.toString(loged_in_Employee.getSalary()));
-            pesel.setText(loged_in_Employee.getPESEL());
+            name.setText(logedInEmployee.getName());
+            surname.setText(logedInEmployee.getSurname());
+            e_mail.setText(logedInEmployee.getEmail());
+            phone_number.setText(logedInEmployee.getPhone_Number());
+            username.setText(logedInEmployee.getUsername());
+            password.setText(logedInEmployee.getPassword());
+            city.setText(logedInEmployee.getAddress_ID().getCity());
+            zip_code.setText(logedInEmployee.getAddress_ID().getZIP_Code());
+            house_number.setText(logedInEmployee.getAddress_ID().getHouse_Number());
+            street.setText(logedInEmployee.getAddress_ID().getStreet());
+            apartment_number.setText(logedInEmployee.getAddress_ID().getApartment_Number());
+            job_position.setText(logedInEmployee.getPosition_ID().getPosition_Name());
+            salary.setText(Float.toString(logedInEmployee.getSalary()));
+            pesel.setText(logedInEmployee.getPESEL());
         }
 
     }
@@ -209,7 +209,7 @@ public class SettingsControl implements Initializable {
         return true;
     }
 
-    public Address check_If__given_Address_Exists(){
+    public Address checkIfGivenAddressExists(){
         SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
@@ -235,49 +235,49 @@ public class SettingsControl implements Initializable {
         return null;
     }
 
-    public void set_new_value_for_Customer(){
-        if(!loged_in_Customer.getName().equals(name.getText()))
-            loged_in_Customer.setName(name.getText());
+    public void setNewValueForCustomer(){
+        if(!logedInCustomer.getName().equals(name.getText()))
+            logedInCustomer.setName(name.getText());
 
-        if(!loged_in_Customer.getSurname().equals(surname.getText()))
-            loged_in_Customer.setSurname(surname.getText());
+        if(!logedInCustomer.getSurname().equals(surname.getText()))
+            logedInCustomer.setSurname(surname.getText());
 
-        if(!loged_in_Customer.getEmail().equals(e_mail.getText()))
-            loged_in_Customer.setEmail(e_mail.getText());
+        if(!logedInCustomer.getEmail().equals(e_mail.getText()))
+            logedInCustomer.setEmail(e_mail.getText());
 
-        if(!loged_in_Customer.getPhone_Number().equals(phone_number.getText()))
-            loged_in_Customer.setPhone_Number(phone_number.getText());
+        if(!logedInCustomer.getPhone_Number().equals(phone_number.getText()))
+            logedInCustomer.setPhone_Number(phone_number.getText());
 
-        if(!loged_in_Customer.getPassword().equals(password.getText()))
-            loged_in_Customer.setPassword(password.getText());
-
-    }
-
-    public void set_new_value_for_Employee(){
-        if(!loged_in_Employee.getName().equals(name.getText()))
-            loged_in_Employee.setName(name.getText());
-
-        if(!loged_in_Employee.getSurname().equals(surname.getText()))
-            loged_in_Employee.setSurname(surname.getText());
-
-        if(!loged_in_Employee.getEmail().equals(e_mail.getText()))
-            loged_in_Employee.setEmail(e_mail.getText());
-
-        if(!loged_in_Employee.getPhone_Number().equals(phone_number.getText()))
-            loged_in_Employee.setPhone_Number(phone_number.getText());
-
-        if(!loged_in_Employee.getPassword().equals(password.getText()))
-            loged_in_Employee.setPassword(password.getText());
-
-        if(!loged_in_Employee.getPESEL().equals(pesel.getText()))
-            loged_in_Employee.setPESEL(pesel.getText());
+        if(!logedInCustomer.getPassword().equals(password.getText()))
+            logedInCustomer.setPassword(password.getText());
 
     }
 
+    public void setNewValueForEmployee(){
+        if(!logedInEmployee.getName().equals(name.getText()))
+            logedInEmployee.setName(name.getText());
 
-    public void update_settings(ActionEvent event){
+        if(!logedInEmployee.getSurname().equals(surname.getText()))
+            logedInEmployee.setSurname(surname.getText());
 
-        Address result_Address = check_If__given_Address_Exists();
+        if(!logedInEmployee.getEmail().equals(e_mail.getText()))
+            logedInEmployee.setEmail(e_mail.getText());
+
+        if(!logedInEmployee.getPhone_Number().equals(phone_number.getText()))
+            logedInEmployee.setPhone_Number(phone_number.getText());
+
+        if(!logedInEmployee.getPassword().equals(password.getText()))
+            logedInEmployee.setPassword(password.getText());
+
+        if(!logedInEmployee.getPESEL().equals(pesel.getText()))
+            logedInEmployee.setPESEL(pesel.getText());
+
+    }
+
+
+    public void updateProfile(ActionEvent event){
+
+        Address result_Address = checkIfGivenAddressExists();
 
         SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
@@ -285,41 +285,40 @@ public class SettingsControl implements Initializable {
         try {
             session.getTransaction().begin();
 
-            if(loged_in_Customer != null) {
-                set_new_value_for_Customer();
+            if(logedInCustomer != null) {
+                setNewValueForCustomer();
                 if (result_Address == null) {
                     Address new_address = new Address(city.getText(), street.getText(), house_number.getText(), apartment_number.getText(), zip_code.getText());
                     session.save(new_address);
 
-                    loged_in_Customer.setAddress_ID(new_address);
-                    session.update(loged_in_Customer);
+                    logedInCustomer.setAddress_ID(new_address);
+                    session.update(logedInCustomer);
 
                     session.getTransaction().commit();
                 } else {
-                    loged_in_Customer.setAddress_ID(result_Address);
-                    session.update(loged_in_Customer);
+                    logedInCustomer.setAddress_ID(result_Address);
+                    session.update(logedInCustomer);
 
                     session.getTransaction().commit();
                 }
             }
             else{
-                set_new_value_for_Employee();
+                setNewValueForEmployee();
                 if (result_Address == null) {
                     Address new_address = new Address(city.getText(), street.getText(), house_number.getText(), apartment_number.getText(), zip_code.getText());
                     session.save(new_address);
 
-                    loged_in_Employee.setAddress_ID(new_address);
-                    session.update(loged_in_Employee);
+                    logedInEmployee.setAddress_ID(new_address);
+                    session.update(logedInEmployee);
 
                     session.getTransaction().commit();
                 } else {
-                    loged_in_Employee.setAddress_ID(result_Address);
-                    session.update(loged_in_Employee);
+                    logedInEmployee.setAddress_ID(result_Address);
+                    session.update(logedInEmployee);
 
                     session.getTransaction().commit();
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
@@ -332,8 +331,7 @@ public class SettingsControl implements Initializable {
 
     public void submit(ActionEvent event){
         if(checkInputLogic()){
-            update_settings(event);
+            updateProfile(event);
         }
-
     }
 }

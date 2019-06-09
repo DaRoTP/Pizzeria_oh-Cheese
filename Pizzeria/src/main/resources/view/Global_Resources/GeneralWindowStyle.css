@@ -252,6 +252,33 @@
        -fx-background-color: #db3b2f;
 
    }
+.switchScene{
+
+     -fx-background-color: #db3b2f;
+     -fx-text-fill: #1e1414;
+     -fx-font-family: Arial;
+     -fx-font-weight: bold;
+     -fx-font-size: 15;
+     -fx-padding: 0;
+     -fx-border-width: 2;
+     -fx-border-color: #1e1414;
+      -fx-padding: 3;
+      -fx-cursor: hand;
+ }
+ .switchScene:pressed{
+
+    -fx-text-fill: #f7bc27;
+    -fx-background-color: #db3b2f;
+    -fx-border-color: #f7bc27;
+
+  }
+  .switchScene:hover{
+
+        -fx-text-fill: #f7bc27;
+       -fx-background-color: #db3b2f;
+       -fx-border-color: #f7bc27;
+
+   }
 
 .settings
  {

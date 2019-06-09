@@ -30,7 +30,6 @@ public class Address {
         this.ZIP_Code = ZIP_Code;
     }
 
-
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 

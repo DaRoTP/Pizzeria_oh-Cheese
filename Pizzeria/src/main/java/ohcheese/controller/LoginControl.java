@@ -2,20 +2,15 @@ package ohcheese.controller;
 
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import ohcheese.model.Customer;
 import ohcheese.model.Employee;
-import ohcheese.model.Job_Position;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -106,7 +101,7 @@ public class LoginControl extends GeneralWindowControl{
     }
     
     public void SignInOpen(ActionEvent event) throws IOException {
-        openscene(event,"SignUp","GeneralWindowStyle","SignUp","Global_Resources");
+        openScene("SignUp","GeneralWindowStyle","SignUp","Global_Resources");
 
     }
 
@@ -117,16 +112,16 @@ public class LoginControl extends GeneralWindowControl{
         if(checkIfEmpty()) {
             if(CustomerUser.size() > 0){
                 loggedinCustomer = CustomerUser.get(0);
-                changescene(event, "Customer", "Customer", "Customer", "Customer");
+                changeScene(event, "Customer", "Customer", "Customer", "Customer");
             }
             else if(EmployeeUser.size() > 0){
                 int positionID =  EmployeeUser.get(0).getPosition_ID().getId();
                 loggedinEmployee = EmployeeUser.get(0);
 
                 if(positionID == 2 || positionID == 3 || positionID == 4)
-                    changescene(event, "Admin", "Admin", "Admin", "Admin");
+                    changeScene(event, "Admin", "Admin", "Admin", "Admin");
                 else
-                    changescene(event, "Employee", "Employee", "Employee", "Employee");
+                    changeScene(event, "Employee", "Employee", "Employee", "Employee");
             }
             else{
                 Warning_label.setText("Bad Login");

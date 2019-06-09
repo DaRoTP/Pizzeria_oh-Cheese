@@ -14,6 +14,13 @@ public class Size {
     @Column(name = "Price")
     private String price;
 
+    public Size() { }
+
+    public Size(String size, String price) {
+        this.size = size;
+        this.price = price;
+    }
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -23,10 +30,5 @@ public class Size {
     public String getPrice() { return price; }
     public void setPrice(String price) { this.price = price; }
 
-    public Size() { }
 
-    public Size(String size, String price) {
-        this.size = size;
-        this.price = price;
-    }
 }

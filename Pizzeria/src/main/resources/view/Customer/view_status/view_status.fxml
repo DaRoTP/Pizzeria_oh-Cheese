@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ohcheese.controller.ViewStatusControl">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ohcheese.controller.customerUntilities.ViewStatusControl">
    <children>
       <Pane layoutX="-61.0" layoutY="-70.0" prefHeight="201.0" prefWidth="1420.0" styleClass="drops" AnchorPane.leftAnchor="-61.0" AnchorPane.rightAnchor="-79.0" AnchorPane.topAnchor="-70.0" />
       <Pane layoutX="380.0" layoutY="-2.0" prefHeight="191.0" prefWidth="55.0" styleClass="drops" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="0.0" />

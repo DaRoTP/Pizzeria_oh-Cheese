@@ -19,6 +19,14 @@ public class Pizza_Order {
     @JoinColumn(name = "Shopping_Cart_ID")
     private Shopping_Cart shopping_Cart_ID;
 
+    public Pizza_Order() { }
+
+    public Pizza_Order(Pizza pizza_ID, Size size_ID, Shopping_Cart shopping_Cart_ID) {
+        this.pizza_ID = pizza_ID;
+        this.size_ID = size_ID;
+        this.shopping_Cart_ID = shopping_Cart_ID;
+    }
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -31,11 +39,5 @@ public class Pizza_Order {
     public Shopping_Cart getShopping_Cart_ID() { return shopping_Cart_ID; }
     public void setShopping_Cart_ID(Shopping_Cart shopping_Cart_ID) { this.shopping_Cart_ID = shopping_Cart_ID; }
 
-    public Pizza_Order() { }
 
-    public Pizza_Order(Pizza pizza_ID, Size size_ID, Shopping_Cart shopping_Cart_ID) {
-        this.pizza_ID = pizza_ID;
-        this.size_ID = size_ID;
-        this.shopping_Cart_ID = shopping_Cart_ID;
-    }
 }

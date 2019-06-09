@@ -36,7 +36,6 @@ public class Customer {
         Password = password;
     }
 
-    //ID
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
