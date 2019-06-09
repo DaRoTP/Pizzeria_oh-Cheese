@@ -21,7 +21,7 @@ public class Pizza {
 
     @ManyToMany
     @JoinTable(
-        name = "pizzatoppings",
+        name = "PizzaToppings",
         joinColumns = { @JoinColumn(name = "Pizza_ID") },
         inverseJoinColumns = { @JoinColumn(name = "Topping_ID") }
     )

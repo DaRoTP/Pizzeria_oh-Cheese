@@ -179,6 +179,7 @@ public class Admin_tools implements Initializable {
         session.close();
     }
 
+
     public void setAddresses(){
         int id = Address_Info.getTemp_id();
         SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -198,30 +199,32 @@ public class Admin_tools implements Initializable {
         session.close();
     }
     public void updateAddress(ActionEvent event){
-        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
-        Session session = factory.getCurrentSession();
+        if(checkAddressInputLogic()) {
+            SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+            Session session = factory.getCurrentSession();
 
-        try {
-            session.getTransaction().begin();
+            try {
+                session.getTransaction().begin();
 
-            Address updated_address = session.get(Address.class, Address_Info.getTemp_id());
-            updated_address.setCity(city.getText());
-            updated_address.setStreet(street.getText());
-            updated_address.setHouse_Number(house_number.getText());
-            updated_address.setApartment_Number(apartment_number.getText());
-            updated_address.setZIP_Code(zip_code.getText());
-            session.update(updated_address);
+                Address updated_address = session.get(Address.class, Address_Info.getTemp_id());
+                updated_address.setCity(city.getText());
+                updated_address.setStreet(street.getText());
+                updated_address.setHouse_Number(house_number.getText());
+                updated_address.setApartment_Number(apartment_number.getText());
+                updated_address.setZIP_Code(zip_code.getText());
+                session.update(updated_address);
 
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.close();
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                window.close();
 
-            session.getTransaction().commit();
+                session.getTransaction().commit();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
+            } catch (Exception e) {
+                e.printStackTrace();
+                session.getTransaction().rollback();
+            }
+            session.close();
         }
-        session.close();
     }
     public void deleteAddress(ActionEvent event){
         SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
@@ -245,36 +248,37 @@ public class Admin_tools implements Initializable {
         session.close();
     }
     public void addAddress(ActionEvent event){
-        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
-        Session session = factory.getCurrentSession();
-        System.out.println("click");
-        try {
-            session.getTransaction().begin();
+        if(checkAddressInputLogic()) {
+            SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+            Session session = factory.getCurrentSession();
+            System.out.println("click");
+            try {
+                session.getTransaction().begin();
 
-            Query query = session.createQuery("from Address where City = '"+city.getText()+"' and Street = '"+street.getText()+ "' and House_Number = "+
-                    house_number.getText()+" and Apartment_Number = "+apartment_number.getText()+" and ZIP_Code = '"+zip_code.getText()+"'");
-            List<Address> c_user = query.list();
+                Query query = session.createQuery("from Address where City = '" + city.getText() + "' and Street = '" + street.getText() + "' and House_Number = " +
+                        house_number.getText() + " and Apartment_Number = " + apartment_number.getText() + " and ZIP_Code = '" + zip_code.getText() + "'");
+                List<Address> c_user = query.list();
 
-            if(c_user.size() == 0) {
-                Address new_address = new Address(city.getText(),street.getText(),house_number.getText(),
-                        apartment_number.getText(),zip_code.getText());
-                session.save(new_address);
+                if (c_user.size() == 0) {
+                    Address new_address = new Address(city.getText(), street.getText(), house_number.getText(),
+                            apartment_number.getText(), zip_code.getText());
+                    session.save(new_address);
 
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.close();
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    window.close();
+                } else {
+                    warning.setText("Address already exists");
+                    System.out.println("no");
+                }
+
+                session.getTransaction().commit();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                session.getTransaction().rollback();
             }
-            else {
-                warning.setText("Address already exists");
-                System.out.println("no");
-            }
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
+            session.close();
         }
-        session.close();
     }
 
     public Address checkIfGivenAddressExists(){
@@ -342,57 +346,57 @@ public class Admin_tools implements Initializable {
         session.close();
     }
     public void updateEmployee(ActionEvent event){
+        if(checkAddressInputLogic() && checkUserInputLogic() && checkEmployeeInputLogic()) {
+            Address temp_address = checkIfGivenAddressExists();
 
-        Address temp_address = checkIfGivenAddressExists();
+            SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+            Session session = factory.getCurrentSession();
 
-        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
-        Session session = factory.getCurrentSession();
+            try {
+                session.getTransaction().begin();
 
-        try {
-            session.getTransaction().begin();
+                Employee updated_employee = session.get(Employee.class, Employee_Info.getTemp_id());
+                updated_employee.setSalary(Float.parseFloat(salary.getText()));
+                updated_employee.setName(name.getText());
+                updated_employee.setSurname(surname.getText());
+                updated_employee.setEmail(e_mail.getText());
+                updated_employee.setPhone_Number(phone_number.getText());
+                updated_employee.setPESEL(pesel.getText());
+                updated_employee.setUsername(username.getText());
+                updated_employee.setPassword(password.getText());
+                updated_employee.setDate_Of_Birth(birthday.getText());
 
-            Employee updated_employee = session.get(Employee.class, Employee_Info.getTemp_id());
-            updated_employee.setSalary(Float.parseFloat(salary.getText()));
-            updated_employee.setName(name.getText());
-            updated_employee.setSurname(surname.getText());
-            updated_employee.setEmail(e_mail.getText());
-            updated_employee.setPhone_Number(phone_number.getText());
-            updated_employee.setPESEL(pesel.getText());
-            updated_employee.setUsername(username.getText());
-            updated_employee.setPassword(password.getText());
-            updated_employee.setDate_Of_Birth(birthday.getText());
-
-            Query query = session.createQuery("from Job_Position");
-            List<Job_Position> jobs = query.list();
-            for(int i = 0; i < jobs.size(); i++){
-                if(jobs.get(i).getPosition_Name().equals(job_positons.getSelectionModel().getSelectedItem())){
-                    updated_employee.setPosition_ID(jobs.get(i));
-                    break;
+                Query query = session.createQuery("from Job_Position");
+                List<Job_Position> jobs = query.list();
+                for (int i = 0; i < jobs.size(); i++) {
+                    if (jobs.get(i).getPosition_Name().equals(job_positons.getSelectionModel().getSelectedItem())) {
+                        updated_employee.setPosition_ID(jobs.get(i));
+                        break;
+                    }
                 }
+
+                if (temp_address == null) {
+                    Address new_address = new Address(city.getText(), street.getText(), house_number.getText(), apartment_number.getText(), zip_code.getText());
+                    session.save(new_address);
+
+                    updated_employee.setAddress_ID(new_address);
+                } else {
+                    updated_employee.setAddress_ID(temp_address);
+                }
+
+                session.update(updated_employee);
+
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                window.close();
+
+                session.getTransaction().commit();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                session.getTransaction().rollback();
             }
-
-            if(temp_address == null){
-                Address new_address = new Address(city.getText(), street.getText(), house_number.getText(), apartment_number.getText(), zip_code.getText());
-                session.save(new_address);
-
-                updated_employee.setAddress_ID(new_address);
-            }
-            else{
-                updated_employee.setAddress_ID(temp_address);
-            }
-
-            session.update(updated_employee);
-
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.close();
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
+            session.close();
         }
-        session.close();
     }
     public void deleteEmployee(ActionEvent event){
         SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
@@ -416,58 +420,58 @@ public class Admin_tools implements Initializable {
         session.close();
     }
     public void addEmployee(ActionEvent event){
-        Address temp_address = checkIfGivenAddressExists();
-        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
-        Session session = factory.getCurrentSession();
-        try {
-            session.getTransaction().begin();
+        if(checkAddressInputLogic() && checkUserInputLogic() && checkEmployeeInputLogic()) {
+            Address temp_address = checkIfGivenAddressExists();
+            SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+            Session session = factory.getCurrentSession();
+            try {
+                session.getTransaction().begin();
 
-            Query query = session.createQuery("from Employee where Employee_Username='"+username.getText()+"'");
-            List<Employee> employee = query.list();
+                Query query = session.createQuery("from Employee where Employee_Username='" + username.getText() + "'");
+                List<Employee> employee = query.list();
 
-            if(employee.size() == 0) {
-                Employee new_employee = new Employee(name.getText(),surname.getText(),birthday.getText(),phone_number.getText(),
-                        e_mail.getText(),pesel.getText(),Float.parseFloat(salary.getText()) ,username.getText(),password.getText());
+                if (employee.size() == 0) {
+                    Employee new_employee = new Employee(name.getText(), surname.getText(), birthday.getText(), phone_number.getText(),
+                            e_mail.getText(), pesel.getText(), Float.parseFloat(salary.getText()), username.getText(), password.getText());
 
-                //ADDRESS
-                if(temp_address == null){
-                    Address new_address = new Address(city.getText(), street.getText(), house_number.getText(), apartment_number.getText(), zip_code.getText());
-                    session.save(new_address);
+                    //ADDRESS
+                    if (temp_address == null) {
+                        Address new_address = new Address(city.getText(), street.getText(), house_number.getText(), apartment_number.getText(), zip_code.getText());
+                        session.save(new_address);
 
-                    new_employee.setAddress_ID(new_address);
-                }
-                else{
-                    new_employee.setAddress_ID(temp_address);
-                }
-                //JOB POSITION
-
-                query = session.createQuery("from Job_Position");
-                List<Job_Position> jobs = query.list();
-
-
-                for(int i = 0; i < jobs.size(); i++){
-                    if(jobs.get(i).getPosition_Name().equals(job_positons.getSelectionModel().getSelectedItem())){
-                        new_employee.setPosition_ID(jobs.get(i));
-                        break;
+                        new_employee.setAddress_ID(new_address);
+                    } else {
+                        new_employee.setAddress_ID(temp_address);
                     }
+                    //JOB POSITION
+
+                    query = session.createQuery("from Job_Position");
+                    List<Job_Position> jobs = query.list();
+
+
+                    for (int i = 0; i < jobs.size(); i++) {
+                        if (jobs.get(i).getPosition_Name().equals(job_positons.getSelectionModel().getSelectedItem())) {
+                            new_employee.setPosition_ID(jobs.get(i));
+                            break;
+                        }
+                    }
+
+                    session.save(new_employee);
+
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    window.close();
+                } else {
+                    warning.setText("Employee already exists");
                 }
 
-                session.save(new_employee);
+                session.getTransaction().commit();
 
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                session.getTransaction().rollback();
             }
-            else {
-                warning.setText("Employee already exists");
-            }
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
+            session.close();
         }
-        session.close();
     }
 
     public void setCustomer(){
@@ -498,46 +502,46 @@ public class Admin_tools implements Initializable {
         session.close();
     }
     public void updateCustomer(ActionEvent event){
+        if(checkUserInputLogic() && checkAddressInputLogic()){
+            Address temp_address = checkIfGivenAddressExists();
 
-        Address temp_address = checkIfGivenAddressExists();
+            SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
+            Session session = factory.getCurrentSession();
 
-        SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
-        Session session = factory.getCurrentSession();
+            try {
+                session.getTransaction().begin();
 
-        try {
-            session.getTransaction().begin();
-
-            Customer updated_customer = session.get(Customer.class, Customer_Info.getTemp_id());
-            updated_customer.setName(name.getText());
-            updated_customer.setSurname(surname.getText());
-            updated_customer.setEmail(e_mail.getText());
-            updated_customer.setPhone_Number(phone_number.getText());
-            updated_customer.setUsername(username.getText());
-            updated_customer.setPassword(password.getText());
+                Customer updated_customer = session.get(Customer.class, Customer_Info.getTemp_id());
+                updated_customer.setName(name.getText());
+                updated_customer.setSurname(surname.getText());
+                updated_customer.setEmail(e_mail.getText());
+                updated_customer.setPhone_Number(phone_number.getText());
+                updated_customer.setUsername(username.getText());
+                updated_customer.setPassword(password.getText());
 
 
-            if(temp_address == null){
-                Address new_address = new Address(city.getText(), street.getText(), house_number.getText(), apartment_number.getText(), zip_code.getText());
-                session.save(new_address);
+                if (temp_address == null) {
+                    Address new_address = new Address(city.getText(), street.getText(), house_number.getText(), apartment_number.getText(), zip_code.getText());
+                    session.save(new_address);
 
-                updated_customer.setAddress_ID(new_address);
+                    updated_customer.setAddress_ID(new_address);
+                } else {
+                    updated_customer.setAddress_ID(temp_address);
+                }
+
+                session.update(updated_customer);
+
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                window.close();
+
+                session.getTransaction().commit();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                session.getTransaction().rollback();
             }
-            else{
-                updated_customer.setAddress_ID(temp_address);
-            }
-
-            session.update(updated_customer);
-
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.close();
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
+            session.close();
         }
-        session.close();
     }
     public void deleteCustomer(ActionEvent event){
         SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
@@ -560,6 +564,259 @@ public class Admin_tools implements Initializable {
         }
         session.close();
     }
+    public boolean checkUserInputLogic() {
+        if (name.getText() == null || name.getText().trim().isEmpty()){
+            name.getStyleClass().add("warning");
+            warning.setText("name field can not be empty");
+            return false;
+        }
+        else
+        {
+            name.getStyleClass().remove("warning");
 
+            if (!name.getText().trim().matches("[a-zA-Z]+")){
+                name.getStyleClass().add("warning");
+                warning.setText("name must contain characters A-Z");
+                return false;
+            }
+            else
+            {
+                name.getStyleClass().remove("warning");
+            }
+        }
+        if (surname.getText() == null || surname.getText().trim().isEmpty()){
+            surname.getStyleClass().add("warning");
+            warning.setText("surname field can not be empty");
+            return false;
+        }
+        else
+        {
+            surname.getStyleClass().remove("warning");
+
+            if (!surname.getText().matches("[a-zA-Z]+")){
+                surname.getStyleClass().add("warning");
+                warning.setText("surname must contain characters A-Z");
+                return false;
+            }
+            else
+            {
+                surname.getStyleClass().remove("warning");
+
+            }
+        }
+        if (e_mail.getText() == null || e_mail.getText().trim().isEmpty()){
+            e_mail.getStyleClass().add("warning");
+            warning.setText("e-mail field can not be empty");
+            return false;
+        }
+        else
+        {
+            e_mail.getStyleClass().remove("warning");
+
+            if (!e_mail.getText().matches("^[a-zA-Z0-9._]+@[a-zA-Z0-9._]+\\.[a-z]+")){
+                e_mail.getStyleClass().add("warning");
+                warning.setText("e_mail must be like: Example@host.com");
+                return false;
+            }
+            else
+            {
+                e_mail.getStyleClass().remove("warning");
+            }
+        }
+        if (phone_number.getText() == null || phone_number.getText().trim().isEmpty()){
+            phone_number.getStyleClass().add("warning");
+            warning.setText("phone number field can not be empty");
+            return false;
+        }
+        else
+        {
+            phone_number.getStyleClass().remove("warning");
+
+            if (!phone_number.getText().matches("\\d{9}")){
+                phone_number.getStyleClass().add("warning");
+                warning.setText("phone number must have 9 digits");
+                return false;
+            }
+            else
+            {
+                phone_number.getStyleClass().remove("warning");
+            }
+        }
+
+        if (username.getText() == null || username.getText().trim().isEmpty()){
+            username.getStyleClass().add("warning");
+            warning.setText("username field can not be empty");
+            return false;
+        }
+        else
+        {
+            username.getStyleClass().remove("warning");
+
+            if (!username.getText().matches("[a-zA-Z0-9_*@$#]+")){
+                username.getStyleClass().add("warning");
+                warning.setText("allowed characters a-z_*@$#");
+                return false;
+            }
+            else
+            {
+                username.getStyleClass().remove("warning");
+            }
+        }
+        if (password.getText() == null || password.getText().trim().isEmpty()){
+            password.getStyleClass().add("warning");
+            warning.setText("password field can not be empty");
+            return false;
+        }
+        else
+        {
+            password.getStyleClass().remove("warning");
+
+            if (!password.getText().matches("[a-zA-Z0-9_*@$#]+")){
+                password.getStyleClass().add("warning");
+                warning.setText("allowed characters a-z_*@$#");
+                return false;
+            }
+            else
+            {
+                password.getStyleClass().remove("warning");
+            }
+        }
+
+        return true;
+    }
+    public boolean checkEmployeeInputLogic() {
+        if (salary.getText() == null || salary.getText().trim().isEmpty()){
+            salary.getStyleClass().add("warning");
+            warning.setText("salary field can not be empty");
+            return false;
+        }
+        else
+        {
+            salary.getStyleClass().remove("warning");
+
+            if (!salary.getText().trim().matches("\\d+")){
+                salary.getStyleClass().add("warning");
+                warning.setText("salary must be of integer type");
+                return false;
+            }
+            else
+            {
+                salary.getStyleClass().remove("warning");
+            }
+        }
+        if (pesel.getText() == null || pesel.getText().trim().isEmpty()){
+            pesel.getStyleClass().add("warning");
+            warning.setText("pesel field can not be empty");
+            return false;
+        }
+        else
+        {
+            pesel.getStyleClass().remove("warning");
+
+            if (!pesel.getText().matches("\\d{11}")){
+                pesel.getStyleClass().add("warning");
+                warning.setText("PESEL input must be 11 digits");
+                return false;
+            }
+            else
+            {
+                pesel.getStyleClass().remove("warning");
+
+            }
+        }
+        if (birthday.getText() == null || birthday.getText().trim().isEmpty()){
+            birthday.getStyleClass().add("warning");
+            warning.setText("birthday field can not be empty");
+            return false;
+        }
+        else
+        {
+            birthday.getStyleClass().remove("warning");
+
+            if (!birthday.getText().matches("\\d{4}-\\d{2}-\\d{2}")){
+                birthday.getStyleClass().add("warning");
+                warning.setText("birthday format yyyy-mm-dd");
+                return false;
+            }
+            else
+            {
+                birthday.getStyleClass().remove("warning");
+            }
+        }
+
+
+        return true;
+    }
+    public boolean checkAddressInputLogic() {
+
+        if (city.getText() == null || city.getText().trim().isEmpty()){
+            city.getStyleClass().add("warning");
+            warning.setText("city field can not be empty");
+            return false;
+        }
+        else
+        {
+            city.getStyleClass().remove("warning");
+
+            if (!city.getText().matches("[a-zA-Z]+")){
+                city.getStyleClass().add("warning");
+                warning.setText("city must contain characters A-Z");
+                return false;
+            }
+            else
+            {
+                city.getStyleClass().remove("warning");
+            }
+        }
+        if (zip_code.getText() == null || zip_code.getText().trim().isEmpty()){
+            zip_code.getStyleClass().add("warning");
+            warning.setText("ZIP CODE field can not be empty");
+            return false;
+        }
+        else
+        {
+            zip_code.getStyleClass().remove("warning");
+
+            if (!zip_code.getText().matches("\\d{2}-\\d{3}")){
+                zip_code.getStyleClass().add("warning");
+                warning.setText("ZIP CODE must like: 87-345");
+                return false;
+            }
+            else
+            {
+                zip_code.getStyleClass().remove("warning");
+            }
+
+        }
+        if (house_number.getText() == null || house_number.getText().trim().isEmpty()){
+            house_number.getStyleClass().add("warning");
+            warning.setText("house number field can not be empty");
+            return false;
+        }
+        else
+        {
+            house_number.getStyleClass().remove("warning");
+
+            if (!house_number.getText().matches("\\d+")){
+                house_number.getStyleClass().add("warning");
+                warning.setText("house number must contain characters 0-9");
+                return false;
+            }
+            else
+            {
+                house_number.getStyleClass().remove("warning");
+            }
+        }
+        if (street.getText() == null || street.getText().trim().isEmpty()){
+            street.getStyleClass().add("warning");
+            warning.setText("street field can not be empty");
+            return false;
+        }
+        else
+        {
+            street.getStyleClass().remove("warning");
+        }
+        return true;
+    }
 
 }

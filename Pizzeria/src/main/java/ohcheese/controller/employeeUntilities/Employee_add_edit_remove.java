@@ -696,8 +696,9 @@ public class Employee_add_edit_remove implements Initializable {
     public void update_promo_code(ActionEvent event){
         Session session = factory.getCurrentSession();
 
-        try {
-            session.getTransaction().begin();
+        if(discount_TF.getText().trim().matches("\\d+")) {
+            try {
+                session.getTransaction().begin();
 
                 Promo_Codes updated_promocode = session.get(Promo_Codes.class, Promo_Code_Info.getTemp_id());
                 updated_promocode.setPercent_Off(Integer.parseInt(discount_TF.getText()));
@@ -706,13 +707,16 @@ public class Employee_add_edit_remove implements Initializable {
                 Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 window.close();
 
-            session.getTransaction().commit();
+                session.getTransaction().commit();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
+            } catch (Exception e) {
+                e.printStackTrace();
+                session.getTransaction().rollback();
+            }
+            session.close();
         }
-        session.close();
+        else
+            warning.setText("Input must be of Integer type");
     }
     public void delete_promo_code(ActionEvent event){
         Session session = factory.getCurrentSession();
@@ -736,30 +740,33 @@ public class Employee_add_edit_remove implements Initializable {
     }
     public void add_promo_code(ActionEvent event){
         Session session = factory.getCurrentSession();
+        if(discount_TF.getText().trim().matches("\\d+")) {
+            try {
+                session.getTransaction().begin();
 
-        try {
-            session.getTransaction().begin();
+                Query query = session.createQuery("from Promo_Codes where Promo_Code_Name='" + promo_code_name_TF.getText() + "'");
+                List<Promo_Codes> promo_codes_list = query.list();
 
-            Query query = session.createQuery("from Promo_Codes where Promo_Code_Name='"+promo_code_name_TF.getText()+"'");
-            List<Promo_Codes> promo_codes_list = query.list();
+                if (promo_codes_list.size() == 0) {
+                    Promo_Codes new_promocode = new Promo_Codes(promo_code_name_TF.getText(), Integer.parseInt(discount_TF.getText()));
+                    session.save(new_promocode);
 
-            if(promo_codes_list.size() == 0) {
-                Promo_Codes new_promocode = new Promo_Codes(promo_code_name_TF.getText(),Integer.parseInt(discount_TF.getText()));
-                session.save(new_promocode);
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    window.close();
+                } else
+                    warning.setText("Promo Code already exists");
 
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.close();
+                session.getTransaction().commit();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                session.getTransaction().rollback();
             }
-            else
-                warning.setText("Promo Code already exists");
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
+            session.close();
         }
-        session.close();
+        else{
+            warning.setText("Input must be of integer type");
+        }
     }
 
     //Toppings
@@ -840,31 +847,35 @@ public class Employee_add_edit_remove implements Initializable {
         SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
 
-        try {
-            session.getTransaction().begin();
+        if(price_TF.getText().trim().matches("\\d+")) {
+            try {
+                session.getTransaction().begin();
 
-            Query query = session.createQuery("from Size where Size_Name='"+size_TF.getText()+"' and Price='"+price_TF.getText()+"'");
-            List size_list = query.list();
+                Query query = session.createQuery("from Size where Size_Name='" + size_TF.getText() + "' and Price='" + price_TF.getText() + "'");
+                List size_list = query.list();
 
-            if(size_list.size() == 0) {
-                Size updated_size = session.get(Size.class, Size_Info.getTemp_id());
-                updated_size.setSize(size_TF.getText());
-                updated_size.setPrice(price_TF.getText());
-                session.update(updated_size);
+                if (size_list.size() == 0) {
+                    Size updated_size = session.get(Size.class, Size_Info.getTemp_id());
+                    updated_size.setSize(size_TF.getText());
+                    updated_size.setPrice(price_TF.getText());
+                    session.update(updated_size);
 
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.close();
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    window.close();
+                } else
+                    warning.setText("Size already exists");
+
+                session.getTransaction().commit();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                session.getTransaction().rollback();
             }
-            else
-                warning.setText("Size already exists");
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
+            session.close();
         }
-        session.close();
+        else{
+            warning.setText("Input mys be of integer type");
+        }
     }
     public void delete_size(ActionEvent event){
         SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
@@ -890,30 +901,31 @@ public class Employee_add_edit_remove implements Initializable {
     public void add_size(ActionEvent event){
         SessionFactory factory = ohcheese.Utilities.HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
+        if(price_TF.getText().trim().matches("\\d+")) {
+            try {
+                session.getTransaction().begin();
 
-        try {
-            session.getTransaction().begin();
+                Query query = session.createQuery("from Size where Size_Name='" + size_TF.getText() + "'");
+                List size_list = query.list();
 
-            Query query = session.createQuery("from Size where Size_Name='"+size_TF.getText()+"'");
-            List size_list = query.list();
+                if (size_list.size() == 0) {
+                    Size new_size = new Size(size_TF.getText(), price_TF.getText());
+                    session.save(new_size);
 
-            if(size_list.size() == 0) {
-                Size new_size = new Size(size_TF.getText(),price_TF.getText());
-                session.save(new_size);
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    window.close();
+                } else
+                    warning.setText("Size already exists");
 
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.close();
+                session.getTransaction().commit();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                session.getTransaction().rollback();
             }
-            else
-                warning.setText("Size already exists");
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
+            session.close();
         }
-        session.close();
+        warning.setText("Input must be of integer type");
     }
 
     //PIZZA TYPE

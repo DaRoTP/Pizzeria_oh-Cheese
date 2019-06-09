@@ -35,7 +35,6 @@ INSERT INTO Job_Position(Position_Name) VALUES('Administrator');
 INSERT INTO Job_Position(Position_Name) VALUES('Owner');
 INSERT INTO Job_Position(Position_Name) VALUES('Delivery Drivers');
 
-
 INSERT INTO Customer(Address_ID,Customer_Name,Customer_Surname,Customer_Phone_Number,Customer_Email,Customer_Username,Customer_Password)  
 VALUES(1,'Pierette','Wavish','2088850533','iodams0@telegraph.co.uk','PieterWav','Unodos12');
 INSERT INTO Customer(Address_ID,Customer_Name,Customer_Surname,Customer_Phone_Number,Customer_Email,Customer_Username,Customer_Password)  
@@ -210,6 +209,7 @@ INSERT INTO Order_status(Order_status_Name) VALUES('Pending');
 INSERT INTO Order_status(Order_status_Name) VALUES('Accepted');
 INSERT INTO Order_status(Order_status_Name) VALUES('Baking');
 INSERT INTO Order_status(Order_status_Name) VALUES('delivery');
+INSERT INTO Order_status(Order_status_Name) VALUES('finished');
 
 /* ORDERS */
 -- 1
